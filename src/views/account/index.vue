@@ -43,23 +43,102 @@
                 </div>
             </div>
         </div>
-        <passwordDialog></passwordDialog>
+        <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @close="close">
+            <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="ruleForm">
+                <el-form-item label="新密码" prop="password">
+                    <el-input class="w-290" placeholder="请输入新密码" v-model="passwordForm.password"></el-input>
+                </el-form-item>
+                <el-form-item label="新密码确认" prop="confirmPassword">
+                    <el-input class="w-290" placeholder="请输入新密码" v-model="passwordForm.confirmPassword"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱验证码" prop="verifyCode">
+                    <el-input class="w-290" placeholder="请输入邮箱验证码" v-model="passwordForm.verifyCode"></el-input>
+                </el-form-item>
+            </el-form>
+        </basic-dialog>
     </div>
 </template>
 
 <script>
-import passwordDialog from './components/passwordDialog.vue'
+import BasicDialog from '@/components/basic/BasicDialog.vue'
 export default {
   components: {
-    passwordDialog
+    BasicDialog
   },
   data() {
     return {
-
+      bindDialogOptions: {
+        visible: false,
+        theme: 'white',
+        title: '修改密码',
+        titleStyle: {
+          fontSize: '18px',
+          fontFamily: 'PingFang SC-Medium, PingFang SC',
+          color: '#001529',
+          paddingTop: '24px'
+        },
+        width: '466px',
+        BtnStyle: {
+          justifyContent: 'flex-end',
+          paddingTop: '10px',
+          paddingBottom: '27px'
+        },
+        cancalBtnStyle: {
+          flex: 'none',
+          width: '90px',
+          height: '40px',
+          lineHeight: '40px',
+          fontFamily: 'PingFang SC-Regular, PingFang SC',
+          fontSize: '14px',
+          fontWeight: 400,
+          color: '#001529',
+          backgroundColor: 'transparent',
+          border: '1px solid #A9B3C9',
+          paddingTop: 0,
+          paddingBottom: 0
+        },
+        confrimBtnStyle: {
+          flex: 'none',
+          width: '90px',
+          height: '40px',
+          lineHeight: '40px',
+          fontFamily: 'PingFang SC-Regular, PingFang SC',
+          fontSize: '14px',
+          fontWeight: 400,
+          color: '#001529',
+          paddingTop: 0,
+          paddingBottom: 0
+        //   width: '100%',
+        //   padding: '11px 0',
+        //   'text-align': 'center',
+        //   background: this.GLOBAL.basicColor,
+        //   'font-size': '16px',
+        //   'font-family': 'PingFang_Medium',
+        //   color: '#222326'
+        },
+        showBtn: true,
+        showCancelBtn: true
+      },
+      passwordForm: {
+        password: '',
+        confirmPassword: '',
+        verifyCode: ''
+      },
+      rules: {
+        password: [
+          { required: true, message: '请输入新密码', trigger: 'blur' }
+        ],
+        confirmPassword: [
+          { required: true, message: '请输入新密码', trigger: 'blur' }
+        ],
+        verifyCode: [
+          { required: true, message: '请输入邮箱验证码', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
-    confirm() {
+    handleComfirm() {
 
     },
     close() {
@@ -69,4 +148,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep{
+    .el-dialog__header{
+        height: 72px;
+    }
+    .el-dialog__headerbtn{
+        top: 22px;
+        .el-dialog__close{
+            color: #A9B3C9;
+        }
+    }
+}
+</style>
