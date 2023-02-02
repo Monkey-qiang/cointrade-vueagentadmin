@@ -1,0 +1,821 @@
+// 百分比
+$p17: 17%;
+$p20: 20%;
+$p23: 23%;
+$p40: 40%;
+$p50: 50%;
+$p60: 60%;
+$p63: 63%;
+$p80: 80%;
+$p100: 100%;
+
+// 内外边距 (使用方式：例如在类中添加p-l-20px)
+@for $var from 0 through 500 {
+
+  // padding
+  .p-l-#{$var} {
+    padding-left: $var + px;
+  }
+
+  .p-r-#{$var} {
+    padding-right: $var + px;
+  }
+
+  .p-b-#{$var} {
+    padding-bottom: $var + px;
+  }
+
+  .p-t-#{$var} {
+    padding-top: $var + px;
+  }
+
+  .p-lr-#{$var} {
+    padding-right: $var + px;
+    padding-left: $var + px;
+  }
+
+  .p-tb-#{$var} {
+    padding-top: $var + px;
+    padding-bottom: $var + px;
+  }
+
+  .p-#{$var} {
+    padding: $var + px;
+  }
+
+  // margin
+  .m-l-#{$var} {
+    margin-left: $var + px;
+  }
+
+  .m-r-#{$var} {
+    margin-right: $var + px;
+  }
+
+  .m-b-#{$var} {
+    margin-bottom: $var + px;
+  }
+
+  .m-t-#{$var} {
+    margin-top: $var + px;
+  }
+
+  .m-lr-#{$var} {
+    margin-right: $var + px;
+    margin-left: $var + px;
+  }
+
+  .m-tb-#{$var} {
+    margin-top: $var + px;
+    margin-bottom: $var + px;
+  }
+
+  .m-#{$var} {
+    padding: $var + px;
+  }
+}
+
+.m-tb-auto {
+  margin: auto 0;
+}
+
+.m-lr-auto {
+  margin: 0 auto;
+}
+
+/*  -- flex弹性布局 -- */
+@for $i from 1 through 10 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
+
+@each $header,
+$value in (p17: $p17,
+  p20: $p20,
+  p23: $p23,
+  p40: $p40,
+  p50: $p50,
+  p60: $p60,
+  p63: $p63,
+  p80: $p80,
+  p100: $p100 ) {
+  .flex-#{$header} {
+    flex: $value;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-shrink {
+  flex-shrink: 0;
+}
+
+.flex-direction {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowarp {
+  flex-wrap: nowrap;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+/* ==================
+          文本
+ ==================== */
+@for $font from 1 through 100 {
+  .font-#{$font} {
+    font-size: $font + px;
+  }
+}
+
+.fw-nomal {
+  font-weight: normal;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+// 字体
+.ff-Medium {
+  font-family: "PingFang_Medium";
+}
+
+.ff-Regular {
+  font-family: "PingFang_Regular";
+}
+
+.ff-Bold {
+  font-family: "PingFang_Bold";
+}
+
+.ff-SC {
+  font-family: "PingFang SC";
+}
+
+.ff-SCRegular {
+  font-family: "PingFang SC-Regular";
+}
+
+.ff-SCMedium {
+  font-family: "PingFang SC-Medium";
+}
+
+.ff-SCBold {
+  font-family: "PingFang SC-Semibold";
+}
+
+.ff-BPLight {
+  font-family: "binance_plex_light";
+}
+
+.ff-BPMedium {
+  font-family: "binance_plex_medium";
+}
+
+.ff-BPRegular {
+  font-family: "binance_plex_regular";
+}
+
+.ff-BPBold {
+  font-family: "binance_plex_semi_bold";
+}
+
+// 字体间距
+@for $space from 1 through 20 {
+  .t-ls-#{$space} {
+    letter-spacing: $space + px;
+  }
+}
+
+// 字体颜色 (使用方式：例如在类中添加text-red)
+$red: #f46464;
+$orange: #f37b1d;
+$yellow: #f37b1d;
+$primary: #367efc;
+$black: #000000;
+$pink: #ff96ab;
+$c333: #333333;
+$FF6666: #ff6666;
+$grey: #c0bfc5;
+$purple: #978df5;
+$c9086F5: #9086f5;
+$c666: #666666;
+$white: #ffffff;
+$pink_1: #ed769a;
+$green: #00df0b;
+$c34E26E: #34e26e;
+$black_o10: rgba(0, 0, 0, 0.1);
+$c999: #999;
+$d8d8d8: #d8d8d8;
+$F3F4F6: #f3f4f6;
+$E3E1F9: #e3e1f9;
+$c888: #888;
+
+$c90959C: #90959c;
+$c222326: #222326;
+$F6F6F6: #f6f6f6;
+$c636B75: #636b75;
+$EDEDED: #ededed;
+$c27B485: #27b485;
+$c070707: #070707;
+$c2880BF: #2880bf;
+$D4575C: #F6465D;
+$FFC304: #ffc304;
+$c848E9C: #848e9c;
+$c4A4A4A: #4a4a4a;
+$c151520: #151520;
+$C55D5D: #c55d5d;
+$A89045: #a89045;
+$c808C9A: #808c9a;
+$DFE1E5: #dfe1e5;
+$c429FCB: #429fcb;
+$c36C344: #36c344;
+$B7BDC6: #b7bdc6;
+$F1F1F1: #f1f1f1;
+$D9D9D9: #d9d9d9;
+$C141515: #141515;
+$c02C078: #0ECB81;
+$F03851: #F03851;
+
+$c363C45: #363C45;
+$c47505A: #47505A;
+$c222426: #222426;
+$c333A44: #333A44;
+$c474D57: #474D57;
+$transparent: transparent;
+$c1A1F2A: #1A1F2A;
+$c2C394A: #2C394A;
+$c0B0E11: #0B0E11;
+$c0A0E17: #0A0E17;
+$c707070: #707070;
+$c2A2A36: #2A2A36;
+$c181a20: #181a20;
+$c1E1E1E: #1E1E1E;
+$c001529: #001529;
+$c7C869B: #7C869B;
+$c1890FF: #1890FF;
+$A9B3C9: #A9B3C9;
+$c96A0B5: #96A0B5;
+$FAFBFC: #FAFBFC;
+$D4D9E4: #D4D9E4;
+
+@mixin border {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@each $header,
+$color in (red: $red,
+  orange: $orange,
+  yellow: $yellow,
+  primary: $primary,
+  black: $black,
+  pink: $pink,
+  c333: $c333,
+  grey: $grey,
+  purple: $purple,
+  white: $white,
+  pink_1: $pink_1,
+  green: $green,
+  black_o10: $black_o10,
+  c666: $c666,
+  c999: $c999,
+  FF6666: $FF6666,
+  c34E26E: $c34E26E,
+  d8d8d8: $d8d8d8,
+  F3F4F6: $F3F4F6,
+  E3E1F9: $E3E1F9,
+  c9086F5: $c9086F5,
+  c888: $c888,
+  c90959C: $c90959C,
+  c222326: $c222326,
+  f6f6f6: $F6F6F6,
+  c636B75: $c636B75,
+  EDEDED: $EDEDED,
+  c27B485: $c27B485,
+  c070707: $c070707,
+  c2880BF: $c2880BF,
+  D4575C: $D4575C,
+  FFC304: $FFC304,
+  c848E9C: $c848E9C,
+  c4A4A4A: $c4A4A4A,
+  c151520: $c151520,
+  C55D5D: $C55D5D,
+  A89045: $A89045,
+  c808C9A: $c808C9A,
+  DFE1E5: $DFE1E5,
+  c429FCB: $c429FCB,
+  c36C344: $c36C344,
+  B7BDC6: $B7BDC6,
+  F1F1F1: $F1F1F1,
+  D9D9D9: $D9D9D9,
+  c47505A:$c47505A,
+  c222426: $c222426,
+  c333A44: $c333A44,
+  c474D57: $c474D57,
+  c363C45: $c363C45,
+  trans: $transparent,
+  c1A1F2A: $c1A1F2A,
+  c2C394A: $c2C394A,
+  c0B0E11: $c0B0E11,
+  c0A0E17: $c0A0E17,
+  c707070: $c707070,
+  c2A2A36: $c2A2A36,
+  F03851:$F03851,
+  c02C078:$c02C078,
+  c181a20:$c181a20,
+  C141515:$C141515,
+  c1E1E1E:$c1E1E1E,
+  c001529:$c001529,
+  c7C869B:$c7C869B,
+  c1890FF:$c1890FF,
+  A9B3C9:$A9B3C9,
+  c96A0B5:$c96A0B5,
+  FAFBFC: $FAFBFC,
+  D4D9E4: $D4D9E4 ) {
+  .text-#{$header} {
+    color: $color;
+  }
+
+  .bg-#{$header} {
+    background-color: $color;
+  }
+
+  .bc-r-#{$header} {
+    border-right-color: $color;
+  }
+
+  .bc-l-#{$header} {
+    border-left-color: $color;
+  }
+
+  .bc-t-#{$header} {
+    border-top-color: $color;
+  }
+
+  .bc-b-#{$header} {
+    border-bottom-color: $color;
+  }
+
+  .bc-#{$header} {
+    border-color: $color;
+  }
+
+  $solid: solid;
+  $borde_style: $solid;
+
+  @for $width from 1 through 10 {
+
+    @each $style,
+    $value in (solid: $solid) {
+      .b-#{$width}-#{$style}-#{$header} {
+        border: $width + px $value $color;
+      }
+
+      .b-l-#{$width}-#{$style}-#{$header} {
+        border-left: $width + px $value $color;
+      }
+
+      .b-r-#{$width}-#{$style}-#{$header} {
+        border-right: $width + px $value $color;
+      }
+
+      .b-t-#{$width}-#{$style}-#{$header} {
+        border-top: $width + px $value $color;
+      }
+
+      .b-b-#{$width}-#{$style}-#{$header} {
+        border-bottom: $width + px $value $color;
+      }
+    }
+  }
+
+  @for $height from 1 through 20 {
+    @for $width from 1 through 5 {
+      .b-r-#{$header}-h#{$height}-w#{$width}::before {
+        @include border;
+        height: $height + px;
+        width: $width + px;
+        right: 0;
+        background-color: $color;
+      }
+
+      .b-l-#{$header}-h#{$height}-w#{$width}::before {
+        @include border;
+        left: 0;
+        height: $height + px;
+        width: $width + px;
+        background-color: $color;
+      }
+
+      .b-t-#{$header}-h#{$height}-w#{$width}::before {
+        @include border;
+        height: $height + px;
+        width: $width + px;
+        top: 0;
+        background-color: $color;
+      }
+
+      .b-b-#{$header}-h#{$height}-w#{$width}::before {
+        @include border;
+        height: $height + px;
+        width: $width + px;
+        bottom: 0;
+        background-color: $color;
+      }
+    }
+  }
+}
+
+@for $width from 1 through 100 {
+  .bw-#{$width} {
+    border-width: $width + px;
+  }
+
+  .bw-l-#{$width} {
+    border-left-width: $width + px;
+  }
+
+  .bw-r-#{$width} {
+    border-right-width: $width + px;
+  }
+
+  .bw-t-#{$width} {
+    border-top-width: $width + px;
+  }
+
+  .bw-b-#{$width} {
+    border-bottom-width: $width + px;
+  }
+}
+
+$solid: solid;
+$borde_style: $solid;
+
+@each $style in $borde_style {
+  .bs-l-#{$style} {
+    border-left-style: $style;
+  }
+
+  .bs-r-#{$style} {
+    border-right-style: $style;
+  }
+
+  .bs-t-#{$style} {
+    border-top-style: $style;
+  }
+
+  .bs-b-#{$style} {
+    border-bottom-style: $style;
+  }
+
+  .bs-#{$style} {
+    border-style: $style;
+  }
+}
+
+.border-none {
+  border: none;
+}
+
+.text-Abc {
+  text-transform: Capitalize;
+}
+
+.text-ABC {
+  text-transform: Uppercase;
+}
+
+.text-abc {
+  text-transform: Lowercase;
+}
+
+.text-over {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.o-f-h{
+  overflow: hidden;
+}
+
+.t-o-f-h{
+  text-overflow: hidden;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// 行高
+@for $var from 1 through 1000 {
+  .l-h-#{$var} {
+    line-height: $var + px;
+  }
+}
+
+// 宽高
+@for $var from 0 through 2000 {
+  .h-#{$var} {
+    height: $var + px !important;
+  }
+
+  .w-#{$var} {
+    width: $var + px;
+  }
+}
+
+@for $var from 0 through 2000 {
+  .max-h-#{$var} {
+    max-height: $var + px !important;
+  }
+
+  .min-h-#{$var} {
+    min-height: $var + px !important;
+  }
+
+  .min-w-#{$var} {
+    min-width: $var + px;
+  }
+
+  .max-w-#{$var} {
+    max-width: $var + px;
+  }
+}
+
+@for $var from 1 through 2000 {
+  .h-p#{$var} {
+    height: $var / 100 * 100%;
+  }
+
+  .w-p#{$var} {
+    width: $var / 100 * 100%;
+  }
+}
+
+/* 媒体 */
+
+.img {
+  height: 100%;
+  width: 100%;
+}
+
+/* 边框 */
+@for $var from 1 through 50 {
+  .b-r-#{$var} {
+    border-radius: $var + px;
+  }
+}
+
+@each $header,
+$var in (p20: $p20, p50: $p50) {
+  .b-r-#{$header} {
+    border-radius: $var;
+  }
+}
+
+/* 定位 */
+.hidden {
+  overflow: hidden;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.stiky {
+  position: sticky;
+}
+
+.position-all-0 {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.position-lr-0 {
+  left: 0;
+  right: 0;
+}
+
+.position-tb {
+  bottom: 0;
+  top: 0;
+}
+
+.position-left-p50 {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.position-top-p50 {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.position-center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@for $i from 0 through 1000 {
+  .top-#{$i} {
+    top: $i + px;
+  }
+
+  .bottom-#{$i} {
+    bottom: $i + px;
+  }
+
+  .left-#{$i} {
+    left: $i + px;
+  }
+
+  .right-#{$i} {
+    right: $i + px;
+  }
+}
+
+@for $i from 0 through 100 {
+  .top-p#{$i} {
+    top: $i / 100 * 100%;
+  }
+
+  .bottom-p#{$i} {
+    bottom: $i / 100 * 100%;
+  }
+
+  .left-p#{$i} {
+    left: $i / 100 * 100%;
+  }
+
+  .right-p#{$i} {
+    right: $i / 100 * 100%;
+  }
+}
+
+// 负数的时候，需要换成下划线
+@for $i from -1000 through 0 {
+  .top_#{$i} {
+    top: $i + px;
+  }
+
+  .bottom_#{$i} {
+    bottom: $i + px;
+  }
+
+  .left_#{$i} {
+    left: $i + px;
+  }
+
+  .right_#{$i} {
+    right: $i + px;
+  }
+}
+
+// 层级
+@for $i from -1 through 1000 {
+  .z-index-#{$i} {
+    z-index: $i;
+  }
+
+  @if $i< 0 {
+    .z-index_#{$i} {
+      z-index: $i;
+    }
+  }
+}
+
+// 其他项
+.cursor-point {
+  cursor: pointer;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.ver-middle {
+  vertical-align: middle;
+}
+
+.word-warp {
+  white-space: pre-wrap;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.word-break{
+  word-break: break-all
+}
