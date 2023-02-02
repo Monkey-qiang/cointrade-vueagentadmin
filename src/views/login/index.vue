@@ -18,7 +18,7 @@
             <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="login">登录</div>
             <div class="flex justify-between align-center font-14 text-c7C869B m-t-16">
                 <div class="text-c1890FF cursor-point" @click="forgetPassword">忘记密码</div>
-                <div>如果您还不是代理，请 <span class="text-c1890FF cursor-point">申请</span></div>
+                <div>如果您还不是代理，请 <span class="text-c1890FF cursor-point" @click="jump">申请</span></div>
             </div>
         </div>
     </div>
@@ -47,6 +47,9 @@ export default {
     }
   },
   methods: {
+    jump() {
+      this.$router.push({ path: '/agentPage' })
+    },
     forgetPassword() {
       this.$router.push({ path: '/login/forgetPassword' })
     },

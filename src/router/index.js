@@ -98,7 +98,33 @@ const routes = [
         component: () => import('@/views/login/newPassword')
       }
     ]
-  }
+  },
+  {
+    path: '/agentPage',
+    redirect: '/agentPage',
+    component: () => import('@/layout/index'),
+    hidden: true,
+    children: [
+      {
+        path: '/',
+        meta: { title: '代理商页面',hidden: true},
+        component: () => import('@/views/agent/index'),
+        name: 'AgentPage'
+      },
+      {
+        path: 'application',
+        meta: { title: '代理商页面',hidden: true },
+        component: () => import('@/views/agent/application'),
+        name: 'Application'
+      },
+      {
+        path: 'verification',
+        meta: { title: '代理商页面',hidden: true },
+        component: () => import('@/views/agent/verification'),
+        name: 'Verification'
+      }
+    ]
+  },
 ]
 
 const router = new VueRouter({
