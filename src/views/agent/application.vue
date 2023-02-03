@@ -2,7 +2,8 @@
   <div class="w-794 bg-white m-lr-auto">
     <div class="m-b-40 p-t-80">
       <div class="m-b-20 fw-600 font-44 ff-SCBold text-c070707">Tokex Affiliate Program Application</div>
-      <div class="fw-500 font-28 ff-Medium text-c070707">No fee is required, just register a Tokex trading account to join the Tokex Affiliate Program</div>
+      <div class="fw-500 font-28 ff-Medium text-c070707">No fee is required, just register a Tokex trading account to
+        join the Tokex Affiliate Program</div>
     </div>
     <div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
@@ -25,7 +26,7 @@
         </el-form-item>
         <el-form-item prop="region">
           <div class="input"><span class="text-red">*</span>Your are</div>
-          <el-select clearable v-model="ruleForm.region">
+          <el-select clearable v-model="ruleForm.region" placeholder="">
             <el-option label="Social Media Influencer" :value="1"></el-option>
             <el-option label="Content Creator" :value="3"></el-option>
             <el-option label="Professional Affiliate Marketer" :value="5"></el-option>
@@ -39,15 +40,21 @@
           <el-input class="h-141" type="textarea" resize="none" v-model="ruleForm.desc"></el-input>
         </el-form-item>
         <el-form-item prop="country">
-          <!-- <div><span class="text-red">*</span>Your are</div> -->
-          <el-select clearable v-model="ruleForm.country">
-            <el-option label="区域一" value="shanghai">111</el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+          <!-- <el-select clearable v-model="ruleForm.country" placeholder=""> -->
+            <!-- <el-option v-for="(item, index) in country" :value="item.id" :key="index">
+              <div class="area_item flex align-center">
+                <img class="w-30 h-30 m-r-12 b-r-p50" :src="item.countryicon"  alt="">
+                <div class="flex justify-between w-p100 l-h-19">
+                  <span>{{item.namezh }}</span>
+                </div>
+              </div>
+            </el-option> -->
+            <AreaCode style="width: 100%;" :areaList="area_list" @updataArea="updataArea">1</AreaCode>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn" type="primary" @click="submitForm">Next</el-button>
-          <div class="m-t-20 text-c90959C font-14 l-h-14 ff-SCBold fw-600">Already a Tokex affiliate? <span class="text-c2880BF cursor-point" @click="jump">Log in</span></div>
+          <div class="m-t-20 text-c90959C font-14 l-h-14 ff-SCBold fw-600">Already a Tokex affiliate? <span
+              class="text-c2880BF cursor-point" @click="jump">Log in</span></div>
         </el-form-item>
       </el-form>
     </div>
@@ -55,9 +62,15 @@
 </template>
 
 <script>
+import AreaCode from './component/index.vue'
+import { records } from '@/utils/country'
 export default {
+  components: {
+    AreaCode
+  },
   data() {
     return {
+      area_list: records,
       ruleForm: {
         name: '',
         region: '',
@@ -87,6 +100,9 @@ export default {
         region: [
           { required: true, message: 'Please select', trigger: 'change' }
         ],
+        // country: [
+        //   { required: true, message: 'Please select Country', trigger: 'change' }
+        // ],
         desc: [
           { required: true, message: 'Please enter your promotion channels', trigger: 'blur' }
         ]
@@ -94,6 +110,11 @@ export default {
     }
   },
   methods: {
+    // 选择某一个区号
+    updataArea(item) {
+      this.loginForm.area_logo = item.img
+      this.loginForm.area_code = item.area_code
+    },
     jump() {
       this.$router.push({ path: '/login' })
     },
@@ -135,13 +156,18 @@ export default {
   .el-button--primary {
     color: #000;
   }
-  .el-select .el-input__inner:focus{
+
+  .el-select .el-input__inner:focus {
     border-color: #ededed;
   }
-  .el-select:hover .el-input__inner{
-    border-color:#ededed ;
+
+  .el-select:hover .el-input__inner {
+    border-color: #ededed;
   }
-  .el-range-editor.is-active, .el-range-editor.is-active:hover, .el-select .el-input.is-focus .el-input__inner{
+
+  .el-range-editor.is-active,
+  .el-range-editor.is-active:hover,
+  .el-select .el-input.is-focus .el-input__inner {
     border-color: #ededed;
   }
 }
