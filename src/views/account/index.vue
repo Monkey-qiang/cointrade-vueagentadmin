@@ -1,6 +1,6 @@
 <template>
-    <div class="text-c001529 fw-500 ff-SC m-l-24">
-        <div class="flex w-1200 h-192 bg-FAFBFC b-r-8 m-t-24">
+    <div class="w-1200 min-h-984 text-c001529 fw-500 ff-SC p-l-24 p-t-24 m-b-32 b-l-1-solid-E4EBF1">
+        <div class="flex h-192 bg-FAFBFC b-r-8">
             <img class="w-58 h-58 m-l-32 m-t-32" src="@/assets/account/email.png" alt="">
             <div class="m-l-24 m-t-40">
                 <div class="font-24 ff-SCBold fw-600 m-b-20">yonghuming@gmail.com</div>
@@ -43,16 +43,22 @@
                 </div>
             </div>
         </div>
-        <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @close="close">
+        <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
             <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="ruleForm">
                 <el-form-item label="新密码" prop="password">
-                    <el-input class="w-290" placeholder="请输入新密码" v-model="passwordForm.password"></el-input>
+                    <el-input class="w-290" placeholder="请输入新密码" :type="passwordType" v-model="passwordForm.password"></el-input>
+                    <img v-if="eyeIsOpen" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
+                    <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
                 <el-form-item label="新密码确认" prop="confirmPassword">
-                    <el-input class="w-290" placeholder="请输入新密码" v-model="passwordForm.confirmPassword"></el-input>
+                    <el-input class="w-290" placeholder="请输入新密码" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
+                    <img v-if="eyeIsOpen1" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen1 = false" />
+                    <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen1 = true" />
                 </el-form-item>
                 <el-form-item label="邮箱验证码" prop="verifyCode">
-                    <el-input class="w-290" placeholder="请输入邮箱验证码" v-model="passwordForm.verifyCode"></el-input>
+                    <el-input class="w-290" placeholder="请输入邮箱验证码" maxlength="6" v-model="passwordForm.verifyCode" @input="handleInput"></el-input>
+                    <div class="text-c1890FF absolute top-0 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">发送验证码</div>
+                    <div class="text-A9B3C9 absolute top-0 right-16" v-else>{{ cutdown }}s 重新发送</div>
                 </el-form-item>
             </el-form>
         </basic-dialog>
@@ -67,6 +73,11 @@ export default {
   },
   data() {
     return {
+      eyeIsOpen: false,
+      eyeIsOpen1: false,
+      cutdown: 10,
+      cutdownShow: false,
+      timer: null,
       bindDialogOptions: {
         visible: false,
         theme: 'white',
@@ -108,13 +119,6 @@ export default {
           color: '#001529',
           paddingTop: 0,
           paddingBottom: 0
-        //   width: '100%',
-        //   padding: '11px 0',
-        //   'text-align': 'center',
-        //   background: this.GLOBAL.basicColor,
-        //   'font-size': '16px',
-        //   'font-family': 'PingFang_Medium',
-        //   color: '#222326'
         },
         showBtn: true,
         showCancelBtn: true
@@ -137,9 +141,46 @@ export default {
       }
     }
   },
+  computed: {
+    passwordType() {
+      let passwordType
+      if (this.eyeIsOpen) {
+        passwordType = 'text'
+      } else {
+        passwordType = 'password'
+      }
+      return passwordType
+    },
+    passwordType1() {
+      let passwordType
+      if (this.eyeIsOpen1) {
+        passwordType = 'text'
+      } else {
+        passwordType = 'password'
+      }
+      return passwordType
+    }
+  },
   methods: {
+    sendCode() {
+      this.cutdownShow = true
+      this.timer = setInterval(() => {
+        this.cutdown--
+        if (this.cutdown == 0) {
+          this.cutdown = 10
+          this.cutdownShow = false
+          clearInterval(this.timer)
+        }
+      }, 1000)
+    },
+    handleInput() {
+      this.passwordForm.verifyCode = this.passwordForm.verifyCode.replace(/[^\d]/g, '')
+    },
     handleComfirm() {
-
+      this.bindDialogOptions.visible = false
+    },
+    cancel() {
+      this.bindDialogOptions.visible = false
     },
     close() {
       this.bindDialogOptions.visible = false
@@ -150,14 +191,17 @@ export default {
 
 <style lang="scss" scoped>
 ::v-deep{
-    .el-dialog__header{
-        height: 72px;
-    }
-    .el-dialog__headerbtn{
-        top: 22px;
-        .el-dialog__close{
-            color: #A9B3C9;
-        }
-    }
+  .el-input__inner{
+    padding-right: 35px;
+  }
+  .el-dialog__header{
+      height: 72px;
+  }
+  .el-dialog__headerbtn{
+      top: 22px;
+      .el-dialog__close{
+          color: #A9B3C9;
+      }
+  }
 }
 </style>

@@ -48,6 +48,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-menu{
+  border-right: 0;
+}
 .el-menu-item{
   font-family: 'PingFang SC-Semibold, PingFang SC';
   font-weight: 600;

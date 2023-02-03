@@ -219,7 +219,7 @@ export default {
           }
         }
         .el-pager li.active{
-          background-color: $basicColor;
+          background-color: #ffc304;
           color: #0C0C11;
           border-radius: 4px;
           box-shadow: 0px 24px 30px 0px rgba(82,92,229,0.19);
