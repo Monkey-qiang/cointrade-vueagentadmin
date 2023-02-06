@@ -4,34 +4,34 @@
         <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
           <div class="m-l-24">
             <div class="ff-SCRegular fw-400">累计直客佣金(USDT)</div>
-            <div class="ff-SCBold font-24 fw-600 m-t-20">7436.9076</div>
+            <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_straight }}</div>
           </div>
           <div class="w-1 h-80 bg-E4EBF1 m-l-64"></div>
           <div class="m-l-24">
             <div class="flex align-center">
               <div class="ff-SCRegular font-14 fw-400 text-c7C869B">昨日直客佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">0.74367</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_agent }}</div>
             </div>
             <div class="flex align-center m-t-28">
               <div class="ff-SCRegular font-14 fw-400 text-c7C869B">本月直客佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">70.4367</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.month_straight }}</div>
             </div>
           </div>
         </div>
         <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
           <div class="m-l-24">
             <div class="ff-SCRegular fw-400">累计代理佣金(USDT)</div>
-            <div class="ff-SCBold font-24 fw-600 m-t-20">7436.9076</div>
+            <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_agent }}</div>
           </div>
           <div class="w-1 h-80 bg-E4EBF1 m-l-64"></div>
           <div class="m-l-24">
             <div class="flex align-center">
               <div class="ff-SCRegular font-14 fw-400 text-c7C869B">昨日代理佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">0.74367</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_agent }}</div>
             </div>
             <div class="flex align-center m-t-28">
               <div class="ff-SCRegular font-14 fw-400 text-c7C869B">本月代理佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">70.4367</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.month_agent }}</div>
             </div>
           </div>
         </div>
@@ -116,29 +116,58 @@ export default {
       date: '',
       tableOptions: {
         columns: tableColumns,
-        data: [{
-          userId: 'D5359686',
-          inviteNum: 34,
-          totalCommission: 21551.15,
-          transationCommission: 283412.04,
-          agentCommission: 283412.04,
-          status: '已入账',
-          inviteDate: '2023-01-30 16:58:25'
-        }],
+        data: [],
         showPagination: true,
         paginationOp: {
           small: true,
           total: 1,
-          pageSize: 10,
+          pageSize: 3,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
         theme: 'white'
-      }
+      },
+      rewardSummary: {}
     }
   },
+  created() {
+    this.getRewardSummary()
+    this.getRewardList()
+  },
   methods: {
-
+    search() {
+      this.getRewardList()
+    },
+    currentChange(page) {
+      // console.log(page)
+      this.tableOptions.paginationOp.currentPage = page
+      this.getInviteList()
+    },
+    getRewardSummary() {
+      this.getRequest('agent/getrewardsummary').then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.rewardSummary = res.data
+        }
+      })
+    },
+    getRewardList() {
+      const data = {
+        coin: this.coin,
+        category: '',
+        begin_time: this.date[0],
+        end_time: this.date[1],
+        page: this.tableOptions.paginationOp.currentPage,
+        size: 3
+      }
+      this.getRequest('agent/getrewardlist', data).then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.tableOptions.data = res.data.data_list
+          this.tableOptions.paginationOp.total = res.data.data_total
+        }
+      })
+    }
   }
 }
 </script>
@@ -156,9 +185,9 @@ export default {
   }
   .el-date-editor{
     width: 278px;
-  }
-  .el-range__icon{
-    height: auto;
+    .el-input__icon{
+      height: auto;
+    }
   }
   .el-range-separator{
     height: auto;

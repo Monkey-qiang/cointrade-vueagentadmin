@@ -3,15 +3,15 @@
       <div class="flex justify-between align-center">
         <div class="w-389 h-148 text-center bg-FAFBFC b-r-8">
           <div class="ff-Regular fw-400 m-t-32">团队人数</div>
-          <div class="ff-SCBold font-24 fw-600 m-t-20">74367</div>
+          <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.total_people }}</div>
         </div>
         <div class="yesterday-add w-389 h-148 text-center b-r-8">
           <div class="ff-Regular fw-400 m-t-32">昨日新增人数</div>
-          <div class="ff-SCBold font-24 fw-600 m-t-20">74367</div>
+          <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.yesterday_increase }}</div>
         </div>
         <div class="w-389 h-148 text-center bg-FAFBFC b-r-8">
           <div class="ff-Regular fw-400 m-t-32">本月新增人数</div>
-          <div class="ff-SCBold font-24 fw-600 m-t-20">74367</div>
+          <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.month_increase }}</div>
         </div>
       </div>
       <div class="m-t-24">
@@ -23,15 +23,16 @@
               class="h-32"
               v-model="date"
               type="daterange"
+              value-format="yyyy-MM-dd"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               >
             </el-date-picker>
           </div>
-          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4">查询</div>
+          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
         </div>
       </div>
-      <basic-table class="m-t-24" v-bind="tableOptions"></basic-table>
+      <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>
     </div>
 </template>
 
@@ -47,19 +48,12 @@ export default {
       date: '',
       tableOptions: {
         columns: tableColumns,
-        data: [{
-          userId: 'D5359686',
-          inviteNum: 34,
-          totalCommission: 21551.15,
-          transationCommission: 283412.04,
-          agentCommission: 283412.04,
-          inviteDate: '2023-01-30 16:58:25'
-        }],
+        data: [],
         showPagination: true,
         paginationOp: {
           small: true,
-          total: 1,
-          pageSize: 10,
+          total: 0,
+          'page-size': 3,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -70,13 +64,39 @@ export default {
   },
   created() {
     this.getAgentInfo()
+    this.getInviteList()
   },
   methods: {
+    search() {
+      // console.log('startTime == ' + this.date[0])
+      // console.log('endTime == ' + this.date[1])
+      this.getInviteList()
+    },
+    currentChange(page) {
+      // console.log(page)
+      this.tableOptions.paginationOp.currentPage = page
+      this.getInviteList()
+    },
     getAgentInfo() {
       this.getRequest('agent/getinvitesummary').then(res => {
         // console.log(res)
         if (res.code && res.code == 2000) {
           this.inviteSummary = res.data
+        }
+      })
+    },
+    getInviteList() {
+      const data = {
+        begin_time: this.date[0],
+        end_time: this.date[1],
+        page: this.tableOptions.paginationOp.currentPage,
+        size: 3
+      }
+      this.getRequest('agent/getinvitelist', data).then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.tableOptions.data = res.data.data_list
+          this.tableOptions.paginationOp.total = res.data.data_total
         }
       })
     }
@@ -91,9 +111,9 @@ export default {
 ::v-deep{
   .el-date-editor{
     width: 278px;
-  }
-  .el-range__icon{
-    height: auto;
+    .el-input__icon{
+      height: auto;
+    }
   }
   .el-range-separator{
     height: auto;

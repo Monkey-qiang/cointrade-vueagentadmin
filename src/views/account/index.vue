@@ -44,14 +44,14 @@
             </div>
         </div>
         <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
-            <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="ruleForm">
+            <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
                 <el-form-item label="新密码" prop="password">
                     <el-input class="w-290" placeholder="请输入新密码" :type="passwordType" v-model="passwordForm.password"></el-input>
                     <img v-if="eyeIsOpen" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
                 <el-form-item label="新密码确认" prop="confirmPassword">
-                    <el-input class="w-290" placeholder="请输入新密码" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
+                    <el-input class="w-290" placeholder="请确认新密码" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
                     <img v-if="eyeIsOpen1" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen1 = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen1 = true" />
                 </el-form-item>
@@ -72,6 +72,13 @@ export default {
     BasicDialog
   },
   data() {
+    const that = this
+    function validatePassword(rule, value, callback) {
+      if (that.passwordForm.password != that.passwordForm.confirmPassword) {
+        callback(new Error('密码不一致'))
+      }
+      callback()
+    }
     return {
       eyeIsOpen: false,
       eyeIsOpen1: false,
@@ -133,7 +140,8 @@ export default {
           { required: true, message: '请输入新密码', trigger: 'blur' }
         ],
         confirmPassword: [
-          { required: true, message: '请输入新密码', trigger: 'blur' }
+          { required: true, message: '请确认新密码', trigger: 'blur' },
+          { validator: validatePassword, trigger: 'blur' }
         ],
         verifyCode: [
           { required: true, message: '请输入邮箱验证码', trigger: 'blur' }
@@ -176,17 +184,48 @@ export default {
           clearInterval(this.timer)
         }
       }, 1000)
+      const data = {
+        email: this.agentinfo.email
+      }
+      this.postRequest('agent/sendcodebylogin', data).then(res => {
+        console.log(res)
+        if (res.code && res.code == 2000) {
+          this.$toast('验证码发送成功')
+        } else {
+          this.$toast('验证码发送失败')
+        }
+      })
     },
     handleInput() {
       this.passwordForm.verifyCode = this.passwordForm.verifyCode.replace(/[^\d]/g, '')
     },
     handleComfirm() {
-      this.bindDialogOptions.visible = false
+      this.$refs['passwordForm'].validate((valid) => {
+        if (valid) {
+          const data = {
+            password: this.passwordForm.password,
+            code: this.passwordForm.verifyCode
+          }
+          this.postRequest('agent/resetpasswd', data).then(res => {
+            console.log(res)
+            if (res.code && res.code == 2000) {
+              this.$toast('修改密码成功')
+              this.bindDialogOptions.visible = false
+            } else {
+              this.$toast(res.msg)
+            }
+          })
+        }
+      })
     },
     cancel() {
+      this.$refs['passwordForm'].resetFields()
+      this.$refs['passwordForm'].clearValidate()
       this.bindDialogOptions.visible = false
     },
     close() {
+      this.$refs['passwordForm'].resetFields()
+      this.$refs['passwordForm'].clearValidate()
       this.bindDialogOptions.visible = false
     },
     getAgentInfo() {

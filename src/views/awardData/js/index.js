@@ -3,40 +3,40 @@ export const tableColumns = [
     label: '币种',
     // customSlot: 'coin',
     'class-name': 'first',
-    prop: 'userId',
+    prop: 'coin',
     width: '120px'
   },
   {
     label: '奖励数量',
-    prop: 'inviteNum',
+    prop: 'quantity',
     width: '190px'
   },
   {
     // prop: 'price',
     label: '奖励类型',
-    prop: 'totalCommission',
+    prop: 'category',
     width: '170px'
   },
   {
     label: '交易区',
-    prop: 'transationCommission',
+    prop: 'tradeid',
     width: '170px'
   },
   {
     label: '奖励来源',
-    prop: 'agentCommission',
+    prop: 'userid',
     width: '190px'
     // align: 'right',
   },
   {
     label: '状态',
-    prop: 'agentCommission',
+    prop: 'status',
     width: '170px'
     // align: 'right',
   },
   {
     label: '邀请日期',
-    prop: 'inviteDate'
+    prop: 'createtime'
     // align: 'right',
   }
 ]
