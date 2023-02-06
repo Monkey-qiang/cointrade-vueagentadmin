@@ -74,13 +74,13 @@ export default {
         if (valid) {
           const data = {
             email: this.$route.query.email,
-            password: this.$route.query.password,
+            password: this.loginForm.newPassword,
             code: this.$route.query.code
           }
           this.postRequest('agent/findpasswd', data).then(res => {
             console.log(res)
             if (res.code && res.code == 2000) {
-              // this.$toast('设置密码成功')
+              this.$toast('设置密码成功')
               setTimeout(() => {
                 this.$router.replace({ path: '/login' })
               }, 1500)
