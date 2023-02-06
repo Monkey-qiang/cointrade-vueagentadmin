@@ -9,30 +9,31 @@
     <div v-if="sub">
       <div class="m-b-40">
         <div class="m-b-20 fw-600 font-32 l-h-32 ff-SCBold text-c070707">Set Password</div>
-        <div class="m-b-20 fw-500 font-22 l-h-24 text-c070707 ff-Medium">Email Address：563365@gmail.com</div>
+        <div class="m-b-20 fw-500 font-22 l-h-24 text-c070707 ff-Medium">Email Address：{{ form.email }}</div>
         <div class="fw-400 font-24 l-h-24 ff-Regular text-c636B75">After the application is appproved.you can use this
           Email and Password to log in to the Affiliate system</div>
       </div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="Password">
           <div class="input">Password</div>
-          <el-input v-model="ruleForm.Password"></el-input>
+          <el-input clearable v-model.trim="ruleForm.Password"></el-input>
         </el-form-item>
         <el-form-item prop="Verification">
           <div class="input">Verification Code</div>
           <!-- <el-input v-model="ruleForm.Verification"></el-input> -->
-          <el-input placeholder="" :maxlength="6" v-model="ruleForm.Verification" @input="handleInput"></el-input>
+          <el-input placeholder="" :maxlength="6" v-model="ruleForm.Verification"></el-input>
           <div class="text-c2880BF font-14 fw-500 absolute ff-Medium  top-23 right-20 cursor-point" @click="sendCode" v-if="!cutdownShow">Send Code
           </div>
-          <div class="text-A9B3C9 font-14 fw-500 absolute top-22 right-20" v-else>{{ cutdown }}s Send Code</div>
+          <div class="text-A9B3C9 font-14 fw-500 absolute ff-Medium top-23 right-20" v-else >{{ cutdown }}s Send Code</div>
         </el-form-item>
         <el-form-item>
           <el-checkbox v-model="checked">
             <div class="text-c636B75">
-              I agree to the <span class="text-c2880BF cursor-point">Affiliate Agreement</span> and <span
-                class="text-c2880BF cursor-point">Privacy Policy</span>
+              I agree to the
             </div>
           </el-checkbox>
+          <span class="text-c2880BF cursor-point"> Affiliate Agreement</span> and <span
+                class="text-c2880BF cursor-point">Privacy Policy</span>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn" type="primary" @click="submitForm">Submit</el-button>
@@ -45,7 +46,7 @@
       </el-form>
     </div>
     <div class="text-center m-t-98" v-else>
-      <div class="w-200 h-200  m-lr-auto bg-grey"></div>
+      <div class="w-200 h-200  m-lr-auto"><img class="img" src="../../assets/agent/dui.png" alt=""></div>
       <div class="m-b-20 m-t-80 font-32 h-32 l-h-32">Submitted Successfully</div>
       <div class="font-24 h-24 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
         application shortly</div>
@@ -54,9 +55,23 @@
 </template>
 
 <script>
+import bus from '@/js/eventBus.js'
 export default {
   data() {
+    const check = (rule, value, callback) => {
+      if (!value || value.length < 8) {
+        return callback(new Error('At least 8 digits and letter combinations'))
+      } else {
+        if (value.replace(/^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{1,50}$/)) {
+          console.log(1)
+        } else {
+          return callback(new Error('Must be alphanumeric combination'))
+        }
+      }
+      callback()
+    }
     return {
+      form: {},
       cutdown: 10,
       cutdownShow: false,
       timer: null,
@@ -68,15 +83,20 @@ export default {
       },
       rules: {
         Password: [
-          { required: true, message: 'At least 8 digits and letter combinations', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { validator: check, trigger: 'blur' }
         ],
         Verification: [
-          { required: true, message: 'Please enter the Verification Code', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the Verification Code', trigger: 'blur' },
+          { min: 6, max: 6, message: 'Six digit length', trigger: 'change' }
         ]
       }
     }
+  },
+  created() {
+    bus.$off('send')
+    bus.$on('send', data => {
+      this.form = data
+    })
   },
   methods: {
     sendCode() {
@@ -90,20 +110,14 @@ export default {
         }
       }, 1000)
     },
-    handleInput() {
-      this.loginForm.verifyCode = this.loginForm.verifyCode.replace(/[^\d]/g, '')
-    },
     junmp() {
       this.$router.push({ path: '/login' })
     },
     submitForm() {
+      // console.log(1)
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.sub = false
-          console.log(this.ruleForm)
-        } else {
-          console.log('error submit!!')
-          return false
+          console.log(1)
         }
       })
     },

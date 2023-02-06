@@ -24,9 +24,9 @@
           </div>
           <el-input clearable v-model="ruleForm.telegram"></el-input>
         </el-form-item>
-        <el-form-item prop="region">
+        <el-form-item prop="job">
           <div class="input"><span class="text-red">*</span>Your are</div>
-          <el-select clearable v-model="ruleForm.region" placeholder="">
+          <el-select clearable v-model="ruleForm.job" placeholder="">
             <el-option label="Social Media Influencer" :value="1"></el-option>
             <el-option label="Content Creator" :value="3"></el-option>
             <el-option label="Professional Affiliate Marketer" :value="5"></el-option>
@@ -35,13 +35,13 @@
             <el-option label="Others" :value="11"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="desc">
+        <el-form-item prop="channels">
           <div class="input"><span class="text-red">*</span>Please tell us about your promotion channels</div>
-          <el-input class="h-141" type="textarea" resize="none" v-model="ruleForm.desc"></el-input>
+          <el-input class="h-141" type="textarea" resize="none" v-model="ruleForm.channels"></el-input>
         </el-form-item>
-        <el-form-item prop="country">
+        <el-form-item prop="country_id">
           <!-- <el-select clearable v-model="ruleForm.country" placeholder=""> -->
-            <!-- <el-option v-for="(item, index) in country" :value="item.id" :key="index">
+          <!-- <el-option v-for="(item, index) in country" :value="item.id" :key="index">
               <div class="area_item flex align-center">
                 <img class="w-30 h-30 m-r-12 b-r-p50" :src="item.countryicon"  alt="">
                 <div class="flex justify-between w-p100 l-h-19">
@@ -49,7 +49,7 @@
                 </div>
               </div>
             </el-option> -->
-            <AreaCode style="width: 100%;" :areaList="area_list" @updataArea="updataArea">1</AreaCode>
+          <AreaCode style="width: 100%;" :areaList="area_list" @updataArea="updataArea"></AreaCode>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn" type="primary" @click="submitForm">Next</el-button>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+// import { agentRegister } from '@/api/agent.js'
+import bus from '@/js/eventBus'
 import AreaCode from './component/index.vue'
 import { records } from '@/utils/country'
 export default {
@@ -73,12 +75,12 @@ export default {
       area_list: records,
       ruleForm: {
         name: '',
-        region: '',
+        job: '',
         email: '',
         user_id: '',
         telegram: '',
-        country: '',
-        desc: ''
+        channels: '',
+        country_id: 40
       },
       rules: {
         name: [
@@ -97,13 +99,13 @@ export default {
           { required: true, message: 'Please enter the natelegram', trigger: 'blur' }
           //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        region: [
+        job: [
           { required: true, message: 'Please select', trigger: 'change' }
         ],
-        // country: [
-        //   { required: true, message: 'Please select Country', trigger: 'change' }
-        // ],
-        desc: [
+        country_id: [
+          { required: true, message: 'Please select Country', trigger: 'change' }
+        ],
+        channels: [
           { required: true, message: 'Please enter your promotion channels', trigger: 'blur' }
         ]
       }
@@ -112,8 +114,9 @@ export default {
   methods: {
     // 选择某一个区号
     updataArea(item) {
-      this.loginForm.area_logo = item.img
-      this.loginForm.area_code = item.area_code
+      this.ruleForm.area_logo = item.img
+      this.ruleForm.country_id = item.id
+      console.log(this.ruleForm)
     },
     jump() {
       this.$router.push({ path: '/login' })
@@ -121,8 +124,9 @@ export default {
     submitForm() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm)
+          // console.log(this.ruleForm)
           this.$router.push({ path: '/agentPage/verification' })
+          bus.$emit('send', this.ruleForm)
         } else {
           console.log('error submit!!')
           return false
