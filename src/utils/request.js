@@ -3,7 +3,8 @@ import axios from 'axios'
 import { Toast } from 'vant'
 
 const token = ''
-const base = 'http://8.218.110.85/api/'
+// const base = 'http://8.218.110.85/api/'
+const base = 'http://192.168.3.110:6236/api/'
 
 const basicData = axios.create({
   baseURL: base

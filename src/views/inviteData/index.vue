@@ -64,11 +64,19 @@ export default {
           layout: 'prev, pager, next, jumper'
         },
         theme: 'white'
-      }
+      },
+      inviteSummary: {}
     }
   },
   methods: {
-
+    getAgentInfo() {
+      this.getRequest('agent/getinvitesummary').then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.inviteSummary = res.data
+        }
+      })
+    }
   }
 }
 </script>

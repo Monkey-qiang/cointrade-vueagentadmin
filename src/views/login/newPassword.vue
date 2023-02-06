@@ -3,19 +3,19 @@
         <img src="../../assets/login/login_bg.png" alt="">
         <div class="w-483 m-l-236 m-t-200">
             <div class="text-c001529 font-52 m-b-32">忘记密码</div>
-            <el-form label-position="top" label-width="80px" :model="loginForm">
-                <el-form-item class="m-b-40" label="新密码">
+            <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
+                <el-form-item class="m-b-40" label="新密码" prop="newPassword">
                     <el-input placeholder="请输入新密码" :type="passwordType" v-model="loginForm.newPassword"></el-input>
                     <img v-if="eyeIsOpen"  class="absolute top-20 right-16" src="../../assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-20 right-16" src="../../assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
-                <el-form-item class="m-b-40 relative" label="新密码确认">
-                    <el-input placeholder="请确认新密码" :type="passwordType1" :maxlength="6" v-model="loginForm.confirmNewPassword"></el-input>
+                <el-form-item class="m-b-40 relative" label="新密码确认" prop="confirmNewPassword">
+                    <el-input placeholder="请确认新密码" :type="passwordType1" v-model="loginForm.confirmNewPassword"></el-input>
                     <img v-if="eyeIsOpen1"  class="absolute top-20 right-16" src="../../assets/login/eye_open.png" alt="" @click="eyeIsOpen1 = false" />
                     <img v-else class="absolute top-20 right-16" src="../../assets/login/eye_close.png" alt="" @click="eyeIsOpen1 = true" />
                 </el-form-item>
             </el-form>
-            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304">完成</div>
+            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="complete">完成</div>
         </div>
     </div>
 </template>
@@ -23,10 +23,26 @@
 <script>
 export default {
   data() {
+    const that = this
+    function validatePassword(rule, value, callback) {
+      if (that.loginForm.newPassword != that.loginForm.confirmNewPassword) {
+        callback(new Error('密码不一致'))
+      }
+      callback()
+    }
     return {
       loginForm: {
         newPassword: '',
         confirmNewPassword: ''
+      },
+      rules: {
+        newPassword: [
+          { required: true, message: '请输入新密码', trigger: 'blur' }
+        ],
+        confirmNewPassword: [
+          { required: true, message: '请确认新密码', trigger: 'blur' },
+          { validator: validatePassword, trigger: 'blur' }
+        ]
       },
       eyeIsOpen: false,
       eyeIsOpen1: false
@@ -53,7 +69,28 @@ export default {
     }
   },
   methods: {
-
+    complete() {
+      this.$refs['loginForm'].validate((valid) => {
+        if (valid) {
+          const data = {
+            email: this.$route.query.email,
+            password: this.$route.query.password,
+            code: this.$route.query.code
+          }
+          this.postRequest('agent/findpasswd', data).then(res => {
+            console.log(res)
+            if (res.code && res.code == 2000) {
+              // this.$toast('设置密码成功')
+              setTimeout(() => {
+                this.$router.replace({ path: '/login' })
+              }, 1500)
+            } else {
+              this.$toast(res.msg)
+            }
+          })
+        }
+      })
+    }
   }
 }
 </script>
@@ -72,6 +109,7 @@ export default {
         height: 56px;
         line-height: 56px;
         background-color: #FAFBFC;
+        padding-right: 48px;
     }
 }
 </style>

@@ -22,7 +22,7 @@
                     </el-dropdown-menu>
                 </el-dropdown>
                 <div class="line w-1 h-20 bg-c96A0B5 m-lr-24"></div>
-                <div class="flex align-center cursor-point">
+                <div class="flex align-center cursor-point" @click="loginOut">
                     <img src="../../assets/common/exit.png" alt="">
                     <div class="text-white m-l-4 m-r-24">退出</div>
                 </div>
@@ -39,7 +39,10 @@ export default {
     }
   },
   methods: {
-
+    loginOut() {
+      localStorage.clear()
+      this.$router.replace({ path: '/login' })
+    }
   }
 }
 </script>

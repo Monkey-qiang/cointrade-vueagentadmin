@@ -1,5 +1,5 @@
 <template>
-    <div class="m-l-230" v-if="!$route.meta.hidden">
+    <div class="m-l-230 p-t-24" v-if="!$route.meta.hidden">
         <el-menu
         class="w-188 p-lr-24"
         :default-active="activeMenu"
@@ -12,8 +12,7 @@
         @select="menuSelect"
       >
         <el-menu-item class="b-r-4" v-for="(route, index) in routerOptions" :key="route.path" :index="route.path">
-          <!-- <img src="../../../assets/asideIcon/aside_icon_1.png" alt=""/> -->
-          <img :src="`../../../assets/asideIcon/aside_icon_${(index+1) }.png`" alt=""/>
+          <img class="m-l-24 m-r-12" :src="require(`../../../assets/asideIcon/aside_icon_${(index+1) }.png`)" alt=""/>
           <span slot="title">{{ route.meta.title }}</span>
         </el-menu-item>
       </el-menu>
@@ -35,6 +34,7 @@ export default {
   computed: {
     activeMenu() {
       const route = this.$route
+      // console.log(route)
       const { path } = route
       return path
     }
@@ -55,5 +55,11 @@ export default {
   font-family: 'PingFang SC-Semibold, PingFang SC';
   font-weight: 600;
   padding: 0!important;
+  &:hover{
+    background-color: #FFC304;
+  }
+}
+.is-active{
+  background-color: #FFC304;
 }
 </style>

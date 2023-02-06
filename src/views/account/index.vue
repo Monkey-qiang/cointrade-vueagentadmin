@@ -3,9 +3,9 @@
         <div class="flex h-192 bg-FAFBFC b-r-8">
             <img class="w-58 h-58 m-l-32 m-t-32" src="@/assets/account/email.png" alt="">
             <div class="m-l-24 m-t-40">
-                <div class="font-24 ff-SCBold fw-600 m-b-20">yonghuming@gmail.com</div>
-                <div class="ff-SCMedium m-b-20">佣金比例：40%+10%</div>
-                <div class="font-12 fw-400 text-c7C869B ff-SCRegular">上次登录时间：2023-01-29 15:54</div>
+                <div class="font-24 ff-SCBold fw-600 m-b-20">{{ agentinfo.email }}</div>
+                <div class="ff-SCMedium m-b-20">佣金比例：{{ agentinfo.rate }}</div>
+                <div class="font-12 fw-400 text-c7C869B ff-SCRegular">上次登录时间：{{ agentinfo.lasttime }}</div>
             </div>
         </div>
         <div class="flex p-t-24">
@@ -13,12 +13,12 @@
                 <div class="ff-SCMedium font-20 m-t-24">邀请地址</div>
                 <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">邀请码</div>
                 <div class="w-443 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 b-r-4 m-t-12 relative">
-                    4N7RSDST
+                  {{ agentinfo.invitecode }}
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
                 <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">邀请链接</div>
                 <div class="w-443 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 b-r-4 m-t-12 relative">
-                    https://https://accounts.bitechan.info/zh-CN/lsfhkllnk...
+                  {{ agentinfo.inviteUrl }}
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
                 <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point">下载海报</div>
@@ -27,15 +27,15 @@
                 <div class="ff-SCMedium font-20 m-t-24">信息设置</div>
                 <div class="flex align-center justify-between w-443 m-t-24">
                     <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">姓名</div>
-                    <div class="p-l-16 ff-SCMedium font-14">zhangsan</div>
+                    <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.name }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
                     <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">关联用户ID</div>
-                    <div class="p-l-16 ff-SCMedium font-14">43258697</div>
+                    <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.userid }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
                     <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">地区</div>
-                    <div class="p-l-16 ff-SCMedium font-14">France</div>
+                    <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.countryen }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
                     <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">密码</div>
@@ -138,7 +138,8 @@ export default {
         verifyCode: [
           { required: true, message: '请输入邮箱验证码', trigger: 'blur' }
         ]
-      }
+      },
+      agentinfo: {}
     }
   },
   computed: {
@@ -160,6 +161,9 @@ export default {
       }
       return passwordType
     }
+  },
+  created() {
+    this.getAgentInfo()
   },
   methods: {
     sendCode() {
@@ -184,6 +188,14 @@ export default {
     },
     close() {
       this.bindDialogOptions.visible = false
+    },
+    getAgentInfo() {
+      this.getRequest('agent/getagentinfo').then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.agentinfo = res.data
+        }
+      })
     }
   }
 }
