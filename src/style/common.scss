@@ -240,6 +240,9 @@ $value in (p17: $p17,
 .ff-SCBold {
   font-family: "PingFang SC-Semibold";
 }
+.ff-Heavy {
+  font-family: "PingFang SC-Heavy"
+}
 
 .ff-BPLight {
   font-family: "binance_plex_light";
@@ -288,6 +291,7 @@ $F3F4F6: #f3f4f6;
 $E3E1F9: #e3e1f9;
 $c888: #888;
 $F4F4F4: #F4F4F4;
+$F8F8F8: #F8F8F8;
 
 $c90959C: #90959c;
 $c222326: #222326;
@@ -360,8 +364,11 @@ $color in (red: $red,
   pink_1: $pink_1,
   green: $green,
   black_o10: $black_o10,
+
+  F8F8F8: #F8F8F8,
   c666: $c666,
   c999: $c999,
+  F4F4F4:$F4F4F4,
   FF6666: $FF6666,
   c34E26E: $c34E26E,
   d8d8d8: $d8d8d8,
