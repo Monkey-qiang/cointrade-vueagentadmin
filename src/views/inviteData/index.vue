@@ -68,6 +68,9 @@ export default {
       inviteSummary: {}
     }
   },
+  created() {
+    this.getAgentInfo()
+  },
   methods: {
     getAgentInfo() {
       this.getRequest('agent/getinvitesummary').then(res => {
