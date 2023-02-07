@@ -86,19 +86,11 @@
             <div class="p-t-79 font-48 ff-Bold fw-600 text-white l-h-60">现在成为代理商</div>
             <el-button class="btn2" type="primary" @click="application">立即申请</el-button>
         </div>
-        <verification></verification>
-        <application></application>
     </div>
 </template>
 
 <script>
-import application from './application'
-import verification from './verification'
 export default {
-  components: {
-    application,
-    verification
-  },
   data() {
     return {
       activeNames: '',
@@ -167,6 +159,7 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 .bg1 {
     background: linear-gradient(176deg, #E8E8E8 0%, rgba(244, 244, 244, 0) 100%);
     opacity: 1

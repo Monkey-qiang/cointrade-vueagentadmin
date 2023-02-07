@@ -2215,7 +2215,7 @@ const records = [
 const defaultCountry = () => {
   let defaultCountry = {}
   records.forEach(item => {
-    if (item.namezh === '中国') {
+    if (item.namezh === '中华人民共和国香港特别行政区') {
       defaultCountry = {
         id: item.id,
         country_en: item.nameen,
