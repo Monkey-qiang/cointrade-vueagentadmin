@@ -9,24 +9,24 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="name">
           <div class="input"><span class="text-red">*</span>Your Name</div>
-          <el-input clearable v-model="ruleForm.name"></el-input>
+          <el-input clearable v-model.trim="ruleForm.name"></el-input>
         </el-form-item>
         <el-form-item prop="email">
           <div class="input"><span class="text-red">*</span>Your Email</div>
-          <el-input clearable v-model="ruleForm.email"></el-input>
+          <el-input clearable v-model.trim="ruleForm.email"></el-input>
         </el-form-item>
         <el-form-item prop="user_id">
           <div class="input"><span class="text-red">*</span>Your Tokex User ID</div>
-          <el-input clearable v-model="ruleForm.user_id"></el-input>
+          <el-input clearable v-model.number="ruleForm.user_id"></el-input>
         </el-form-item>
         <el-form-item prop="telegram">
           <div class="input"><span class="text-red">*</span>Please provide your Telegram account and we will contact you
           </div>
-          <el-input clearable v-model="ruleForm.telegram"></el-input>
+          <el-input clearable v-model.trim="ruleForm.telegram"></el-input>
         </el-form-item>
         <el-form-item prop="job">
           <div class="input"><span class="text-red">*</span>Your are</div>
-          <el-select clearable v-model="ruleForm.job" placeholder="">
+          <el-select clearable v-model.trim="ruleForm.job" placeholder="">
             <el-option label="Social Media Influencer" :value="1"></el-option>
             <el-option label="Content Creator" :value="3"></el-option>
             <el-option label="Professional Affiliate Marketer" :value="5"></el-option>
@@ -40,15 +40,6 @@
           <el-input class="h-141" type="textarea" resize="none" v-model="ruleForm.channels"></el-input>
         </el-form-item>
         <el-form-item prop="country_id">
-          <!-- <el-select clearable v-model="ruleForm.country" placeholder=""> -->
-          <!-- <el-option v-for="(item, index) in country" :value="item.id" :key="index">
-              <div class="area_item flex align-center">
-                <img class="w-30 h-30 m-r-12 b-r-p50" :src="item.countryicon"  alt="">
-                <div class="flex justify-between w-p100 l-h-19">
-                  <span>{{item.namezh }}</span>
-                </div>
-              </div>
-            </el-option> -->
           <AreaCode style="width: 100%;" :areaList="area_list" @updataArea="updataArea"></AreaCode>
         </el-form-item>
         <el-form-item style="text-align: center;">
@@ -62,7 +53,7 @@
 </template>
 
 <script>
-// import { agentRegister } from '@/api/agent.js'
+import { agentEmail } from '@/api/agent.js'
 import bus from '@/js/eventBus'
 import AreaCode from './component/index.vue'
 import { records } from '@/utils/country'
@@ -71,7 +62,16 @@ export default {
     AreaCode
   },
   data() {
+    var checkExist = (rule, value, callback) => {
+      if (value == '') {
+        callback(new Error('Please enter email'))
+      } else {
+        this.validateHas({ email: value })
+      }
+      callback()
+    }
     return {
+      emailCheck: true,
       area_list: records,
       ruleForm: {
         name: '',
@@ -80,24 +80,23 @@ export default {
         user_id: '',
         telegram: '',
         channels: '',
-        country_id: 40
+        country_id: 73
       },
       rules: {
         name: [
           { required: true, message: 'Please enter the name', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        email: [
-          { required: true, message: 'Please enter the email', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
+        email:
+          [
+            { validator: checkExist, trigger: 'blur' },
+            { type: 'email', message: 'Please enter the correct email address', trigger: ['blur', 'change'] }
+          ],
         user_id: [
-          { required: true, message: 'Please enter the user_id', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the user_id', trigger: 'blur' },
+          { pattern: /^\d+$/, message: 'Input digit', trigger: 'change' }
         ],
         telegram: [
           { required: true, message: 'Please enter the natelegram', trigger: 'blur' }
-          //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         job: [
           { required: true, message: 'Please select', trigger: 'change' }
@@ -112,23 +111,34 @@ export default {
     }
   },
   methods: {
+    async validateHas(value) {
+      const param = value
+      const res = await agentEmail(param)
+      if (res.data.code != 2000) {
+        this.emailCheck = false
+        this.$message({
+          type: 'error',
+          message: res.data.msg
+        })
+      } else {
+        this.emailCheck = true
+      }
+    },
     // 选择某一个区号
     updataArea(item) {
-      this.ruleForm.area_logo = item.img
       this.ruleForm.country_id = item.id
-      console.log(this.ruleForm)
     },
     jump() {
       this.$router.push({ path: '/login' })
     },
     submitForm() {
       this.$refs.ruleForm.validate((valid) => {
-        if (valid) {
-          // console.log(this.ruleForm)
+        if (valid && this.emailCheck) {
           this.$router.push({ path: '/agentPage/verification' })
-          bus.$emit('send', this.ruleForm)
+          setTimeout(() => {
+            bus.$emit('send', this.ruleForm)
+          }, 200)
         } else {
-          console.log('error submit!!')
           return false
         }
       })

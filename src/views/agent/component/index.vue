@@ -71,12 +71,16 @@ export default {
         this.selectArea(command)
       }
     },
-    // 选中当前地区或区号
+    // 选中当前地区
     selectArea(item) {
       // debugger
       this.form.area_logo = item.countryicon
       this.form.country = item.nameen
       this.$emit('updataArea', item)
+      // try {
+      // } catch (error) {
+      //   return error
+      // }
     },
     // 搜索地区
     search() {

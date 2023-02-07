@@ -14,26 +14,28 @@
           Email and Password to log in to the Affiliate system</div>
       </div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-        <el-form-item prop="Password">
+        <el-form-item prop="password">
           <div class="input">Password</div>
-          <el-input clearable v-model.trim="ruleForm.Password"></el-input>
+          <el-input type="password" clearable v-model.trim="ruleForm.password"></el-input>
         </el-form-item>
-        <el-form-item prop="Verification">
+        <el-form-item prop="captcha">
           <div class="input">Verification Code</div>
           <!-- <el-input v-model="ruleForm.Verification"></el-input> -->
-          <el-input placeholder="" :maxlength="6" v-model="ruleForm.Verification"></el-input>
-          <div class="text-c2880BF font-14 fw-500 absolute ff-Medium  top-23 right-20 cursor-point" @click="sendCode" v-if="!cutdownShow">Send Code
+          <el-input placeholder="" :maxlength="6" v-model="ruleForm.captcha"></el-input>
+          <div class="text-c2880BF font-14 fw-500 absolute ff-Medium  top-23 right-20 cursor-point" @click="sendCode"
+            v-if="!cutdownShow">Send Code
           </div>
-          <div class="text-A9B3C9 font-14 fw-500 absolute ff-Medium top-23 right-20" v-else >{{ cutdown }}s Send Code</div>
+          <div class="text-A9B3C9 font-14 fw-500 absolute ff-Medium top-23 right-20" v-else>{{ cutdown }}s Send Code
+          </div>
         </el-form-item>
-        <el-form-item>
-          <el-checkbox v-model="checked">
+        <el-form-item prop="checked">
+          <el-checkbox v-model="ruleForm.checked">
             <div class="text-c636B75">
               I agree to the
             </div>
           </el-checkbox>
-          <span class="text-c2880BF cursor-point"> Affiliate Agreement</span> and <span
-                class="text-c2880BF cursor-point">Privacy Policy</span>
+          <span class="text-c2880BF cursor-point" @click="Affiliate"> Affiliate Agreement</span><span class="text-c636B75"> and </span><span
+            class="text-c2880BF cursor-point" @click="Privacy">Privacy Policy</span>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn" type="primary" @click="submitForm">Submit</el-button>
@@ -55,18 +57,25 @@
 </template>
 
 <script>
+import { agentRegister, agentRegisterSendcode } from '@/api/agent'
 import bus from '@/js/eventBus.js'
 export default {
   data() {
     const check = (rule, value, callback) => {
-      if (!value || value.length < 8) {
-        return callback(new Error('At least 8 digits and letter combinations'))
+      const reg = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}')
+      if (value === '') {
+        callback(new Error('Please enter password'))
+      } else if (value.length < 8) {
+        callback(new Error('At least 8 digits and letter combinations'))
+      } else if (!reg.test(value)) {
+        callback(new Error('The password contains upper and lower case letters and numbers'))
       } else {
-        if (value.replace(/^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{1,50}$/)) {
-          console.log(1)
-        } else {
-          return callback(new Error('Must be alphanumeric combination'))
-        }
+        callback()
+      }
+    }
+    const ischecked = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('Please check protocol'))
       }
       callback()
     }
@@ -75,31 +84,49 @@ export default {
       cutdown: 10,
       cutdownShow: false,
       timer: null,
-      checked: true,
       sub: true,
       ruleForm: {
-        Password: '',
-        Verification: ''
+        password: '',
+        captcha: '',
+        checked: false
       },
       rules: {
-        Password: [
+        password: [
           { validator: check, trigger: 'blur' }
         ],
-        Verification: [
-          { required: true, message: 'Please enter the Verification Code', trigger: 'blur' },
+        captcha: [
+          { required: true, message: 'Please enter the captcha Code', trigger: 'blur' },
           { min: 6, max: 6, message: 'Six digit length', trigger: 'change' }
+        ],
+        checked: [
+          { validator: ischecked, trigger: 'change' }
         ]
       }
     }
   },
   created() {
-    bus.$off('send')
     bus.$on('send', data => {
       this.form = data
     })
+    if (window.name == '') {
+      console.log('首次被加载')
+      window.name = 'isReload'
+    } else if (window.name == 'isReload') {
+      console.log('页面被刷新')
+      // this.$router.back()
+    }
+  },
+  beforeDestroy() {
+    bus.$off('send')
   },
   methods: {
-    sendCode() {
+    Affiliate() {
+
+    },
+    Privacy() {
+
+    },
+    async sendCode() {
       this.cutdownShow = true
       this.timer = setInterval(() => {
         this.cutdown--
@@ -109,15 +136,32 @@ export default {
           clearInterval(this.timer)
         }
       }, 1000)
+      const res = await agentRegisterSendcode({ email: this.form.email })
+      const data = res.data
+      if (data.code !== 2000) {
+        this.$message({
+          type: 'error',
+          message: data.msg
+        })
+      }
     },
     junmp() {
       this.$router.push({ path: '/login' })
     },
     submitForm() {
-      // console.log(1)
-      this.$refs.ruleForm.validate((valid) => {
+      this.$refs.ruleForm.validate(async(valid) => {
         if (valid) {
-          console.log(1)
+          const params = { ...this.ruleForm, ...this.form }
+          const res = await agentRegister(params)
+          const data = res.data
+          if (data.code !== 2000) {
+            this.$message({
+              type: 'error',
+              message: data.msg
+            })
+          } else {
+            this.sub = false
+          }
         }
       })
     },
