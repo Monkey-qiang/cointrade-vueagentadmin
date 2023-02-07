@@ -342,6 +342,7 @@ $FAFBFC: #FAFBFC;
 $D4D9E4: #D4D9E4;
 $E4EBF1: #E4EBF1;
 $F0F2F5: #F0F2F5;
+$c01060C: #01060C;
 
 @mixin border {
   content: "";
@@ -425,7 +426,8 @@ $color in (red: $red,
   FAFBFC: $FAFBFC,
   D4D9E4: $D4D9E4,
   E4EBF1: $E4EBF1,
-  F0F2F5: $F0F2F5 ) {
+  F0F2F5: $F0F2F5,
+  c01060C: $c01060C, ) {
   .text-#{$header} {
     color: $color;
   }

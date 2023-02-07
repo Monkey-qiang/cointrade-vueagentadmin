@@ -10,16 +10,17 @@
               class="h-32"
               v-model="date"
               type="daterange"
+              value-format="yyyy-MM-dd"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               >
             </el-date-picker>
           </div>
         </div>
-        <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4">查询</div>
+        <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
       </div>
     </div>
-    <basic-table class="m-t-24" v-bind="tableOptions"></basic-table>
+    <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>
   </div>
 </template>
 
@@ -35,19 +36,12 @@ export default {
       date: '',
       tableOptions: {
         columns: tableColumns,
-        data: [{
-          userId: 'D5359686',
-          inviteNum: 34,
-          totalCommission: 21551.15,
-          transationCommission: 283412.04,
-          agentCommission: 283412.04,
-          inviteDate: '2023-01-30 16:58:25'
-        }],
+        data: [],
         showPagination: true,
         paginationOp: {
           small: true,
           total: 1,
-          pageSize: 10,
+          'page-size': 2,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -55,8 +49,39 @@ export default {
       }
     }
   },
+  created() {
+    this.getReportFormList()
+  },
   methods: {
-
+    search() {
+      this.tableOptions.paginationOp.currentPage = 1
+      this.getReportFormList()
+    },
+    currentChange(page) {
+      // console.log(page)
+      this.tableOptions.paginationOp.currentPage = page
+      this.getReportFormList()
+    },
+    getReportFormList() {
+      let begin_time, end_time
+      if (this.date) {
+        begin_time = this.date[0]
+        end_time = this.date[1]
+      }
+      const data = {
+        begin_time,
+        end_time,
+        page: this.tableOptions.paginationOp.currentPage,
+        size: 2
+      }
+      this.getRequest('agent/getreportlist', data).then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          this.tableOptions.data = res.data.data_list
+          this.tableOptions.paginationOp.total = res.data.data_total
+        }
+      })
+    }
   }
 }
 </script>

@@ -68,8 +68,7 @@ export default {
   },
   methods: {
     search() {
-      // console.log('startTime == ' + this.date[0])
-      // console.log('endTime == ' + this.date[1])
+      this.tableOptions.paginationOp.currentPage = 1
       this.getInviteList()
     },
     currentChange(page) {

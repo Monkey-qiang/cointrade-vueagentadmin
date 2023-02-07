@@ -17,11 +17,11 @@
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
                 <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">邀请链接</div>
-                <div class="w-443 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 b-r-4 m-t-12 relative">
+                <div class="w-395 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 text-over b-r-4 m-t-12 p-r-48 relative">
                   {{ agentinfo.inviteUrl }}
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
-                <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point">下载海报</div>
+                <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point" @click="download">下载海报</div>
             </div>
             <div class="w-600">
                 <div class="ff-SCMedium font-20 m-t-24">信息设置</div>
@@ -42,6 +42,10 @@
                     <div class="p-l-16 ff-SCMedium font-14 text-c1890FF cursor-point" @click="bindDialogOptions.visible = true">修改</div>
                 </div>
             </div>
+        </div>
+        <div class="poster w-406 h-538 bg-c01060C absolute" id="poster">
+          <vue-qr class="absolute left-24 bottom-24 z-index-99" :text="QRCodeUrl" :size="64" :margin="5"/>
+          <img src="@/assets/common/poster.png" alt="">
         </div>
         <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
             <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
@@ -66,10 +70,13 @@
 </template>
 
 <script>
+import VueQr from 'vue-qr'
+import html2canvas from 'html2canvas'
 import BasicDialog from '@/components/basic/BasicDialog.vue'
 export default {
   components: {
-    BasicDialog
+    BasicDialog,
+    VueQr
   },
   data() {
     const that = this
@@ -147,7 +154,8 @@ export default {
           { required: true, message: '请输入邮箱验证码', trigger: 'blur' }
         ]
       },
-      agentinfo: {}
+      agentinfo: {},
+      QRCodeUrl: ''
     }
   },
   computed: {
@@ -233,14 +241,42 @@ export default {
         // console.log(res)
         if (res.code && res.code == 2000) {
           this.agentinfo = res.data
+          this.QRCodeUrl = this.agentinfo.inviteUrl
         }
       })
+    },
+    download() {
+      const domObj = document.getElementById('poster')
+      setTimeout(() => {
+        html2canvas(domObj, {
+          width: domObj.clientWidth,
+          height: domObj.clientHeight,
+          useCORS: true,
+          allowTaint: true,
+          onclone(doc) {
+            const e = doc.querySelector('#poster')
+            e.style.display = 'block'
+          }
+        }).then(canvas => {
+          domObj.style.display = 'none'
+          const url = canvas.toDataURL('image/png')
+          let aLink = document.createElement('a')
+          aLink.download = '下载海报'
+          aLink.href = url
+          aLink.click()
+          aLink = null
+        })
+      }, 500)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.poster{
+  left: -406px;
+  z-index: 9;
+}
 ::v-deep{
   .el-input__inner{
     padding-right: 35px;

@@ -45,12 +45,16 @@
           <div class="flex align-center">
             <div>
               <span class="ff-Regular font-14 fw-400 m-r-10">币种</span>
-              <el-select v-model="coin" clearable placeholder="全部">
+              <el-select v-model="coin" filterable clearable placeholder="全部">
                 <el-option
                   v-for="item in coinOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
+                  <div class="flex justify-between align-center">
+                    <span style="float: left">{{ item.label }}</span>
+                    <img v-if="coin == item.value" src="@/assets/common/selected.png" alt="">
+                  </div>
                 </el-option>
               </el-select>
             </div>
@@ -62,6 +66,10 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
+                  <div class="flex justify-between align-center">
+                    <span style="float: left">{{ item.label }}</span>
+                    <img v-if="awardType == item.value" src="@/assets/common/selected.png" alt="">
+                  </div>
                 </el-option>
               </el-select>
             </div>
@@ -71,16 +79,17 @@
                 class="h-32"
                 v-model="date"
                 type="daterange"
+                value-format="yyyy-MM-dd"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
                 >
               </el-date-picker>
             </div>
           </div>
-          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4">查询</div>
+          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
         </div>
       </div>
-      <basic-table class="m-t-24" v-bind="tableOptions"></basic-table>
+      <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>
     </div>
 </template>
 
@@ -95,22 +104,22 @@ export default {
     return {
       coin: '',
       coinOptions: [
-        {
-          value: '22',
-          label: 'BTC'
-        }, {
-          value: '128',
-          label: 'USDT'
+        { value: '',
+          label: '全部'
         }
       ],
       awardType: '',
       awardTypeOptions: [
         {
+          value: '',
+          label: '全部'
+        },
+        {
           value: '1',
-          label: '一等奖'
+          label: '直客佣金'
         }, {
-          value: '2',
-          label: '二等奖'
+          value: '3',
+          label: '代理佣金'
         }
       ],
       date: '',
@@ -121,7 +130,7 @@ export default {
         paginationOp: {
           small: true,
           total: 1,
-          pageSize: 3,
+          'page-size': 3,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -131,17 +140,32 @@ export default {
     }
   },
   created() {
+    this.getCoinList()
     this.getRewardSummary()
     this.getRewardList()
   },
   methods: {
     search() {
+      this.tableOptions.paginationOp.currentPage = 1
       this.getRewardList()
     },
     currentChange(page) {
       // console.log(page)
       this.tableOptions.paginationOp.currentPage = page
-      this.getInviteList()
+      this.getRewardList()
+    },
+    getCoinList() {
+      this.getRequest('agent/allcoin').then(res => {
+        // console.log(res)
+        if (res.code && res.code == 2000) {
+          res.data.forEach(item => {
+            this.coinOptions.push({
+              value: item.coin,
+              label: item.coin
+            })
+          })
+        }
+      })
     },
     getRewardSummary() {
       this.getRequest('agent/getrewardsummary').then(res => {
@@ -154,7 +178,7 @@ export default {
     getRewardList() {
       const data = {
         coin: this.coin,
-        category: '',
+        category: this.awardType,
         begin_time: this.date[0],
         end_time: this.date[1],
         page: this.tableOptions.paginationOp.currentPage,

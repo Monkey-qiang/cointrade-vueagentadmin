@@ -2,7 +2,8 @@
     <div class="login-contain flex">
         <img src="../../assets/login/login_bg.png" alt="">
         <div class="w-483 m-l-236 m-t-200">
-            <div class="text-c001529 font-52 m-b-32">欢迎登录</div>
+          <!-- 欢迎登录 -->
+            <div class="text-c001529 font-52 m-b-32">{{ $t("login.welcomeLogin") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
                 <el-form-item class="m-b-40 relative" label="邮箱地址" prop="email">
                     <el-input placeholder="请输入邮箱地址" v-model="loginForm.email"></el-input>
