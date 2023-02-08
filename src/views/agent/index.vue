@@ -6,8 +6,10 @@
                     <div class="m-t-91">
                         <div class="title">TokEX</div>
                         <div class="title m-b-21">Affiliate Program</div>
-                        <div class="font-26 fw-400 ff-Regular l-h-30 m-b-48">邀请交易者来Tokex，赚取最高50%佣金收入</div>
-                        <el-button class="btn" type="primary" @click="application">开始赚取最高50%佣金</el-button>
+                        <div class="font-26 fw-400 ff-Regular l-h-30 m-b-48">{{ $t("agent.description") }}</div>
+                        <el-button class="btn" type="primary" @click="application">{{
+                            $t("agent.startEarning")
+                        }}</el-button>
                     </div>
                     <div class="w-361 h-388 m-t-77 line"><img class="img" src="../../assets/agent/top.png" alt="">
                     </div>
@@ -20,41 +22,44 @@
                     <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group2.png"
                             alt="">
                     </div>
-                    <div class="m-t-64">准备好材料，提交申请</div>
+                    <div class="m-t-64">{{ $t("agent.step1") }}</div>
                 </div>
                 <div class="box_inner center_box">
                     <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group1.png"
                             alt="">
                     </div>
-                    <div class="m-t-64">我们将审核您的申请，通过后您将获得专属邀请链接，邀请交易员来Tokex</div>
+                    <div class="m-t-64">{{ $t("agent.step2") }}</div>
                 </div>
                 <div class="box_inner">
                     <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group3.png"
                             alt="">
                     </div>
-                    <div class="m-t-64">您可以将邀请链接分享至您的社交平台、社区内容或其他推广渠道中，同时您可以使用专属后台查看您的数据</div>
+                    <div class="m-t-64">{{ $t("agent.step3") }}</div>
                 </div>
             </div>
         </div>
         <div class="m-b-86">
             <div class="w-1024 m-lr-auto flex justify-between">
                 <div>
-                    <div class="font-48 fw-800 ff-Heavy l-h-34 m-b-81">代理权益</div>
+                    <div class="font-48 fw-800 ff-Heavy l-h-34 m-b-81">{{ $t("agent.agencyInterest") }}</div>
                     <div class="flex">
                         <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34460.png" alt=""></div>
-                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">丰厚的佣金奖励，依靠被动收入致富</div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">{{ $t("agent.agencyInterest1") }}
+                        </div>
                     </div>
                     <div class="flex">
                         <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34672.png" alt=""></div>
-                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">永久返佣，持久收益</div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">{{ $t("agent.agencyInterest2") }}
+                        </div>
                     </div>
                     <div class="flex">
                         <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34673.png" alt=""></div>
-                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">一对一，专业客户经理</div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">{{ $t("agent.agencyInterest3") }}
+                        </div>
                     </div>
                     <div class="flex">
                         <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Vector.png" alt=""></div>
-                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-l-23">专属后台，报表级数据报告</div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-l-23">{{ $t("agent.agencyInterest4") }}</div>
                     </div>
                 </div>
                 <div class="w-426 h-319 m-t-51 line m-r-59"><img class="img" src="@/assets/agent/bottom.png" alt="">
@@ -65,18 +70,25 @@
             <div class="w-1024 m-lr-auto h-491 flex justify-between">
                 <div class="p-t-100">
                     <div class="font-48 fw-800 l-h-34 m-b-1 ff-Heavy text-c070707">You Can Earn</div>
-                    <div class="flex align-center m-t-108 m-l-23">
-                        <div class="w-122 h-122 bg-FFC304 b-r-p50 text-center m-lr-auto">
-                            <div class="font-46 ff-Heavy fw-800 l-h-46 p-t-38">40%</div>
+                    <div class="flex m-t-108">
+                        <div>
+                            <div
+                                class="w-122 h-122 bg-FFC304 b-r-p50 text-center m-lr-auto font-46 ff-Heavy fw-800 l-h-122">
+                                40%</div>
+                            <span class="inline-block m-t-15 font-12 w-182 fw-800 color-c070707 ff-Heavy">on your
+                                referrals' trading fees</span>
                         </div>
-                        <div class="font-58 m-l-43 m-r-50" style="color:#A4A8AB">+</div>
-                        <div class="w-122 h-122 bg-black b-r-p50 text-center m-lr-auto">
-                            <div class="font-46 text-FFC304 ff-Heavy fw-800 l-h-46 p-t-38">10%</div>
+                        <div class="font-58 m-l-8 m-t-30 m-r-15" style="color:#A4A8AB">+</div>
+                        <div>
+                            <div
+                                class="w-122 h-122 bg-black b-r-p50 text-center m-lr-auto font-46 text-FFC304 ff-Heavy fw-800 l-h-122">
+                                10%</div>
+                            <span class="inline-block font-12 m-t-15 w-200 fw-800 color-c070707 ff-Heavy">on what your
+                                Sub-Affiliates earn</span>
                         </div>
                     </div>
                 </div>
-                <div class="w-446 h-274 m-t-135 line m-r-49 m-b-80"><img class="img" src="@/assets/agent/human.png"
-                        alt="">
+                <div class="w-446 h-274 m-t-135 line m-r-49"><img class="img" src="@/assets/agent/human.png" alt="">
                 </div>
             </div>
         </div>
@@ -95,8 +107,8 @@
             </div>
         </div>
         <div class="h-308 text-center back_bt">
-            <div class="p-t-79 font-48 ff-Bold fw-600 text-white l-h-60">现在成为代理商</div>
-            <el-button class="btn2" type="primary" @click="application">立即申请</el-button>
+            <div class="p-t-79 font-48 ff-Bold fw-600 text-white l-h-60">{{ $t("agent.become") }}</div>
+            <el-button class="btn2" type="primary" @click="application">{{ $t("agent.applyImmediately") }}</el-button>
         </div>
     </div>
 </template>
@@ -108,6 +120,7 @@ export default {
       activeNames: '',
       problemList: [
         {
+          //   title: this.$t('agent.tokexPlan'),
           title: '1，什么是TokEX代理计划？',
           content: 'Tokex目前提供市场上顶级加密货币的交易互换，包括主流数字资产 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC)等。',
           id: '1'
@@ -183,7 +196,7 @@ export default {
 }
 
 .bg1 {
-    background: linear-gradient(176deg, #E8E8E8 0%, rgba(244, 244, 244, 0) 100%);
+    background: linear-gradient(-176deg, #E8E8E8 0%, rgba(244, 244, 244, 0) 100%);
     opacity: 1
 }
 

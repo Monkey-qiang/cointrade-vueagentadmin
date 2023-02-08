@@ -77,5 +77,25 @@ module.exports = {
   },
   dataReport: {
     dataReport: '数据报表'
+  },
+  agent: {
+    description: '邀请交易者来Tokex，赚取最高50%佣金收入',
+    startEarning: '开始赚取最高50%佣金',
+    step1: '准备好材料，提交申请',
+    step2: '我们将审核您的申请，通过后您将获得专属邀请链接，邀请交易员来Tokex',
+    step3: '您可以将邀请链接分享至您的社交平台、社区内容或其他推广渠道中，同时您可以使用专属后台查看您的数据',
+    agencyInterest: '代理权益',
+    agencyInterest1: '丰厚的佣金奖励，依靠被动收入致富',
+    agencyInterest2: '永久返佣，持久收益',
+    agencyInterest3: '一对一专业客户经理',
+    agencyInterest4: '专属后台，报表级数据报告',
+    earn: '您将赚取',
+    hight: '最高40%',
+    hight1: '现货&合约交易手续费返佣',
+    subagent: '10%',
+    subagent1: '子代理收入',
+    become: '现在成为TOKEX代理商',
+    applyImmediately: '立即申请',
+    tokexPlan: '1，什么是TokEX代理计划？'
   }
 }
