@@ -6,18 +6,18 @@
                 <div class="login-text font-20 fw-600 text-white">TokEX Affiliate</div>
             </div>
             <div class="flex align-center">
-                <el-dropdown class="text-white cursor-point" trigger="click">
+                <el-dropdown class="text-white cursor-point" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{ language }}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item class="flex align-center justify-between text-c001529 p-l-32 p-r-24">
+                        <el-dropdown-item class="flex align-center justify-between text-c001529 p-l-32 p-r-24" command="zh">
                             简体中文
-                            <img src="../../assets/common/selected.png" alt="">
+                            <img v-if="language == '简体中文'" src="../../assets/common/selected.png" alt="">
                         </el-dropdown-item>
-                        <el-dropdown-item class="flex align-center justify-between text-c001529 p-l-32 p-r-24">
+                        <el-dropdown-item class="flex align-center justify-between text-c001529 p-l-32 p-r-24" command="en">
                             English
-                            <img src="../../assets/common/selected.png" alt="">
+                            <img v-if="language == 'English'" src="../../assets/common/selected.png" alt="">
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -35,13 +35,33 @@
 export default {
   data() {
     return {
-      language: '简体中文'
+      language: ''
     }
+  },
+  created() {
+    const language = localStorage.getItem('lang')
+    this.language = language == 'zh' ? '简体中文' : 'English'
   },
   methods: {
     loginOut() {
-      localStorage.clear()
-      this.$router.replace({ path: '/login' })
+      this.postRequest('agent/loginout').then(res => {
+        if (res.code && res.code == 2000) {
+          localStorage.clear()
+          this.$router.replace({ path: '/login' })
+        }
+      })
+    },
+    handleCommand(command) {
+    //   console.log(command)
+      if (command == 'zh') {
+        this.language = '简体中文'
+      } else {
+        this.language = 'English'
+      }
+      this.$i18n.locale = command
+      localStorage.setItem('lang', command)
+      const language = localStorage.getItem('lang')
+      this.language = language == 'zh' ? '简体中文' : 'English'
     }
   }
 }

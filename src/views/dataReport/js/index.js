@@ -3,34 +3,34 @@ export const tableColumns = [
     label: '邀请人数',
     // customSlot: 'coin',
     'class-name': 'first',
-    prop: 'userId',
+    prop: 'people',
     width: '120px'
   },
   {
     label: '直客佣金(USDT)',
-    prop: 'inviteNum',
+    prop: 'straight',
     width: '220px'
   },
   {
     // prop: 'price',
     label: '代理佣金(USDT)',
-    prop: 'totalCommission',
+    prop: 'subfee',
     width: '220px'
   },
   {
     label: '现货交易量(USDT)',
-    prop: 'transationCommission',
+    prop: 'spotnum',
     width: '220px'
   },
   {
     label: '合约交易量',
-    prop: 'agentCommission',
+    prop: 'futnum',
     width: '220px'
     // align: 'right',
   },
   {
     label: '日期',
-    prop: 'inviteDate'
+    prop: 'createtime'
     // align: 'right',
   }
 ]

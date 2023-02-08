@@ -3,27 +3,27 @@ export const tableColumns = [
     label: '用户ID',
     // customSlot: 'coin',
     'class-name': 'first',
-    prop: 'userId',
+    prop: 'userid',
     width: '200px'
   },
   {
     label: '交易对',
-    prop: 'inviteNum',
+    prop: 'ticker',
     width: '260px'
   },
   {
     label: '交易额',
-    prop: 'totalCommission',
+    prop: 'amount',
     width: '260px'
   },
   {
     label: '交易量',
-    prop: 'transationCommission',
+    prop: 'quantity',
     width: '260px'
   },
   {
     label: '邀请日期',
-    prop: 'inviteDate'
+    prop: 'createtime'
     // align: 'right',
   }
 ]
