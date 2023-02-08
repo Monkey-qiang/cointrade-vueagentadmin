@@ -1,10 +1,10 @@
 import axios from 'axios'
-// import router from '../router/index'
 import { Toast } from 'vant'
+import router from '../router'
 
 const token = ''
 // const base = 'http://8.218.110.85/api/'
-const base = 'http://192.168.3.110:6236/api/'
+const base = 'http://192.168.3.110:6240/api/'
 
 const basicData = axios.create({
   baseURL: base
@@ -17,12 +17,13 @@ basicData.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-
 // http request拦截器 添加一个请求拦截器
 basicData.interceptors.request.use(function(config) {
   const token = localStorage.getItem('token')
-
   if (token) {
     // 将token放到请求头发送给服务器,将tokenkey放在请求头中
     config.headers.token = token
     // 也能够这种写法
     // config.headers['token'] = token;
+  } else {
+    router.replace({ path: '/login' })
   }
   return config
 }, function(error) {
@@ -45,7 +46,7 @@ basicData.interceptors.response.use(function(response) {
   }
   return response
 }, function(error) {
-  Toast.fail('请检查你的网络连接')
+  // Toast.fail('请检查你的网络连接')
   return Promise.reject(error)
 })
 
