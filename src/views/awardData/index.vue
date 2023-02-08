@@ -3,49 +3,49 @@
       <div class="flex justify-between align-center">
         <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
           <div class="m-l-24">
-            <div class="ff-SCRegular fw-400">累计直客佣金(USDT)</div>
+            <div class="ff-SCRegular fw-400">{{ $t('award.totalStraight') }}(USDT)</div>
             <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_straight }}</div>
           </div>
           <div class="w-1 h-80 bg-E4EBF1 m-l-64"></div>
           <div class="m-l-24">
             <div class="flex align-center">
-              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">昨日直客佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_agent }}</div>
+              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.yesterdayStraight') }}(USDT)</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_straight }}</div>
             </div>
             <div class="flex align-center m-t-28">
-              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">本月直客佣金(USDT)</div>
+              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.monthStraight') }}(USDT)</div>
               <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.month_straight }}</div>
             </div>
           </div>
         </div>
         <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
           <div class="m-l-24">
-            <div class="ff-SCRegular fw-400">累计代理佣金(USDT)</div>
+            <div class="ff-SCRegular fw-400">{{ $t('award.totalAgent') }}(USDT)</div>
             <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_agent }}</div>
           </div>
           <div class="w-1 h-80 bg-E4EBF1 m-l-64"></div>
           <div class="m-l-24">
             <div class="flex align-center">
-              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">昨日代理佣金(USDT)</div>
+              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.yesterdayAgent') }}(USDT)</div>
               <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_agent }}</div>
             </div>
             <div class="flex align-center m-t-28">
-              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">本月代理佣金(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.month_agent }}</div>
+              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.yesterdayAgent') }}(USDT)</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.monthAgent }}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="m-t-24">
         <div class="flex justify-between align-center ff-SCMedium font-20 p-t-24">
-          奖励记录
-          <div class="ff-SCRegular font-12 fw-400 text-c7C869B">每日UTC+8时间10:00结算前一日奖励</div>
+          {{ $t('award.awardRecord') }}
+          <div class="ff-SCRegular font-12 fw-400 text-c7C869B">{{ $t('award.settlementTime') }}</div>
         </div>
         <div class="flex justify-between align-center m-t-20">
           <div class="flex align-center">
             <div>
-              <span class="ff-Regular font-14 fw-400 m-r-10">币种</span>
-              <el-select v-model="coin" filterable clearable placeholder="全部">
+              <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('award.coin') }}</span>
+              <el-select v-model="coin" filterable clearable :placeholder="$t('common.all')">
                 <el-option
                   v-for="item in coinOptions"
                   :key="item.value"
@@ -59,8 +59,8 @@
               </el-select>
             </div>
             <div class="m-l-32">
-              <span class="ff-Regular font-14 fw-400 m-r-10">奖励类型</span>
-              <el-select v-model="awardType" clearable placeholder="全部">
+              <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('award.awardType') }}</span>
+              <el-select v-model="awardType" clearable :placeholder="$t('common.all')">
                 <el-option
                   v-for="item in awardTypeOptions"
                   :key="item.value"
@@ -74,19 +74,19 @@
               </el-select>
             </div>
             <div class="m-l-32">
-              <span class="ff-Regular font-14 fw-400 m-r-10">日期</span>
+              <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('common.date') }}</span>
               <el-date-picker
                 class="h-32"
                 v-model="date"
                 type="daterange"
                 value-format="yyyy-MM-dd"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
+                :start-placeholder="$t('common.beginDate')"
+                :end-placeholder="$t('common.endDate')"
                 >
               </el-date-picker>
             </div>
           </div>
-          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
+          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">{{ $t('common.search') }}</div>
         </div>
       </div>
       <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>
@@ -105,21 +105,21 @@ export default {
       coin: '',
       coinOptions: [
         { value: '',
-          label: '全部'
+          label: this.$t('common.all')
         }
       ],
       awardType: '',
       awardTypeOptions: [
         {
           value: '',
-          label: '全部'
+          label: this.$t('common.all')
         },
         {
           value: '1',
-          label: '直客佣金'
+          label: this.$t('award.straight')
         }, {
           value: '3',
-          label: '代理佣金'
+          label: this.$t('award.agent')
         }
       ],
       date: '',

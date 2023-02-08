@@ -5,21 +5,21 @@
           <!-- 欢迎登录 -->
             <div class="text-c001529 font-52 m-b-32">{{ $t("login.welcomeLogin") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
-                <el-form-item class="m-b-40 relative" label="邮箱地址" prop="email">
-                    <el-input placeholder="请输入邮箱地址" v-model="loginForm.email"></el-input>
+                <el-form-item class="m-b-40 relative" :label="$t('login.emailAddress')" prop="email">
+                    <el-input :placeholder="$t('common.enter')+$t('login.emailAddress')" v-model="loginForm.email"></el-input>
                     <img v-if="loginForm.email" class="absolute top-20 right-16" src="../../assets/login/close.png" alt="" @click="loginForm.email = ''">
                 </el-form-item>
-                <el-form-item class="m-b-40 relative" label="密码" prop="password">
-                    <el-input placeholder="请输入密码" :type="passwordType" v-model="loginForm.password"></el-input>
+                <el-form-item class="m-b-40 relative" :label="$t('login.password')" prop="password">
+                    <el-input :placeholder="$t('common.enter')+$t('login.password')" :type="passwordType" v-model="loginForm.password"></el-input>
                     <img v-if="eyeIsOpen"  class="absolute top-20 right-16 cursor-point" src="../../assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-20 right-16 cursor-point" src="../../assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                     <img v-if="loginForm.password" class="absolute top-20 right-48 cursor-point" src="../../assets/login/close.png" alt="" @click="loginForm.password = ''">
                 </el-form-item>
             </el-form>
-            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="login">登录</div>
+            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="login">{{ $t("login.login") }}</div>
             <div class="flex justify-between align-center font-14 text-c7C869B m-t-16">
-                <div class="text-c1890FF cursor-point" @click="forgetPassword">忘记密码</div>
-                <div>如果您还不是代理，请 <span class="text-c1890FF cursor-point" @click="jump">申请</span></div>
+                <div class="text-c1890FF cursor-point" @click="forgetPassword">{{ $t("login.forgetPassword") }}</div>
+                <div>{{ $t("login.applyAgent") }}<span class="text-c1890FF cursor-point" @click="jump">{{ $t("login.apply") }}</span></div>
             </div>
         </div>
     </div>

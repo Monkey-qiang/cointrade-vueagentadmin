@@ -1,15 +1,15 @@
 <template>
     <div class="w-1200 min-h-984 text-c001529 fw-500 ff-SC p-l-24 p-t-24 m-b-32 b-l-1-solid-E4EBF1">
       <div class="flex align-center m-t-24">
-        <div class="ff-SCMedium font-20 text-c7C869B p-b-7 cursor-point" :class="[isActive==1?'active':'']" @click="tabToggle(1)">现货交易</div>
-        <div class="ff-SCMedium font-20 text-c7C869B p-b-7 m-l-40 cursor-point" :class="[isActive==3?'active':'']" @click="tabToggle(3)">合约交易</div>
+        <div class="ff-SCMedium font-20 text-c7C869B p-b-7 cursor-point" :class="[isActive==1?'active':'']" @click="tabToggle(1)">{{ $t('transaction.spotTransation') }}</div>
+        <div class="ff-SCMedium font-20 text-c7C869B p-b-7 m-l-40 cursor-point" :class="[isActive==3?'active':'']" @click="tabToggle(3)">{{ $t('transaction.contractTransaction') }}</div>
       </div>
       <div class="m-t-24">
         <div class="flex justify-between align-center m-t-20">
           <div class="flex align-center">
             <div>
-              <span class="ff-Regular font-14 fw-400 m-r-10">交易对</span>
-              <el-select v-model="ticker" filterable clearable placeholder="全部">
+              <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('transaction.transactionPair') }}</span>
+              <el-select v-model="ticker" filterable clearable :placeholder="$t('common.all')">
                 <el-option
                   v-for="item in tickerOptions"
                   :key="item.value"
@@ -23,14 +23,14 @@
               </el-select>
             </div>
             <div class="m-l-32">
-              <span class="ff-Regular font-14 fw-400 m-r-10">日期</span>
+              <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('common.date') }}</span>
               <el-date-picker
                 class="h-32"
                 v-model="date"
                 type="daterange"
                 value-format="yyyy-MM-dd"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
+                :start-placeholder="$t('common.beginDate')"
+                :end-placeholder="$t('common.endDate')"
                 >
               </el-date-picker>
             </div>
@@ -56,7 +56,7 @@ export default {
       tickerOptions: [
         {
           value: '',
-          label: '全部'
+          label: this.$t('common.all')
         }
       ],
       date: '',

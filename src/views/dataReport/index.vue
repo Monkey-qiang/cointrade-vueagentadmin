@@ -1,18 +1,18 @@
 <template>
   <div class="w-1200 min-h-984 text-c001529 fw-500 ff-SC p-l-24 p-t-24 m-b-32 b-l-1-solid-E4EBF1">
     <div class="m-t-24">
-      <div class="flex justify-between align-center ff-SCMedium font-20">数据报表</div>
+      <div class="flex justify-between align-center ff-SCMedium font-20">{{ $t('dataReport.dataReport') }}</div>
       <div class="flex justify-between align-center m-t-20">
         <div class="flex align-center">
           <div>
-            <span class="ff-Regular font-14 fw-400 m-r-10">日期</span>
+            <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('common.date') }}</span>
             <el-date-picker
               class="h-32"
               v-model="date"
               type="daterange"
               value-format="yyyy-MM-dd"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              :start-placeholder="$t('common.beginDate')"
+              :end-placeholder="$t('common.endDate')"
               >
             </el-date-picker>
           </div>

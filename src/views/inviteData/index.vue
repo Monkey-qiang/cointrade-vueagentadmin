@@ -2,34 +2,34 @@
     <div class="w-1200 min-h-984 text-c001529 fw-500 ff-SC p-l-24 p-t-24 m-b-32 b-l-1-solid-E4EBF1">
       <div class="flex justify-between align-center">
         <div class="w-389 h-148 text-center bg-FAFBFC b-r-8">
-          <div class="ff-Regular fw-400 m-t-32">团队人数</div>
+          <div class="ff-Regular fw-400 m-t-32">{{ $t('invite.teamMemberNumber') }}</div>
           <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.total_people }}</div>
         </div>
         <div class="yesterday-add w-389 h-148 text-center b-r-8">
-          <div class="ff-Regular fw-400 m-t-32">昨日新增人数</div>
+          <div class="ff-Regular fw-400 m-t-32">{{ $t('invite.yesterdayAdd') }}</div>
           <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.yesterday_increase }}</div>
         </div>
         <div class="w-389 h-148 text-center bg-FAFBFC b-r-8">
-          <div class="ff-Regular fw-400 m-t-32">本月新增人数</div>
+          <div class="ff-Regular fw-400 m-t-32">{{ $t('invite.monthAdd') }}</div>
           <div class="ff-SCBold font-24 fw-600 m-t-20">{{ inviteSummary.month_increase }}</div>
         </div>
       </div>
       <div class="m-t-24">
-        <div class="ff-SCMedium font-20 p-t-24">邀请记录</div>
+        <div class="ff-SCMedium font-20 p-t-24">{{ $t('invite.inviteRecord') }}</div>
         <div class="flex justify-between align-center m-t-20">
           <div>
-            <span class="ff-Regular font-14 fw-400 m-r-10">日期</span>
+            <span class="ff-Regular font-14 fw-400 m-r-10">{{ $t('common.date') }}</span>
             <el-date-picker
               class="h-32"
               v-model="date"
               type="daterange"
               value-format="yyyy-MM-dd"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              :start-placeholder="$t('common.beginDate')"
+              :end-placeholder="$t('common.endDate')"
               >
             </el-date-picker>
           </div>
-          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
+          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">{{ $t('common.search') }}</div>
         </div>
       </div>
       <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>

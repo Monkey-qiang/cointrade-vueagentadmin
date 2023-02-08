@@ -24,7 +24,7 @@
                 <div class="line w-1 h-20 bg-c96A0B5 m-lr-24"></div>
                 <div class="flex align-center cursor-point" @click="loginOut">
                     <img src="../../assets/common/exit.png" alt="">
-                    <div class="text-white m-l-4 m-r-24">退出</div>
+                    <div class="text-white m-l-4 m-r-24">{{ $t('common.exit') }}</div>
                 </div>
             </div>
         </div>
@@ -40,7 +40,11 @@ export default {
   },
   created() {
     const language = localStorage.getItem('lang')
-    this.language = language == 'zh' ? '简体中文' : 'English'
+    if (language) {
+      this.language = language == 'zh' ? '简体中文' : 'English'
+    } else {
+      this.language = '简体中文'
+    }
   },
   methods: {
     loginOut() {

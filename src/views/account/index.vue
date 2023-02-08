@@ -4,42 +4,42 @@
             <img class="w-58 h-58 m-l-32 m-t-32" src="@/assets/account/email.png" alt="">
             <div class="m-l-24 m-t-40">
                 <div class="font-24 ff-SCBold fw-600 m-b-20">{{ agentinfo.email }}</div>
-                <div class="ff-SCMedium m-b-20">佣金比例：{{ agentinfo.rate }}</div>
-                <div class="font-12 fw-400 text-c7C869B ff-SCRegular">上次登录时间：{{ agentinfo.lasttime }}</div>
+                <div class="ff-SCMedium m-b-20">{{ $t('account.commissionRate') }}：{{ agentinfo.rate }}</div>
+                <div class="font-12 fw-400 text-c7C869B ff-SCRegular">{{ $t('account.lastLoginTime') }}：{{ agentinfo.lasttime }}</div>
             </div>
         </div>
         <div class="flex p-t-24">
             <div class="w-600">
-                <div class="ff-SCMedium font-20 m-t-24">邀请地址</div>
-                <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">邀请码</div>
+                <div class="ff-SCMedium font-20 m-t-24">{{ $t('account.inviteAddress') }}</div>
+                <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">{{ $t('account.inviteCode') }}</div>
                 <div class="w-443 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 b-r-4 m-t-12 relative">
                   {{ agentinfo.invitecode }}
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
-                <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">邀请链接</div>
+                <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">{{ $t('account.inviteLink') }}</div>
                 <div class="w-395 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 text-over b-r-4 m-t-12 p-r-48 relative">
                   {{ agentinfo.inviteUrl }}
                     <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
                 </div>
-                <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point" @click="download">下载海报</div>
+                <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point" @click="download">{{ $t('account.downPoster') }}</div>
             </div>
             <div class="w-600">
-                <div class="ff-SCMedium font-20 m-t-24">信息设置</div>
+                <div class="ff-SCMedium font-20 m-t-24">{{ $t('account.infoSetting') }}</div>
                 <div class="flex align-center justify-between w-443 m-t-24">
-                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">姓名</div>
+                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">{{ $t('account.name') }}</div>
                     <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.name }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
-                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">关联用户ID</div>
+                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">{{ $t('account.associatedUserID') }}</div>
                     <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.userid }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
-                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">地区</div>
+                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">{{ $t('account.area') }}</div>
                     <div class="p-l-16 ff-SCMedium font-14">{{ agentinfo.countryen }}</div>
                 </div>
                 <div class="flex align-center justify-between w-443 m-t-24">
-                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">密码</div>
-                    <div class="p-l-16 ff-SCMedium font-14 text-c1890FF cursor-point" @click="bindDialogOptions.visible = true">修改</div>
+                    <div class="ff-SCRegular fot-14 fw-400 text-c7C869B">{{ $t('account.password') }}</div>
+                    <div class="p-l-16 ff-SCMedium font-14 text-c1890FF cursor-point" @click="bindDialogOptions.visible = true">{{ $t('account.modify') }}</div>
                 </div>
             </div>
         </div>
@@ -49,20 +49,20 @@
         </div>
         <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
             <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
-                <el-form-item label="新密码" prop="password">
-                    <el-input class="w-290" placeholder="请输入新密码" :type="passwordType" v-model="passwordForm.password"></el-input>
+                <el-form-item :label="$t('common.newPassword')" prop="password">
+                    <el-input class="w-290" :placeholder="$t('common.enter')+$t('common.newPassword')" :type="passwordType" v-model="passwordForm.password"></el-input>
                     <img v-if="eyeIsOpen" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
-                <el-form-item label="新密码确认" prop="confirmPassword">
-                    <el-input class="w-290" placeholder="请确认新密码" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
+                <el-form-item :label="$t('common.newPasswordConfirm')" prop="confirmPassword">
+                    <el-input class="w-290" :placeholder="$t('common.confirmNewpassword')" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
                     <img v-if="eyeIsOpen1" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen1 = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen1 = true" />
                 </el-form-item>
-                <el-form-item label="邮箱验证码" prop="verifyCode">
-                    <el-input class="w-290" placeholder="请输入邮箱验证码" maxlength="6" v-model="passwordForm.verifyCode" @input="handleInput"></el-input>
-                    <div class="text-c1890FF absolute top-0 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">发送验证码</div>
-                    <div class="text-A9B3C9 absolute top-0 right-16" v-else>{{ cutdown }}s 重新发送</div>
+                <el-form-item :label="$t('account.emailCode')" prop="verifyCode">
+                    <el-input class="w-290" :placeholder="$t('common.enter')+$t('account.emailCode')" maxlength="6" v-model="passwordForm.verifyCode" @input="handleInput"></el-input>
+                    <div class="text-c1890FF absolute top-0 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">{{ $t('common.sendVerifyCode') }}</div>
+                    <div class="text-A9B3C9 absolute top-0 right-16" v-else>{{ cutdown }}s {{ $t('common.sendAgain') }}</div>
                 </el-form-item>
             </el-form>
         </basic-dialog>
@@ -82,7 +82,7 @@ export default {
     const that = this
     function validatePassword(rule, value, callback) {
       if (that.passwordForm.password != that.passwordForm.confirmPassword) {
-        callback(new Error('密码不一致'))
+        callback(new Error(this.$t('common.passwordAtypism')))
       }
       callback()
     }
@@ -95,7 +95,7 @@ export default {
       bindDialogOptions: {
         visible: false,
         theme: 'white',
-        title: '修改密码',
+        title: this.$t('account.modify') + this.$t('account.password'),
         titleStyle: {
           fontSize: '18px',
           fontFamily: 'PingFang SC-Medium, PingFang SC',
@@ -144,14 +144,14 @@ export default {
       },
       rules: {
         password: [
-          { required: true, message: '请输入新密码', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' }
         ],
         confirmPassword: [
-          { required: true, message: '请确认新密码', trigger: 'blur' },
+          { required: true, message: this.$t('common.confirmNewpassword'), trigger: 'blur' },
           { validator: validatePassword, trigger: 'blur' }
         ],
         verifyCode: [
-          { required: true, message: '请输入邮箱验证码', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('account.emailCode'), trigger: 'blur' }
         ]
       },
       agentinfo: {},
@@ -198,9 +198,9 @@ export default {
       this.postRequest('agent/sendcodebylogin', data).then(res => {
         console.log(res)
         if (res.code && res.code == 2000) {
-          this.$toast('验证码发送成功')
+          this.$toast(this.$t('common.sendSuccess'))
         } else {
-          this.$toast('验证码发送失败')
+          this.$toast(this.$t('common.sendFailed'))
         }
       })
     },
@@ -217,7 +217,7 @@ export default {
           this.postRequest('agent/resetpasswd', data).then(res => {
             console.log(res)
             if (res.code && res.code == 2000) {
-              this.$toast('修改密码成功')
+              this.$toast(this.$t('account.modifySuccess'))
               this.bindDialogOptions.visible = false
             } else {
               this.$toast(res.msg)
@@ -261,7 +261,7 @@ export default {
           domObj.style.display = 'none'
           const url = canvas.toDataURL('image/png')
           let aLink = document.createElement('a')
-          aLink.download = '下载海报'
+          aLink.download = this.$t('account.downPoster')
           aLink.href = url
           aLink.click()
           aLink = null
