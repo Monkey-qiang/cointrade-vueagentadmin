@@ -20,7 +20,9 @@ module.exports = {
     beginDate: '开始日期',
     endDate: '结束日期',
     search: '查询',
-    all: '全部'
+    all: '全部',
+    inviteDate: '邀请日期',
+    copySuccess: '复制成功'
   },
   login: {
     welcomeLogin: '欢迎登录',
@@ -54,7 +56,12 @@ module.exports = {
     teamMemberNumber: '团队人数',
     yesterdayAdd: '昨日新增人数',
     monthAdd: '本月新增人数',
-    inviteRecord: '邀请记录'
+    inviteRecord: '邀请记录',
+    userId: '用户ID',
+    inviteNum: '用户邀请人数',
+    totalCommission: '用户产生总佣金',
+    totalTransationCommission: '用户累计交易佣金',
+    totalAgentCommission: '用户累计代理佣金'
   },
   award: {
     totalStraight: '累计直客佣金',
@@ -68,15 +75,29 @@ module.exports = {
     coin: '币种',
     awardType: '奖励类型',
     straight: '直客佣金',
-    agent: '代理佣金'
+    agent: '代理佣金',
+    awardNum: '奖励数量',
+    tradingArea: '交易区',
+    awardSource: '奖励来源',
+    status: '状态',
+    notRecorded: '未入账',
+    recorded: '已入账',
+    stopped: '已停止'
   },
   transaction: {
     spotTransation: '现货交易',
     contractTransaction: '合约交易',
-    transactionPair: '交易对'
+    transactionPair: '交易对',
+    volume: '交易额',
+    transactionAmount: '交易量'
   },
   dataReport: {
-    dataReport: '数据报表'
+    dataReport: '数据报表',
+    inviteNum: '邀请人数',
+    straightCommission: '直客佣金',
+    agentCommission: '代理佣金',
+    spotTransationNum: '现货交易量',
+    contractTransationNum: '合约交易量'
   },
   agent: {
     description: '邀请交易者来Tokex，赚取最高50%佣金收入',

@@ -14,12 +14,12 @@
                 <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">{{ $t('account.inviteCode') }}</div>
                 <div class="w-443 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 b-r-4 m-t-12 relative">
                   {{ agentinfo.invitecode }}
-                    <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
+                    <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" v-clipboard:copy="agentinfo.invitecode" v-clipboard:success="onCopy"/>
                 </div>
                 <div class="ff-SCRegular fot-14 fw-400 text-c7C869B m-t-24">{{ $t('account.inviteLink') }}</div>
                 <div class="w-395 h-40 l-h-40 p-l-16 ff-SCMedium font-14 b-1-solid-D4D9E4 text-over b-r-4 m-t-12 p-r-48 relative">
                   {{ agentinfo.inviteUrl }}
-                    <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt="" />
+                    <img class="absolute top-12 right-16 cursor-point" src="@/assets/account/copy.png" alt=""  v-clipboard:copy="agentinfo.inviteUrl" v-clipboard:success="onCopy"/>
                 </div>
                 <div class="ff-SCMedium font-14 text-c1890FF m-t-32 cursor-point" @click="download">{{ $t('account.downPoster') }}</div>
             </div>
@@ -182,6 +182,12 @@ export default {
     this.getAgentInfo()
   },
   methods: {
+    onCopy() {
+      this.$message.success({
+        message: `${this.$t('common.copySuccess')}!`,
+        duration: 1000
+      })
+    },
     sendCode() {
       this.cutdownShow = true
       this.timer = setInterval(() => {

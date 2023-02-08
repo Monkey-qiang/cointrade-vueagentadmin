@@ -1,35 +1,36 @@
+import i18n from '@/language'
 export const tableColumns = [
   {
-    label: '邀请人数',
+    label: i18n.t('dataReport.inviteNum'),
     // customSlot: 'coin',
     'class-name': 'first',
     prop: 'people',
     width: '120px'
   },
   {
-    label: '直客佣金(USDT)',
+    label: i18n.t('dataReport.straightCommission') + '(USDT)',
     prop: 'straight',
     width: '220px'
   },
   {
     // prop: 'price',
-    label: '代理佣金(USDT)',
+    label: i18n.t('dataReport.agentCommission') + '(USDT)',
     prop: 'subfee',
     width: '220px'
   },
   {
-    label: '现货交易量(USDT)',
+    label: i18n.t('dataReport.spotTransationNum') + '(USDT)',
     prop: 'spotnum',
     width: '220px'
   },
   {
-    label: '合约交易量',
+    label: i18n.t('dataReport.contractTransationNum') + '(USDT)',
     prop: 'futnum',
     width: '220px'
     // align: 'right',
   },
   {
-    label: '日期',
+    label: i18n.t('common.date'),
     prop: 'createtime'
     // align: 'right',
   }

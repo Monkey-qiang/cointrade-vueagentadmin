@@ -1,28 +1,29 @@
+import i18n from '@/language'
 export const tableColumns = [
   {
-    label: '用户ID',
+    label: i18n.t('invite.userId'),
     // customSlot: 'coin',
     'class-name': 'first',
     prop: 'userid',
     width: '200px'
   },
   {
-    label: '交易对',
+    label: i18n.t('transaction.transactionPair'),
     prop: 'ticker',
     width: '260px'
   },
   {
-    label: '交易额',
+    label: i18n.t('transaction.volume'),
     prop: 'amount',
     width: '260px'
   },
   {
-    label: '交易量',
+    label: i18n.t('transaction.transactionAmount'),
     prop: 'quantity',
     width: '260px'
   },
   {
-    label: '邀请日期',
+    label: i18n.t('common.inviteDate'),
     prop: 'createtime'
     // align: 'right',
   }
