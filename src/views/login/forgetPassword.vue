@@ -2,18 +2,18 @@
     <div class="login-contain flex">
         <img src="../../assets/login/login_bg.png" alt="">
         <div class="w-483 m-l-236 m-t-200">
-            <div class="text-c001529 font-52 m-b-32">忘记密码</div>
+            <div class="text-c001529 font-52 m-b-32">{{ $t("login.forgetPassword") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
-                <el-form-item class="m-b-40" label="邮箱地址" prop="email">
-                    <el-input placeholder="请输入邮箱地址" v-model="loginForm.email"></el-input>
+                <el-form-item class="m-b-40" :label="$t('login.emailAddress')" prop="email">
+                    <el-input :placeholder="$t('common.enter')+$t('login.emailAddress')" v-model="loginForm.email"></el-input>
                 </el-form-item>
-                <el-form-item class="m-b-40 relative" label="验证码" prop="verifyCode">
-                    <el-input placeholder="请输入验证码" :maxlength="6" v-model="loginForm.verifyCode" @input="handleInput"></el-input>
-                    <div class="text-c1890FF absolute top-8 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">发送验证码</div>
-                    <div class="text-A9B3C9 absolute top-8 right-16" v-else>{{ cutdown }}s 重新发送</div>
+                <el-form-item class="m-b-40 relative" :label="$t('login.verifyCode')" prop="verifyCode">
+                    <el-input :placeholder="$t('common.enter')+$t('login.verifyCode')" :maxlength="6" v-model="loginForm.verifyCode" @input="handleInput"></el-input>
+                    <div class="text-c1890FF absolute top-8 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">{{ $t("common.sendVerifyCode") }}</div>
+                    <div class="text-A9B3C9 absolute top-8 right-16" v-else>{{ cutdown }}s {{ $t("common.sendAgain") }}</div>
                 </el-form-item>
             </el-form>
-            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="next">下一步</div>
+            <div class="w-483 h-56 l-h-56 text-center font-18 text-c001529 b-r-4 bg-FFC304 cursor-point" @click="next">{{ $t("login.next") }}</div>
         </div>
     </div>
 </template>
@@ -28,10 +28,10 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.emailAddress'), trigger: 'blur' }
         ],
         verifyCode: [
-          { required: true, message: '请输入验证码', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.verifyCode'), trigger: 'blur' }
         ]
       },
       cutdown: 10,
@@ -56,11 +56,11 @@ export default {
             email: this.loginForm.email
           }
           this.postRequest('agent/sendcodebyfind', data).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code && res.code == 2000) {
-              this.$toast('验证码发送成功')
+              this.$toast(this.$t('common.sendSuccess'))
             } else {
-              this.$toast('验证码发送失败')
+              this.$toast(this.$t('common.sendFailed'))
             }
           })
         } else {
