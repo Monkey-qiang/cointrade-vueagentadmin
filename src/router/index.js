@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layout/index'),
-    meta: { title: '账户' },
+    meta: { title: 'common.account' },
     children: [
       {
         path: '/',
@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/invite',
     component: () => import('@/layout/index'),
-    meta: { title: '邀请数据' },
+    meta: { title: 'common.invitationData' },
     children: [
       {
         path: '/',
@@ -31,7 +31,7 @@ const routes = [
   {
     path: '/award',
     component: () => import('@/layout/index'),
-    meta: { title: '奖励数据' },
+    meta: { title: 'common.rewardData' },
     children: [
       {
         path: '/',
@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/transation',
     component: () => import('@/layout/index'),
-    meta: { title: '交易数据' },
+    meta: { title: 'common.transactionData' },
     children: [
       {
         path: '/',
@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/dataReport',
     component: () => import('@/layout/index'),
-    meta: { title: '数据报表' },
+    meta: { title: 'common.dataReport' },
     children: [
       {
         path: '/',

@@ -22,8 +22,6 @@ basicData.interceptors.request.use(function(config) {
     config.headers.token = token
     // 也能够这种写法
     // config.headers['token'] = token;
-  } else {
-    router.replace({ path: '/login' })
   }
   return config
 }, function(error) {
@@ -35,11 +33,12 @@ basicData.interceptors.request.use(function(config) {
 // 添加一个响应拦截器
 basicData.interceptors.response.use(function(response) {
   if (response.data && response.data.code) {
-    // if (response.data.message === 'token失效' || response.data.message === '请求头中没有token') {
-    //     //未登陆
-    //     Toast.fail("登陆信息已失效，请从新登陆");
-    //     router.push('/login');
-    // }
+    // console.log(response)
+    if (response.data.msg == '未登录' || response.data.code == 10001) {
+      // 未登陆
+      // Toast.fail('登陆信息已失效，请从新登陆')
+      router.replace({ path: '/login' })
+    }
     if (response.data.code === -1) {
       Toast.fail('请求失败')
     }

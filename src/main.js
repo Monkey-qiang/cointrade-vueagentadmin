@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import VueClipboard from 'vue-clipboard2'
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from './language/index'
 
@@ -17,6 +18,7 @@ Vue.prototype.postRequest = POST
 Vue.prototype.getRequest = GET
 
 Vue.use(ElementUI)
+Vue.use(VueClipboard)
 
 // 移动端调试器
 // import Vconsole from 'vconsole'

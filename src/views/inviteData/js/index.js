@@ -1,35 +1,37 @@
+import i18n from '@/language'
+
 export const tableColumns = [
   {
-    label: '用户ID',
+    label: i18n.t('invite.userId'),
     // customSlot: 'coin',
     'class-name': 'first',
     prop: 'userid',
     width: '160px'
   },
   {
-    label: '用户邀请人数',
+    label: i18n.t('invite.inviteNum'),
     prop: 'people',
     width: '140px'
   },
   {
     // prop: 'price',
-    label: '用户产生总佣金(USDT)',
+    label: i18n.t('invite.totalCommission') + '(USDT)',
     prop: 'total',
     width: '230px'
   },
   {
-    label: '用户累计交易佣金(USDT)',
+    label: i18n.t('invite.totalTransationCommission') + '(USDT)',
     prop: 'straight',
     width: '230px'
   },
   {
-    label: '用户累计代理佣金(USDT)',
+    label: i18n.t('invite.totalAgentCommission') + '(USDT)',
     prop: 'subfee',
     width: '230px'
     // align: 'right',
   },
   {
-    label: '邀请日期',
+    label: i18n.t('common.date'),
     prop: 'createtime'
     // align: 'right',
   }

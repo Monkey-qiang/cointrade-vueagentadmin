@@ -1,57 +1,58 @@
+import i18n from '@/language'
 export const tableColumns = [
   {
-    label: '币种',
+    label: i18n.t('award.coin'),
     // customSlot: 'coin',
     'class-name': 'first',
     prop: 'coin',
     width: '120px'
   },
   {
-    label: '奖励数量',
+    label: i18n.t('award.awardNum'),
     prop: 'quantity',
     width: '190px'
   },
   {
-    label: '奖励类型',
+    label: i18n.t('award.awardType'),
     prop: 'category',
     width: '170px',
     formatter: (row) => {
-      return row.category == 1 ? '直客佣金' : '代理佣金'
+      return row.category == 1 ? i18n.t('award.straight') : i18n.t('award.agent')
     }
   },
   {
-    label: '交易区',
+    label: i18n.t('award.tradingArea'),
     prop: 'tradeid',
     width: '170px',
     formatter: (row) => {
-      return row.category == 1 ? '现货交易' : '合约交易'
+      return row.category == 1 ? i18n.t('transaction.spotTransation') : i18n.t('transaction.contractTransaction')
     }
   },
   {
-    label: '奖励来源',
+    label: i18n.t('award.awardSource'),
     prop: 'userid',
     width: '190px'
     // align: 'right',
   },
   {
-    label: '状态',
+    label: i18n.t('award.status'),
     prop: 'status',
     width: '170px',
     // align: 'right',
     formatter: (row) => {
       let statusText
       if (row.status == 1) {
-        statusText = '未入账'
+        statusText = i18n.t('award.notRecorded')
       } else if (row.status == 3) {
-        statusText = '已入账'
+        statusText = i18n.t('award.recorded')
       } else if (row.status == 4) {
-        statusText = '已停止'
+        statusText = i18n.t('award.stopped')
       }
       return statusText
     }
   },
   {
-    label: '邀请日期',
+    label: i18n.t('common.inviteDate'),
     prop: 'createtime'
     // align: 'right',
   }

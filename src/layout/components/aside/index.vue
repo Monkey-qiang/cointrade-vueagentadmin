@@ -13,7 +13,7 @@
       >
         <el-menu-item class="b-r-4" v-for="(route, index) in routerOptions" :key="route.path" :index="route.path">
           <img class="m-l-24 m-r-12" :src="require(`../../../assets/asideIcon/aside_icon_${(index+1) }.png`)" alt=""/>
-          <span slot="title">{{ route.meta.title }}</span>
+          <span slot="title">{{ $t(route.meta.title) }}</span>
         </el-menu-item>
       </el-menu>
     </div>
