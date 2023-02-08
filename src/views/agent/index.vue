@@ -40,10 +40,22 @@
             <div class="w-1024 m-lr-auto flex justify-between">
                 <div>
                     <div class="font-48 fw-800 ff-Heavy l-h-34 m-b-81">代理权益</div>
-                    <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-48">丰厚的佣金奖励，依靠被动收入致富</div>
-                    <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-48">永久返佣，持久收益</div>
-                    <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-48">一对一，专业客户经理</div>
-                    <div class="font-20 ff-SCBold fw-600 l-h-30 m-l-48">专属后台，报表级数据报告</div>
+                    <div class="flex">
+                        <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34460.png" alt=""></div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">丰厚的佣金奖励，依靠被动收入致富</div>
+                    </div>
+                    <div class="flex">
+                        <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34672.png" alt=""></div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">永久返佣，持久收益</div>
+                    </div>
+                    <div class="flex">
+                        <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Group34673.png" alt=""></div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-b-29 m-l-23">一对一，专业客户经理</div>
+                    </div>
+                    <div class="flex">
+                        <div class="h-23 w-23 m-t-3"><img class="img" src="@/assets/agent/Vector.png" alt=""></div>
+                        <div class="font-20 ff-SCBold fw-600 l-h-30 m-l-23">专属后台，报表级数据报告</div>
+                    </div>
                 </div>
                 <div class="w-426 h-319 m-t-51 line m-r-59"><img class="img" src="@/assets/agent/bottom.png" alt="">
                 </div>
@@ -96,27 +108,27 @@ export default {
       activeNames: '',
       problemList: [
         {
-          title: '什么是TokEX代理计划？',
+          title: '1，什么是TokEX代理计划？',
           content: 'Tokex目前提供市场上顶级加密货币的交易互换，包括主流数字资产 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC)等。',
           id: '1'
         },
         {
-          title: '如何申请TokEX代理计划？',
+          title: '2，如何申请TokEX代理计划？',
           content: '在Tokex购买数字资产无需手续费。',
           id: '2'
         },
         {
-          title: '加入TokEX代理计划需要什么条件？',
+          title: '3，加入TokEX代理计划需要什么条件？',
           content: '我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请',
           id: '3'
         },
         {
-          title: '加入TokEX代理计划有什么好处？',
+          title: '4，加入TokEX代理计划有什么好处？',
           content: '您首先需要完成身份认证（KYC）和手机验证后，然后，您可以在快捷区直接下单，或在自选区浏览所有广告，并选择合适的广告。点击“购买“按钮下单，输入您要购买的金额，并根据卖方提供的支付方式进行转账。最后，回到订单页，点击“已付款”，等待卖方放币，即可获得您的数字货币。',
           id: '4'
         },
         {
-          title: '我如何查看我的报酬和推荐人列表？',
+          title: '5，我如何查看我的报酬和推荐人列表？',
           content: 'Tokex会对数字货币订单的资产进行托管保护，卖家发布广告后，我们将冻结广告中的资产进行托管，如果交易过程中卖家不放行资产，我们会将冻结中托管的资产放行给买家。',
           id: '5'
         }
@@ -133,6 +145,13 @@ export default {
 
 <style scoped lang="scss">
 ::v-deep {
+    .el-collapse-item__header.is-active {
+        background: #f6f6f6;
+        color: #070707;
+        font-family: PingFang SC-Regular, PingFang SC;
+        font-weight: 500;
+    }
+
     .el-collapse-item__header {
         height: 70px;
         font-size: 18px;
@@ -140,6 +159,8 @@ export default {
         color: #333333;
         line-height: 21px;
         font-weight: 400;
+        padding-left: 20px;
+        // padding-top: 23px;
     }
 
     .el-collapse-item__content {
@@ -147,6 +168,7 @@ export default {
         font-family: PingFang SC-Medium, PingFang SC;
         font-weight: 500;
         color: #636B75;
+        background: #f6f6f6;
         line-height: 21px;
         padding-left: 52px;
         padding-right: 51px;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant'
-import router from '../router'
+// import router from '../router'
 
 const token = ''
 // const base = 'http://8.218.110.85/api/'
@@ -23,7 +23,7 @@ basicData.interceptors.request.use(function(config) {
     // 也能够这种写法
     // config.headers['token'] = token;
   } else {
-    router.replace({ path: '/login' })
+    // router.replace({ path: '/login' })
   }
   return config
 }, function(error) {

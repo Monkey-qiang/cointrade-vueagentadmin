@@ -16,7 +16,11 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="password">
           <div class="input">Password</div>
-          <el-input type="password" clearable v-model.trim="ruleForm.password"></el-input>
+          <el-input class="relative" :type="passwordType" clearable v-model.trim="ruleForm.password"></el-input>
+          <img v-if="eyeIsOpen" class="absolute top-35 right-30 cursor-point" src="../../assets/login/eye_open.png"
+            alt="" @click="eyeIsOpen = false" />
+          <img v-else class="absolute top-35 right-30 cursor-point" src="../../assets/login/eye_close.png" alt=""
+            @click="eyeIsOpen = true" />
         </el-form-item>
         <el-form-item prop="captcha">
           <div class="input">Verification Code</div>
@@ -34,11 +38,12 @@
               I agree to the
             </div>
           </el-checkbox>
-          <span class="text-c2880BF cursor-point" @click="Affiliate"> Affiliate Agreement</span><span class="text-c636B75"> and </span><span
-            class="text-c2880BF cursor-point" @click="Privacy">Privacy Policy</span>
+          <span class="text-c2880BF cursor-point" @click="Affiliate"> Affiliate Agreement</span><span
+            class="text-c636B75"> and </span><span class="text-c2880BF cursor-point" @click="Privacy">Privacy
+            Policy</span>
         </el-form-item>
         <el-form-item style="text-align: center;">
-          <el-button class="btn" type="primary" @click="submitForm">Submit</el-button>
+          <el-button class="btn" @click="submitForm">Submit</el-button>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn b_btn" type="primary" @click="previous">Previous</el-button>
@@ -50,8 +55,9 @@
     <div class="text-center m-t-98" v-else>
       <div class="w-200 h-200  m-lr-auto"><img class="img" src="../../assets/agent/dui.png" alt=""></div>
       <div class="m-b-20 m-t-80 font-32 h-32 l-h-32">Submitted Successfully</div>
-      <div class="font-24 h-24 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
+      <div class="font-24 h-24 m-b-20 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
         application shortly</div>
+      <div class="btn_jump m-lr-auto" @click="jump">Log In</div>
     </div>
   </div>
 </template>
@@ -81,6 +87,7 @@ export default {
     }
     return {
       form: {},
+      eyeIsOpen: false,
       cutdown: 10,
       cutdownShow: false,
       timer: null,
@@ -104,6 +111,17 @@ export default {
       }
     }
   },
+  computed: {
+    passwordType() {
+      let passwordType
+      if (this.eyeIsOpen) {
+        passwordType = 'text'
+      } else {
+        passwordType = 'password'
+      }
+      return passwordType
+    }
+  },
   created() {
     bus.$on('send', data => {
       this.form = data
@@ -112,7 +130,7 @@ export default {
       console.log('首次被加载')
       window.name = 'isReload'
     } else if (window.name == 'isReload') {
-      console.log('页面被刷新')
+      console.log('首次被刷新')
       // this.$router.back()
     }
   },
@@ -120,6 +138,9 @@ export default {
     bus.$off('send')
   },
   methods: {
+    jump() {
+      this.$router.push({ path: '/login' })
+    },
     Affiliate() {
 
     },
@@ -157,7 +178,7 @@ export default {
           if (data.code !== 2000) {
             this.$message({
               type: 'error',
-              message: data.msg
+              message: '注册失败'
             })
           } else {
             this.sub = false
@@ -205,6 +226,7 @@ export default {
   font-family: PingFang SC-Heavy;
 }
 
+.btn_jump,
 .btn {
   width: 310px;
   height: 58px;
@@ -216,6 +238,11 @@ export default {
   line-height: 19px;
   background: #ffc304;
   border-color: #ffc304;
+  cursor: pointer;
+}
+
+.btn_jump {
+  line-height: 58px;
 }
 
 .b_btn {
