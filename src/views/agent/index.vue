@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1920">
+    <div>
         <div class="w-p100 bg1">
             <div class="w-1024 m-lr-auto">
                 <div class="flex justify-between h-544 m-b-83">

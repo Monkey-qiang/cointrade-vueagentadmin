@@ -5,7 +5,9 @@
                 <img class="m-l-18 m-r-8" src="../../assets/common/logo.png" alt="" >
                 <div class="login-text font-20 fw-600 text-white">TokEX Affiliate</div>
             </div>
-            <div class="flex align-center">
+            <div class="flex align-center text-center">
+              <div class="m-r-14 l-h-24 b-r-4 w-48 h-24 cursor-point bg-FFC304 ff-Medium text-c070707 font-14 fw-500" @click="login">登录</div>
+              <div class="m-r-20 l-h-24 b-r-4 w-48 h-24 cursor-point bg-EDEDED ff-Medium text-c070707 font-14 fw-500" @click="apply">申请</div>
                 <el-dropdown class="text-white cursor-point" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{ language }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -47,6 +49,12 @@ export default {
     }
   },
   methods: {
+    login() {
+      this.$router.push({ path: '/login' })
+    },
+    apply() {
+      this.$router.push({ path: '/agentPage' })
+    },
     loginOut() {
       this.postRequest('agent/loginout').then(res => {
         if (res.code && res.code == 2000) {
@@ -56,7 +64,6 @@ export default {
       })
     },
     handleCommand(command) {
-    //   console.log(command)
       if (command == 'zh') {
         this.language = '简体中文'
       } else {

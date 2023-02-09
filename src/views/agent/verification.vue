@@ -48,7 +48,7 @@
         <el-form-item style="text-align: center;">
           <el-button class="btn b_btn" type="primary" @click="previous">Previous</el-button>
           <div class="m-t-10 m-l-11 text-c90959C font-14 fw-600">Already a Tokex affiliate? <span
-              class="text-c2880BF cursor-point" @click="junmp">Log in</span></div>
+              class="text-c2880BF cursor-point" @click="login">Log in</span></div>
         </el-form-item>
       </el-form>
     </div>
@@ -57,7 +57,7 @@
       <div class="m-b-20 m-t-80 font-32 h-32 l-h-32">Submitted Successfully</div>
       <div class="font-24 h-24 m-b-20 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
         application shortly</div>
-      <div class="btn_jump m-lr-auto" @click="jump">Log In</div>
+      <div class="btn_jump m-lr-auto" @click="login">Log In</div>
     </div>
   </div>
 </template>
@@ -112,6 +112,7 @@ export default {
     }
   },
   computed: {
+    // 密码
     passwordType() {
       let passwordType
       if (this.eyeIsOpen) {
@@ -123,6 +124,7 @@ export default {
     }
   },
   created() {
+    // 兄弟组件接收
     bus.$on('send', data => {
       this.form = data
     })
@@ -134,19 +136,24 @@ export default {
       // this.$router.back()
     }
   },
+  // 避免多次触发
   beforeDestroy() {
     bus.$off('send')
   },
   methods: {
-    jump() {
+    // 跳转登录页
+    login() {
       this.$router.push({ path: '/login' })
     },
+    // 用户协议
     Affiliate() {
 
     },
+    // 用户协议
     Privacy() {
 
     },
+    // 发送验证码倒计时
     async sendCode() {
       this.cutdownShow = true
       this.timer = setInterval(() => {
@@ -166,9 +173,7 @@ export default {
         })
       }
     },
-    junmp() {
-      this.$router.push({ path: '/login' })
-    },
+    // 注册
     submitForm() {
       this.$refs.ruleForm.validate(async(valid) => {
         if (valid) {
@@ -186,6 +191,7 @@ export default {
         }
       })
     },
+    // 上一步
     previous() {
       this.$router.back()
     }

@@ -111,6 +111,7 @@ export default {
     }
   },
   methods: {
+    // 邮箱失去焦点验证
     async validateHas(value) {
       const param = value
       const res = await agentEmail(param)
@@ -128,9 +129,11 @@ export default {
     updataArea(item) {
       this.ruleForm.country_id = item.id
     },
+    // 跳转
     jump() {
       this.$router.push({ path: '/login' })
     },
+    // 下一步，兄弟组件传参
     submitForm() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid && this.emailCheck) {
