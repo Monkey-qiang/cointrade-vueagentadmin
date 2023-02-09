@@ -78,5 +78,25 @@ module.exports = {
   },
   dataReport: {
     dataReport: ''
+  },
+  agent: {
+    description: '',
+    startEarning: '',
+    step1: '',
+    step2: '',
+    step3: '',
+    agencyInterest: '',
+    agencyInterest1: '',
+    agencyInterest2: '',
+    agencyInterest3: '',
+    agencyInterest4: '',
+    earn: '',
+    hight: '',
+    hight1: '',
+    subagent: '',
+    subagent1: '',
+    become: '',
+    applyImmediately: '',
+    tokexPlan: ''
   }
 }
