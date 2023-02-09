@@ -67,7 +67,7 @@ export default {
         paginationOp: {
           small: true,
           total: 1,
-          'page-size': 5,
+          'page-size': 10,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -123,7 +123,7 @@ export default {
         begin_time,
         end_time,
         page: this.tableOptions.paginationOp.currentPage,
-        size: 5
+        size: 10
       }
       this.getRequest('agent/gettradelist', data).then(res => {
         // console.log(res)

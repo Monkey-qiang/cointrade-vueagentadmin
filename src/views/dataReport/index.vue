@@ -41,7 +41,7 @@ export default {
         paginationOp: {
           small: true,
           total: 1,
-          'page-size': 2,
+          'page-size': 10,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -72,7 +72,7 @@ export default {
         begin_time,
         end_time,
         page: this.tableOptions.paginationOp.currentPage,
-        size: 2
+        size: 10
       }
       this.getRequest('agent/getreportlist', data).then(res => {
         // console.log(res)

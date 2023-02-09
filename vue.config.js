@@ -18,7 +18,7 @@ module.exports = {
     proxy: {
       // 配置多个跨域代理
       '/api': {
-        //要访问的跨域的api的域名
+        // 要访问的跨域的api的域名
         target: 'http://192.168.3.110:3000/mock/18/',
         pathRewrite: {
           '^/api': ''
