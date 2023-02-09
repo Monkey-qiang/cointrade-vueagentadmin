@@ -53,7 +53,7 @@ export default {
         paginationOp: {
           small: true,
           total: 0,
-          'page-size': 3,
+          'page-size': 10,
           currentPage: 1,
           layout: 'prev, pager, next, jumper'
         },
@@ -89,7 +89,7 @@ export default {
         begin_time: this.date[0],
         end_time: this.date[1],
         page: this.tableOptions.paginationOp.currentPage,
-        size: 3
+        size: 10
       }
       this.getRequest('agent/getinvitelist', data).then(res => {
         // console.log(res)
