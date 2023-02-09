@@ -21,6 +21,14 @@
 <script>
 export default {
   data() {
+    const that = this
+    function validateEmail(rule, value, callback) {
+      const reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (!reg.test(that.loginForm.email)) {
+        callback(new Error(that.$t('common.enter') + that.$t('login.emailReg')))
+      }
+      callback()
+    }
     return {
       loginForm: {
         email: '',
@@ -28,7 +36,8 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: this.$t('common.enter') + this.$t('login.emailAddress'), trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.emailAddress'), trigger: 'blur' },
+          { validator: validateEmail, trigger: 'blur' }
         ],
         verifyCode: [
           { required: true, message: this.$t('common.enter') + this.$t('login.verifyCode'), trigger: 'blur' }

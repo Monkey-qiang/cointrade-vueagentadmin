@@ -28,6 +28,14 @@
 <script>
 export default {
   data() {
+    const that = this
+    function validateEmail(rule, value, callback) {
+      const reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (!reg.test(that.loginForm.email)) {
+        callback(new Error(that.$t('common.enter') + that.$t('login.emailReg')))
+      }
+      callback()
+    }
     return {
       loginForm: {
         email: '',
@@ -35,10 +43,11 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.emailAddress'), trigger: 'blur' },
+          { validator: validateEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.password'), trigger: 'blur' }
         ]
       },
       eyeIsOpen: false
@@ -66,9 +75,11 @@ export default {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
           this.postRequest('agent/login', this.loginForm).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code == 2000) {
               localStorage.setItem('token', res.data.token)
+              const token = localStorage.getItem('token')
+              this.$store.commit('setToken', token)
               this.$router.replace('/')
             }
           })

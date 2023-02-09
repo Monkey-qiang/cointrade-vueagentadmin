@@ -6,7 +6,7 @@
                 <div class="login-text font-20 fw-600 text-white">TokEX Affiliate</div>
             </div>
             <div class="flex align-center">
-                <el-dropdown class="text-white cursor-point" @command="handleCommand">
+                <el-dropdown class="text-white cursor-point m-r-24" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{ language }}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
@@ -21,8 +21,8 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-                <div class="line w-1 h-20 bg-c96A0B5 m-lr-24"></div>
-                <div class="flex align-center cursor-point" @click="loginOut">
+                <div class="line w-1 h-20 bg-c96A0B5 m-r-24" v-if="isLogin"></div>
+                <div class="flex align-center cursor-point" @click="loginOut" v-if="isLogin">
                     <img src="../../assets/common/exit.png" alt="">
                     <div class="text-white m-l-4 m-r-24">{{ $t('common.exit') }}</div>
                 </div>
@@ -35,10 +35,21 @@
 export default {
   data() {
     return {
-      language: ''
+      language: '',
+      isLogin: false
+    }
+  },
+  watch: {
+    '$store.state.token'(newVal) {
+      if (newVal) {
+        this.isLogin = true
+      } else {
+        this.isLogin = false
+      }
     }
   },
   created() {
+    this.isLogin = !!this.$store.state.token
     const language = localStorage.getItem('lang')
     if (language) {
       this.language = language == 'zh' ? '简体中文' : 'English'
@@ -51,6 +62,7 @@ export default {
       this.postRequest('agent/loginout').then(res => {
         if (res.code && res.code == 2000) {
           localStorage.clear()
+          this.$store.commit('setToken', '')
           this.$router.replace({ path: '/login' })
         }
       })
