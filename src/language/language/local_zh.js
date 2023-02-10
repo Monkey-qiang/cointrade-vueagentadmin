@@ -34,7 +34,8 @@ module.exports = {
     apply: '申请',
     verifyCode: '验证码',
     next: '下一步',
-    complete: '完成'
+    complete: '完成',
+    emailReg: '正确的邮箱地址'
   },
   account: {
     commissionRate: '佣金比例',

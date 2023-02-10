@@ -5,9 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    areaCode: ''
+    areaCode: '',
+    token: localStorage.getItem('token')
   },
-  mutations: {},
+  mutations: {
+    setToken(state, data) {
+      state.token = data
+    }
+  },
   actions: {},
   modules: {}
 })

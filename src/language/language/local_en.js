@@ -32,7 +32,8 @@ module.exports = {
     apply: '',
     verifyCode: '',
     next: '',
-    complete: ''
+    complete: '',
+    emailReg: ''
   },
   account: {
     commissionRate: '',
