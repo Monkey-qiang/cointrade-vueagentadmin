@@ -80,9 +80,16 @@ export default {
   },
   data() {
     const that = this
+    function validatePasswordFormat(rule, value, callback) {
+      const reg = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,32}$/
+      if (!reg.test(that.passwordForm.password)) {
+        callback(new Error(that.$t('common.passwordFormat')))
+      }
+      callback()
+    }
     function validatePassword(rule, value, callback) {
       if (that.passwordForm.password != that.passwordForm.confirmPassword) {
-        callback(new Error(this.$t('common.passwordAtypism')))
+        callback(new Error(that.$t('common.passwordAtypism')))
       }
       callback()
     }
@@ -144,7 +151,8 @@ export default {
       },
       rules: {
         password: [
-          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' },
+          { validator: validatePasswordFormat, trigger: 'blur' }
         ],
         confirmPassword: [
           { required: true, message: this.$t('common.confirmNewpassword'), trigger: 'blur' },
@@ -202,7 +210,7 @@ export default {
         email: this.agentinfo.email
       }
       this.postRequest('agent/sendcodebylogin', data).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code && res.code == 2000) {
           this.$toast(this.$t('common.sendSuccess'))
         } else {
@@ -221,7 +229,7 @@ export default {
             code: this.passwordForm.verifyCode
           }
           this.postRequest('agent/resetpasswd', data).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code && res.code == 2000) {
               this.$toast(this.$t('account.modifySuccess'))
               this.bindDialogOptions.visible = false

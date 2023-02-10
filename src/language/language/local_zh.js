@@ -22,7 +22,8 @@ module.exports = {
     search: '查询',
     all: '全部',
     inviteDate: '邀请日期',
-    copySuccess: '复制成功'
+    copySuccess: '复制成功',
+    passwordFormat: '密码至少位8位数字与字母组合'
   },
   login: {
     welcomeLogin: '欢迎登录',

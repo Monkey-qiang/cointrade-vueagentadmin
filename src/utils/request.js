@@ -3,8 +3,8 @@ import { Toast } from 'vant'
 import router from '../router'
 
 const token = ''
-// const base = 'http://192.168.3.110:6240/api/'
-const base = 'http://8.218.110.85:6240/api/'
+const base = 'http://192.168.3.110:6240/api/'
+// const base = 'http://8.218.110.85:6240/api/'
 
 const basicData = axios.create({
   baseURL: base
@@ -39,8 +39,8 @@ basicData.interceptors.response.use(function(response) {
       // Toast.fail('登陆信息已失效，请从新登陆')
       router.replace({ path: '/login' })
     }
-    if (response.data.code === -1) {
-      Toast.fail('请求失败')
+    if (response.data.code != 2000) {
+      Toast.fail(response.data.msg)
     }
   }
   return response
