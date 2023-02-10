@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item prop="user_id">
           <div class="input"><span class="text-red">*</span>Your Tokex User ID</div>
-          <el-input clearable v-model.number="ruleForm.user_id"></el-input>
+          <el-input clearable maxlength="12" v-model.number="ruleForm.user_id"></el-input>
         </el-form-item>
         <el-form-item prop="telegram">
           <div class="input"><span class="text-red">*</span>Please provide your Telegram account and we will contact you
@@ -92,7 +92,7 @@ export default {
             { type: 'email', message: 'Please enter the correct email address', trigger: ['blur', 'change'] }
           ],
         user_id: [
-          { required: true, message: 'Please enter the user_id', trigger: 'blur' },
+          { required: true, message: 'Please enter the User ID', trigger: 'blur' },
           { pattern: /^\d+$/, message: 'Input digit', trigger: 'change' }
         ],
         telegram: [
