@@ -24,9 +24,16 @@
 export default {
   data() {
     const that = this
+    function validatePasswordFormat(rule, value, callback) {
+      const reg = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,32}$/
+      if (!reg.test(that.loginForm.newPassword)) {
+        callback(new Error(that.$t('common.passwordFormat')))
+      }
+      callback()
+    }
     function validatePassword(rule, value, callback) {
       if (that.loginForm.newPassword != that.loginForm.confirmNewPassword) {
-        callback(new Error(this.$t('common.passwordAtypism')))
+        callback(new Error(that.$t('common.passwordAtypism')))
       }
       callback()
     }
@@ -37,7 +44,8 @@ export default {
       },
       rules: {
         newPassword: [
-          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' },
+          { validator: validatePasswordFormat, trigger: 'blur' }
         ],
         confirmNewPassword: [
           { required: true, message: this.$t('common.confirmNewpassword'), trigger: 'blur' },

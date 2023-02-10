@@ -20,7 +20,10 @@ module.exports = {
     beginDate: '',
     endDate: '',
     search: '',
-    all: ''
+    all: '',
+    inviteDate: '',
+    copySuccess: '',
+    passwordFormat: ''
   },
   login: {
     welcomeLogin: 'Welcome to login ',
