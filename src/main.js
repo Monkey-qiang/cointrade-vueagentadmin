@@ -27,10 +27,19 @@ Vue.use(VueClipboard)
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
+  // if (to.meta.title) {
+  //   document.title = to.meta.title
+  // }
+  // next()
+  if (localStorage.getItem('token')) {
+    if (to.meta.loginRequest) {
+      next({ path: '/' })
+    } else {
+      next()
+    }
+  } else {
+    next()
   }
-  next()
 })
 
 // 适配
