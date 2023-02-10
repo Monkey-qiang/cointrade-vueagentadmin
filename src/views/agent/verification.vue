@@ -16,11 +16,7 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="password">
           <div class="input">Password</div>
-          <el-input class="relative" :type="passwordType" clearable v-model.trim="ruleForm.password"></el-input>
-          <img v-if="eyeIsOpen" class="absolute top-35 right-30 cursor-point" src="../../assets/login/eye_open.png"
-            alt="" @click="eyeIsOpen = false" />
-          <img v-else class="absolute top-35 right-30 cursor-point" src="../../assets/login/eye_close.png" alt=""
-            @click="eyeIsOpen = true" />
+          <el-input type="password" clearable v-model.trim="ruleForm.password"></el-input>
         </el-form-item>
         <el-form-item prop="captcha">
           <div class="input">Verification Code</div>
@@ -38,26 +34,24 @@
               I agree to the
             </div>
           </el-checkbox>
-          <span class="text-c2880BF cursor-point" @click="Affiliate"> Affiliate Agreement</span><span
-            class="text-c636B75"> and </span><span class="text-c2880BF cursor-point" @click="Privacy">Privacy
-            Policy</span>
+          <span class="text-c2880BF cursor-point" @click="Affiliate"> Affiliate Agreement</span><span class="text-c636B75"> and </span><span
+            class="text-c2880BF cursor-point" @click="Privacy">Privacy Policy</span>
         </el-form-item>
         <el-form-item style="text-align: center;">
-          <el-button class="btn" @click="submitForm">Submit</el-button>
+          <el-button class="btn" type="primary" @click="submitForm">Submit</el-button>
         </el-form-item>
         <el-form-item style="text-align: center;">
           <el-button class="btn b_btn" type="primary" @click="previous">Previous</el-button>
           <div class="m-t-10 m-l-11 text-c90959C font-14 fw-600">Already a Tokex affiliate? <span
-              class="text-c2880BF cursor-point" @click="login">Log in</span></div>
+              class="text-c2880BF cursor-point" @click="junmp">Log in</span></div>
         </el-form-item>
       </el-form>
     </div>
     <div class="text-center m-t-98" v-else>
       <div class="w-200 h-200  m-lr-auto"><img class="img" src="../../assets/agent/dui.png" alt=""></div>
       <div class="m-b-20 m-t-80 font-32 h-32 l-h-32">Submitted Successfully</div>
-      <div class="font-24 h-24 m-b-20 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
+      <div class="font-24 h-24 ff-Regular text-c636B75 fw-400 l-h-24">Please be patient, we will review your
         application shortly</div>
-      <div class="btn_jump m-lr-auto" @click="login">Log In</div>
     </div>
   </div>
 </template>
@@ -68,7 +62,7 @@ import bus from '@/js/eventBus.js'
 export default {
   data() {
     const check = (rule, value, callback) => {
-      const reg = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}')
+      const reg = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,32}$/
       if (value === '') {
         callback(new Error('Please enter password'))
       } else if (value.length < 8) {
@@ -87,7 +81,6 @@ export default {
     }
     return {
       form: {},
-      eyeIsOpen: false,
       cutdown: 10,
       cutdownShow: false,
       timer: null,
@@ -111,20 +104,7 @@ export default {
       }
     }
   },
-  computed: {
-    // 密码
-    passwordType() {
-      let passwordType
-      if (this.eyeIsOpen) {
-        passwordType = 'text'
-      } else {
-        passwordType = 'password'
-      }
-      return passwordType
-    }
-  },
   created() {
-    // 兄弟组件接收
     bus.$on('send', data => {
       this.form = data
     })
@@ -132,28 +112,20 @@ export default {
       console.log('首次被加载')
       window.name = 'isReload'
     } else if (window.name == 'isReload') {
-      console.log('首次被刷新')
+      console.log('页面被刷新')
       // this.$router.back()
     }
   },
-  // 避免多次触发
   beforeDestroy() {
     bus.$off('send')
   },
   methods: {
-    // 跳转登录页
-    login() {
-      this.$router.push({ path: '/login' })
-    },
-    // 用户协议
     Affiliate() {
 
     },
-    // 用户协议
     Privacy() {
 
     },
-    // 发送验证码倒计时
     async sendCode() {
       this.cutdownShow = true
       this.timer = setInterval(() => {
@@ -173,7 +145,9 @@ export default {
         })
       }
     },
-    // 注册
+    junmp() {
+      this.$router.push({ path: '/login' })
+    },
     submitForm() {
       this.$refs.ruleForm.validate(async(valid) => {
         if (valid) {
@@ -183,7 +157,7 @@ export default {
           if (data.code !== 2000) {
             this.$message({
               type: 'error',
-              message: '注册失败'
+              message: data.msg
             })
           } else {
             this.sub = false
@@ -191,7 +165,6 @@ export default {
         }
       })
     },
-    // 上一步
     previous() {
       this.$router.back()
     }
@@ -232,7 +205,6 @@ export default {
   font-family: PingFang SC-Heavy;
 }
 
-.btn_jump,
 .btn {
   width: 310px;
   height: 58px;
@@ -244,11 +216,6 @@ export default {
   line-height: 19px;
   background: #ffc304;
   border-color: #ffc304;
-  cursor: pointer;
-}
-
-.btn_jump {
-  line-height: 58px;
 }
 
 .b_btn {
