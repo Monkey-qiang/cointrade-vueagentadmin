@@ -59,8 +59,10 @@ export default {
     },
     currentChange(page) {
       // console.log(page)
-      this.tableOptions.paginationOp.currentPage = page
-      this.getReportFormList()
+      if (typeof (page) !== 'object') {
+        this.tableOptions.paginationOp.currentPage = page
+        this.getReportFormList()
+      }
     },
     getReportFormList() {
       let begin_time, end_time

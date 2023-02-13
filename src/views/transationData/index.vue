@@ -90,8 +90,10 @@ export default {
     },
     currentChange(page) {
       // console.log(page)
-      this.tableOptions.paginationOp.currentPage = page
-      this.getTransactionList()
+      if (typeof (page) !== 'object') {
+        this.tableOptions.paginationOp.currentPage = page
+        this.getTransactionList()
+      }
     },
     getTickers() {
       this.getRequest('agent/gettickers ').then(res => {

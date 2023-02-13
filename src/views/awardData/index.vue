@@ -30,8 +30,8 @@
               <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.yesterday_agent }}</div>
             </div>
             <div class="flex align-center m-t-28">
-              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.yesterdayAgent') }}(USDT)</div>
-              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.monthAgent }}</div>
+              <div class="ff-SCRegular font-14 fw-400 text-c7C869B">{{ $t('award.monthAgent') }}(USDT)</div>
+              <div class="ff-SCBold fw-600 m-l-20">{{ rewardSummary.month_agent }}</div>
             </div>
           </div>
         </div>
@@ -151,8 +151,10 @@ export default {
     },
     currentChange(page) {
       // console.log(page)
-      this.tableOptions.paginationOp.currentPage = page
-      this.getRewardList()
+      if (typeof (page) !== 'object') {
+        this.tableOptions.paginationOp.currentPage = page
+        this.getRewardList()
+      }
     },
     getCoinList() {
       this.getRequest('agent/allcoin').then(res => {
@@ -176,11 +178,16 @@ export default {
       })
     },
     getRewardList() {
+      let begin_time, end_time
+      if (this.date) {
+        begin_time = this.date[0]
+        end_time = this.date[1]
+      }
       const data = {
         coin: this.coin,
         category: this.awardType,
-        begin_time: this.date[0],
-        end_time: this.date[1],
+        begin_time,
+        end_time,
         page: this.tableOptions.paginationOp.currentPage,
         size: 10
       }

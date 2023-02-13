@@ -73,8 +73,10 @@ export default {
     },
     currentChange(page) {
       // console.log(page)
-      this.tableOptions.paginationOp.currentPage = page
-      this.getInviteList()
+      if (typeof (page) !== 'object') {
+        this.tableOptions.paginationOp.currentPage = page
+        this.getInviteList()
+      }
     },
     getAgentInfo() {
       this.getRequest('agent/getinvitesummary').then(res => {
@@ -85,9 +87,14 @@ export default {
       })
     },
     getInviteList() {
+      let begin_time, end_time
+      if (this.date) {
+        begin_time = this.date[0]
+        end_time = this.date[1]
+      }
       const data = {
-        begin_time: this.date[0],
-        end_time: this.date[1],
+        begin_time,
+        end_time,
         page: this.tableOptions.paginationOp.currentPage,
         size: 10
       }
