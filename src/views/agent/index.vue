@@ -120,29 +120,28 @@ export default {
       activeNames: '',
       problemList: [
         {
-          //   title: this.$t('agent.tokexPlan'),
-          title: '1，什么是TokEX代理计划？',
-          content: 'Tokex目前提供市场上顶级加密货币的交易互换，包括主流数字资产 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC)等。',
+          title: this.$t('agent.tokexPlan1'),
+          content: this.$t('agent.tokexPlanContent1'),
           id: '1'
         },
         {
-          title: '2，如何申请TokEX代理计划？',
-          content: '在Tokex购买数字资产无需手续费。',
+          title: this.$t('agent.tokexPlan2'),
+          content: this.$t('agent.tokexPlanContent2'),
           id: '2'
         },
         {
-          title: '3，加入TokEX代理计划需要什么条件？',
-          content: '我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请我们欢迎任何有推广渠道的客户来申请',
+          title: this.$t('agent.tokexPlan3'),
+          content: this.$t('agent.tokexPlanContent3'),
           id: '3'
         },
         {
-          title: '4，加入TokEX代理计划有什么好处？',
-          content: '您首先需要完成身份认证（KYC）和手机验证后，然后，您可以在快捷区直接下单，或在自选区浏览所有广告，并选择合适的广告。点击“购买“按钮下单，输入您要购买的金额，并根据卖方提供的支付方式进行转账。最后，回到订单页，点击“已付款”，等待卖方放币，即可获得您的数字货币。',
+          title: this.$t('agent.tokexPlan4'),
+          content: this.$t('agent.tokexPlanContent4'),
           id: '4'
         },
         {
-          title: '5，我如何查看我的报酬和推荐人列表？',
-          content: 'Tokex会对数字货币订单的资产进行托管保护，卖家发布广告后，我们将冻结广告中的资产进行托管，如果交易过程中卖家不放行资产，我们会将冻结中托管的资产放行给买家。',
+          title: this.$t('agent.tokexPlan5'),
+          content: this.$t('agent.tokexPlanContent5'),
           id: '5'
         }
       ]
@@ -190,7 +189,7 @@ export default {
 
 .back_bt {
     background: url('../../assets/agent/CTA.png') no-repeat;
-    background-size: 100%;
+    background-size: cover;
     width: 100%;
     height: 100%;
 }
@@ -209,7 +208,7 @@ export default {
 
 .btn2,
 .btn {
-    width: 274px;
+    // width: 274px;
     height: 62px;
     background: #FFC304;
     border-radius: 8px 8px 8px 8px;
@@ -235,7 +234,7 @@ export default {
 .box_inner {
     position: relative;
     width: 320px;
-    height: 206px;
+    // height: 206px;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 18px;

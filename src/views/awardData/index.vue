@@ -1,8 +1,8 @@
 <template>
     <div class="w-1200 min-h-984 text-c001529 fw-500 ff-SC p-l-24 p-t-24 m-b-32 b-l-1-solid-E4EBF1">
       <div class="flex justify-between align-center">
-        <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
-          <div class="m-l-24">
+        <div class="flex align-center w-544 h-148 bg-FAFBFC b-r-8 p-lr-24">
+          <div>
             <div class="ff-SCRegular fw-400">{{ $t('award.totalStraight') }}(USDT)</div>
             <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_straight }}</div>
           </div>
@@ -18,8 +18,8 @@
             </div>
           </div>
         </div>
-        <div class="flex align-center w-592 h-148 bg-FAFBFC b-r-8">
-          <div class="m-l-24">
+        <div class="flex align-center w-544 h-148 bg-FAFBFC b-r-8 p-lr-24">
+          <div>
             <div class="ff-SCRegular fw-400">{{ $t('award.totalAgent') }}(USDT)</div>
             <div class="ff-SCBold font-24 fw-600 m-t-20">{{ rewardSummary.total_agent }}</div>
           </div>
