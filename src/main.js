@@ -29,8 +29,9 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   // if (to.meta.title) {
   //   document.title = to.meta.title
+  // } else {
+  //   next()
   // }
-  // next()
   if (localStorage.getItem('token')) {
     if (to.meta.loginRequest) {
       next({ path: '/' })

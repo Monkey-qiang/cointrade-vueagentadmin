@@ -25,7 +25,7 @@ export const tableColumns = [
     prop: 'tradeid',
     width: '170px',
     formatter: (row) => {
-      return row.category == 1 ? i18n.t('transaction.spotTransation') : i18n.t('transaction.contractTransaction')
+      return row.category == 1 ? i18n.t('transaction.contractTransaction') : i18n.t('transaction.spotTransation')
     }
   },
   {
