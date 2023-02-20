@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Toast } from 'vant'
 import router from '../router'
 import store from '@/store'
+import { Message } from 'element-ui'
 const token = ''
 // const base = 'http://192.168.3.110:6240/api/'
 const base = 'http://8.218.110.85:6240/api/'
@@ -44,17 +45,7 @@ basicData.interceptors.response.use(
         response.data.code == 10001 ||
         response.data.code == 10002
       ) {
-        // MessageBox.confirm(
-        //   '即将退出登录，您可以选择取消留在此页面，或者重新登录',
-        //   '确认重新登陆',
-        //   {
-        //     confirmButtonText: '重新登陆',
-        //     cancelButtonText: '取消',
-        //     type: 'warning'
-        //   }
-        // ).then(() => {
-        //   this.postRequest('agent/loginout').then(() => {
-        //     // location.reload()
+        Message.warning('账号异常需要重新登录')
         localStorage.clear()
         store.commit('setToken', '')
         router.replace({ path: '/login' })
