@@ -48,21 +48,21 @@
           <img src="@/assets/common/poster.png" alt="">
         </div>
         <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
-            <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="right" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
+            <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="top" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
                 <el-form-item :label="$t('common.newPassword')" prop="password">
-                    <el-input class="w-290" :placeholder="$t('common.enter')+$t('common.newPassword')" :type="passwordType" v-model="passwordForm.password"></el-input>
+                    <el-input :placeholder="$t('common.enter')+$t('common.newPassword')" :type="passwordType" v-model="passwordForm.password"></el-input>
                     <img v-if="eyeIsOpen" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
                 <el-form-item :label="$t('common.newPasswordConfirm')" prop="confirmPassword">
-                    <el-input class="w-290" :placeholder="$t('common.confirmNewpassword')" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
+                    <el-input :placeholder="$t('common.confirmNewpassword')" :type="passwordType1" v-model="passwordForm.confirmPassword"></el-input>
                     <img v-if="eyeIsOpen1" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen1 = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen1 = true" />
                 </el-form-item>
                 <el-form-item :label="$t('account.emailCode')" prop="verifyCode">
-                    <el-input class="w-290" :placeholder="$t('common.enter')+$t('account.emailCode')" maxlength="6" v-model="passwordForm.verifyCode" @input="handleInput"></el-input>
-                    <div class="text-c1890FF absolute top-0 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">{{ $t('common.sendVerifyCode') }}</div>
-                    <div class="text-A9B3C9 absolute top-0 right-16" v-else>{{ cutdown }}s {{ $t('common.sendAgain') }}</div>
+                    <el-input :placeholder="$t('common.enter')+$t('account.emailCode')" maxlength="6" v-model="passwordForm.verifyCode" @input="handleInput"></el-input>
+                    <div class="cutdown-btn text-c1890FF absolute right-16 z-index-9 cursor-point" @click="sendCode" v-if="!cutdownShow">{{ $t('common.sendVerifyCode') }}</div>
+                    <div class="cutdown-btn text-A9B3C9 absolute right-16 z-index-9" v-else>{{ cutdown }}s {{ $t('common.sendAgain') }}</div>
                 </el-form-item>
             </el-form>
         </basic-dialog>
@@ -109,7 +109,7 @@ export default {
           color: '#001529',
           paddingTop: '24px'
         },
-        width: '466px',
+        width: '480px',
         BtnStyle: {
           justifyContent: 'flex-end',
           paddingTop: '10px',
@@ -142,7 +142,9 @@ export default {
           paddingBottom: 0
         },
         showBtn: true,
-        showCancelBtn: true
+        showCancelBtn: true,
+        confirmText: this.$t('account.confirm'),
+        cancelText: this.$t('account.cancel')
       },
       passwordForm: {
         password: '',
@@ -291,6 +293,9 @@ export default {
   left: -406px;
   z-index: 9;
 }
+.cutdown-btn{
+  top: -40px;
+}
 ::v-deep{
   .el-input__inner{
     padding-right: 35px;
@@ -303,6 +308,9 @@ export default {
       .el-dialog__close{
           color: #A9B3C9;
       }
+  }
+  .el-form-item__label{
+    line-height: 20px;
   }
 }
 </style>

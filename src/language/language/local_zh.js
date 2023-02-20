@@ -52,7 +52,9 @@ module.exports = {
     password: '密码',
     modify: '修改',
     emailCode: '邮箱验证码',
-    modifySuccess: '修改密码成功'
+    modifySuccess: '修改密码成功',
+    cancel: '取消',
+    confirm: '确定'
   },
   invite: {
     teamMemberNumber: '团队人数',
@@ -119,6 +121,15 @@ module.exports = {
     subagent1: '子代理收入',
     become: '现在成为TOKEX代理商',
     applyImmediately: '立即申请',
-    tokexPlan: '1，什么是TokEX代理计划？'
+    tokexPlan1: '1、什么是Tokex代理计划？',
+    tokexPlan2: '2、如何申请Tokex代理计划？',
+    tokexPlan3: '3、加入Tokex代理计划需要什么条件？',
+    tokexPlan4: '4、加入Tokex代理计划有什么好处？',
+    tokexPlan5: '5、我如何查看我的报酬和推荐人列表？',
+    tokexPlanContent1: 'Tokex目前提供市场上顶级加密货币的交易互换，包括主流数字资产 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC)等。',
+    tokexPlanContent2: '在Tokex购买数字资产无需手续费。',
+    tokexPlanContent3: '我们欢迎任何有推广渠道的客户来申请',
+    tokexPlanContent4: '您首先需要完成身份认证（KYC）和手机验证后，然后，您可以在快捷区直接下单，或在自选区浏览所有广告，并选择合适的广告。点击“购买“按钮下单，输入您要购买的金额，并根据卖方提供的支付方式进行转账。最后，回到订单页，点击“已付款”，等待卖方放币，即可获得您的数字货币。',
+    tokexPlanContent5: 'Tokex会对数字货币订单的资产进行托管保护，卖家发布广告后，我们将冻结广告中的资产进行托管，如果交易过程中卖家不放行资产，我们会将冻结中托管的资产放行给买家。'
   }
 }

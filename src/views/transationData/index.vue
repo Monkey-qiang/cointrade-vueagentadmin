@@ -35,7 +35,7 @@
               </el-date-picker>
             </div>
           </div>
-          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">查询</div>
+          <div class="w-80 h-32 l-h-32 text-center ff-Regular font-14 fw-400 bg-FFC304 b-r-4 cursor-point" @click="search">{{ $t('common.search') }}</div>
         </div>
       </div>
       <basic-table class="m-t-24" v-bind="tableOptions" @current-change="currentChange"></basic-table>
@@ -90,8 +90,10 @@ export default {
     },
     currentChange(page) {
       // console.log(page)
-      this.tableOptions.paginationOp.currentPage = page
-      this.getTransactionList()
+      if (typeof (page) !== 'object') {
+        this.tableOptions.paginationOp.currentPage = page
+        this.getTransactionList()
+      }
     },
     getTickers() {
       this.getRequest('agent/gettickers ').then(res => {

@@ -7,9 +7,9 @@
       </div>
       <div class="flex align-center text-center">
         <div class="m-r-14 l-h-24 b-r-4 w-48 h-24 cursor-point bg-FFC304 ff-Medium text-c070707 font-14 fw-500"
-          @click="login" v-if="!isLogin">登录</div>
+          @click="login" v-if="!isLogin">{{ $t('login.login') }}</div>
         <div class="m-r-20 l-h-24 b-r-4 w-48 h-24 cursor-point bg-EDEDED ff-Medium text-c070707 font-14 fw-500"
-          @click="apply" v-if="$route.path.indexOf('agentPage') >-1 || isLogin ? false : true">申请</div>
+          @click="apply" v-if="$route.path.indexOf('agentPage') >-1 || isLogin ? false : true">{{ $t('login.apply') }}</div>
         <div class="flex align-center">
           <el-dropdown class="text-white cursor-point m-r-24" @command="handleCommand">
             <span class="el-dropdown-link">
@@ -88,6 +88,7 @@ export default {
       }
       this.$i18n.locale = command
       localStorage.setItem('lang', command)
+      window.location.reload()
       const language = localStorage.getItem('lang')
       this.language = language == 'zh' ? '简体中文' : 'English'
     }
