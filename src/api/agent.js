@@ -26,3 +26,12 @@ export function agentRegisterSendcode(data) {
     data
   })
 }
+
+// 更改密码邮箱验证码校验
+export function checkresetpasswd(data) {
+  return request({
+    url: '/agent/checkresetpasswd',
+    method: 'post',
+    data
+  })
+}

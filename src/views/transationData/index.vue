@@ -96,11 +96,11 @@ export default {
       }
     },
     getTickers() {
-      this.getRequest('agent/gettickers ').then(res => {
+      this.getRequest('agent/gettickers').then(res => {
         // console.log(res)
         if (res.code && res.code == 2000) {
           res.data.forEach(item => {
-            this.tickerOptions.push({
+            this.tickerOptions.unshift({
               value: item.coin + '/' + item.currency,
               label: item.coin + '/' + item.currency
             })

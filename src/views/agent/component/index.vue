@@ -1,13 +1,14 @@
 <template>
   <el-dropdown trigger="click" placement="bottom-start" @visible-change="checkArea">
-    <div class="flex align-center b-1-solid-DFE1E5 p-lr-20 h-52 b-r-4 cursor-point">
+    <div class="flex justify-between align-center b-1-solid-DFE1E5 p-lr-20 h-52 b-r-4 cursor-point">
       <img class="area_logo" :src="form.area_logo" alt="">
-      <span class="m-r-9">{{form.country}}</span>
-      <i class="el-icon-caret-bottom" />
+      <span class="flex-1">{{form.country}}</span>
+      <i class="el-icon-arrow-down"/>
     </div>
     <el-dropdown-menu ref="areaDropdown" slot="dropdown" class="area_menu scroll_view" style="margin-top: 0;">
-    <!-- <el-dropdown-item class="input_item" @click.native="handleCommand('input')">
+    <el-dropdown-item class="input_item" @click.native="handleCommand('input')">
       <el-input ref="searchArea"
+      class="w-700"
         v-model.trim="searchText"
         :class="{'is_focus': isFocus}"
         @input="search()"
@@ -16,7 +17,7 @@
         @keyup.enter.native="search()">
         <el-button slot="prepend" icon="el-icon-search"></el-button>
       </el-input>
-    </el-dropdown-item> -->
+    </el-dropdown-item>
     <el-dropdown-item v-for="item in filterList" :key="item.id" class="p-lr-12 font-16 ff-Regular text-c1A1F2A" @click.native="handleCommand(item)">
       <div class="area_item flex align-center">
         <img class="w-30 h-30 m-r-12 b-r-p50" :src="item.countryicon" alt="">
@@ -59,7 +60,7 @@ export default {
         this.filterList = [...this.areaList]
         this.$nextTick(() => {
           this.searchText = ''
-          // this.$refs.searchArea.focus()
+          this.$refs.searchArea.focus()
         })
       }
     },
@@ -77,15 +78,11 @@ export default {
       this.form.area_logo = item.countryicon
       this.form.country = item.nameen
       this.$emit('updataArea', item)
-      // try {
-      // } catch (error) {
-      //   return error
-      // }
     },
     // 搜索地区
     search() {
       this.filterList = []
-      this.filterList = this.areaList.filter(item => item.nameen.indexOf(this.searchText) > -1 || item.area_code.indexOf(this.searchText) > -1)
+      this.filterList = this.areaList.filter(item => item.nameen.indexOf(this.searchText) > -1)
     }
   }
 }

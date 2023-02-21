@@ -75,7 +75,6 @@ export default {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
           this.postRequest('agent/login', this.loginForm).then(res => {
-            // console.log(res)
             if (res.code == 2000) {
               localStorage.setItem('token', res.data.token)
               const token = localStorage.getItem('token')

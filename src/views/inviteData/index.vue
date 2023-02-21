@@ -72,7 +72,6 @@ export default {
       this.getInviteList()
     },
     currentChange(page) {
-      // console.log(page)
       if (typeof (page) !== 'object') {
         this.tableOptions.paginationOp.currentPage = page
         this.getInviteList()
@@ -80,7 +79,6 @@ export default {
     },
     getAgentInfo() {
       this.getRequest('agent/getinvitesummary').then(res => {
-        // console.log(res)
         if (res.code && res.code == 2000) {
           this.inviteSummary = res.data
         }

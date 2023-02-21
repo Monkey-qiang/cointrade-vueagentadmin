@@ -81,7 +81,7 @@ export default {
     }
     return {
       form: {},
-      cutdown: 10,
+      cutdown: 60,
       cutdownShow: false,
       timer: null,
       sub: true,

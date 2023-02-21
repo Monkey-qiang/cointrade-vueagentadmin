@@ -96,7 +96,7 @@ export default {
     return {
       eyeIsOpen: false,
       eyeIsOpen1: false,
-      cutdown: 10,
+      cutdown: 60,
       cutdownShow: false,
       timer: null,
       bindDialogOptions: {
@@ -231,12 +231,11 @@ export default {
             code: this.passwordForm.verifyCode
           }
           this.postRequest('agent/resetpasswd', data).then(res => {
-            // console.log(res)
             if (res.code && res.code == 2000) {
-              this.$toast(this.$t('account.modifySuccess'))
+              this.$message.success(this.$t('account.modifySuccess'))
               this.bindDialogOptions.visible = false
             } else {
-              this.$toast(res.msg)
+              // this.$message(res.msg)
             }
           })
         }
@@ -254,7 +253,6 @@ export default {
     },
     getAgentInfo() {
       this.getRequest('agent/getagentinfo').then(res => {
-        // console.log(res)
         if (res.code && res.code == 2000) {
           this.agentinfo = res.data
           this.QRCodeUrl = this.agentinfo.inviteUrl

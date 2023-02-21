@@ -4,14 +4,14 @@
             <div class="w-1024 m-lr-auto">
                 <div class="flex justify-between h-544 m-b-83">
                     <div class="m-t-91">
-                        <div class="title">TokEX</div>
+                        <div class="title">Tokex</div>
                         <div class="title m-b-21">Affiliate Program</div>
                         <div class="font-26 fw-400 ff-Regular l-h-30 m-b-48">{{ $t("agent.description") }}</div>
                         <el-button class="btn" type="primary" @click="application">{{
                             $t("agent.startEarning")
                         }}</el-button>
                     </div>
-                    <div class="w-361 h-388 m-t-77 line"><img class="img" src="../../assets/agent/top.png" alt="">
+                    <div class="w-361 h-388 m-t-77"><img class="img" src="../../assets/agent/top.png" alt="">
                     </div>
                 </div>
             </div>
@@ -19,19 +19,19 @@
         <div class="m-b-100">
             <div class="flex w-1024 m-lr-auto">
                 <div class="box_inner">
-                    <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group2.png"
+                    <div class="w-64 h-77 absolute left-128 icon"><img class="img" src="@/assets/agent/Group2.png"
                             alt="">
                     </div>
                     <div class="m-t-64">{{ $t("agent.step1") }}</div>
                 </div>
                 <div class="box_inner center_box">
-                    <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group1.png"
+                    <div class="w-64 h-77 absolute left-128 icon"><img class="img" src="@/assets/agent/Group1.png"
                             alt="">
                     </div>
                     <div class="m-t-64">{{ $t("agent.step2") }}</div>
                 </div>
                 <div class="box_inner">
-                    <div class="w-64 h-64 absolute left-128 icon"><img class="img" src="@/assets/agent/Group3.png"
+                    <div class="w-64 h-77 absolute left-128 icon"><img class="img" src="@/assets/agent/Group3.png"
                             alt="">
                     </div>
                     <div class="m-t-64">{{ $t("agent.step3") }}</div>
@@ -62,11 +62,11 @@
                         <div class="font-20 ff-SCBold fw-600 l-h-30 m-l-23">{{ $t("agent.agencyInterest4") }}</div>
                     </div>
                 </div>
-                <div class="w-426 h-319 m-t-51 line m-r-59"><img class="img" src="@/assets/agent/bottom.png" alt="">
+                <div class="w-426 h-319 m-t-51 m-r-59"><img class="img" src="@/assets/agent/bottom.png" alt="">
                 </div>
             </div>
         </div>
-        <div class="bg-F8F8F8  m-b-100">
+        <div v-if="language == 'English'" class="bg-F8F8F8  m-b-100">
             <div class="w-1024 m-lr-auto h-491 flex justify-between">
                 <div class="p-t-100">
                     <div class="font-48 fw-800 l-h-34 m-b-1 ff-Heavy text-c070707">You Can Earn</div>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-446 h-274 m-t-135 line m-r-49"><img class="img" src="@/assets/agent/human.png" alt="">
+                <div class="w-446 h-274 m-t-135 m-r-49"><img class="img" src="@/assets/agent/human.png" alt="">
                 </div>
             </div>
         </div>
@@ -118,6 +118,7 @@ export default {
   data() {
     return {
       activeNames: '',
+      language: '',
       problemList: [
         {
           title: this.$t('agent.tokexPlan1'),
@@ -145,6 +146,14 @@ export default {
           id: '5'
         }
       ]
+    }
+  },
+  created() {
+    const language = localStorage.getItem('lang')
+    if (language) {
+      this.language = language == 'zh' ? '简体中文' : 'English'
+    } else {
+      this.language = '简体中文'
     }
   },
   methods: {
@@ -244,10 +253,6 @@ export default {
     line-height: 30px;
     background-color: #f8f8f8;
 
-}
-
-.line {
-    border: 1px dotted #8c94a3;
 }
 
 .icon {

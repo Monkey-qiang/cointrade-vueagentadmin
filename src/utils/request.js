@@ -38,25 +38,38 @@ basicData.interceptors.request.use(
 // 添加一个响应拦截器
 basicData.interceptors.response.use(
   function(response) {
-    if (response.data && response.data.code) {
-      // console.log(response)
-      if (
-        response.data.msg == '未登录' ||
-        response.data.code == 10001 ||
-        response.data.code == 10002
-      ) {
-        Message.warning('账号异常需要重新登录')
-        localStorage.clear()
-        store.commit('setToken', '')
-        router.replace({ path: '/login' })
-      } else if (response.data.code != 2000) {
-        Toast.fail(response.data.msg)
-      }
+    // debugger
+    if (response.data.status == -1 || response.data.status == -2) {
+      Message.warning(response.data.msg)
+      localStorage.clear()
+      store.commit('setToken', '')
+      router.replace({ path: '/login' })
+      // Message.warning(response.data.response)
+      // router.replace({ path: '/login' })
+      // debugger
+      // // console.log(response)
+      // if (
+      //   response.data.msg == '未登录' ||
+      //   response.data.code == 10001 ||
+      //   response.data.code == 10002
+      // ) {
+      //   try {
+      //     Message.warning('账号异常需要重新登录')
+      //     localStorage.clear()
+      //     store.commit('setToken', '')
+      //     router.replace({ path: '/login' })
+      //   } catch (error) {
+      //     return false
+      //   }
+      // } else if (response.data.code != 2000) {
+      //   Message.warning(response.data.msg)
+      // }
+    } else if (response.data.code != 2000) {
+      Message.warning(response.data.msg)
     }
     return response
   },
   function(error) {
-    // Toast.fail('请检查你的网络连接')
     return Promise.reject(error)
   }
 )

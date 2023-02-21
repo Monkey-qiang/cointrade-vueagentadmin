@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// import { checkresetpasswd } from '@/api/agent.js'
 export default {
   data() {
     const that = this
@@ -40,10 +41,11 @@ export default {
           { validator: validateEmail, trigger: 'blur' }
         ],
         verifyCode: [
-          { required: true, message: this.$t('common.enter') + this.$t('login.verifyCode'), trigger: 'blur' }
+          { required: true, message: this.$t('common.enter') + this.$t('login.verifyCode'), trigger: 'blur' },
+          { min: 6, max: 6, message: this.$t('common.code'), trigger: 'change' }
         ]
       },
-      cutdown: 10,
+      cutdown: 60,
       cutdownShow: false,
       timer: null
     }
@@ -56,7 +58,7 @@ export default {
           this.timer = setInterval(() => {
             this.cutdown--
             if (this.cutdown == 0) {
-              this.cutdown = 10
+              this.cutdown = 60
               this.cutdownShow = false
               clearInterval(this.timer)
             }
@@ -65,11 +67,12 @@ export default {
             email: this.loginForm.email
           }
           this.postRequest('agent/sendcodebyfind', data).then(res => {
-            // console.log(res)
             if (res.code && res.code == 2000) {
-              this.$toast(this.$t('common.sendSuccess'))
+              this.$message.success(res.msg)
             } else {
-              this.$toast(this.$t('common.sendFailed'))
+              this.cutdown = 60
+              this.cutdownShow = false
+              clearInterval(this.timer)
             }
           })
         } else {
@@ -81,9 +84,12 @@ export default {
       this.loginForm.verifyCode = this.loginForm.verifyCode.replace(/[^\d]/g, '')
     },
     next() {
-      this.$refs['loginForm'].validate((valid) => {
+      this.$refs['loginForm'].validate(async(valid) => {
         if (valid) {
+          // const res = await checkresetpasswd(this.loginForm)
+          // if (res.code == 2000) {
           this.$router.push({ path: '/login/newPassword', query: { email: this.loginForm.email, code: this.loginForm.verifyCode }})
+          // }
         }
       })
     }

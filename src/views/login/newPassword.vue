@@ -86,7 +86,6 @@ export default {
             code: this.$route.query.code
           }
           this.postRequest('agent/findpasswd', data).then(res => {
-            // console.log(res)
             if (res.code && res.code == 2000) {
               this.$toast(this.$t('common.setPasswordSuccess'))
               setTimeout(() => {

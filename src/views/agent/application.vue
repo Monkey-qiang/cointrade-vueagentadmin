@@ -117,10 +117,6 @@ export default {
       const res = await agentEmail(param)
       if (res.data.code != 2000) {
         this.emailCheck = false
-        this.$message({
-          type: 'error',
-          message: res.data.msg
-        })
       } else {
         this.emailCheck = true
       }
