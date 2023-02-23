@@ -65,13 +65,13 @@ export default {
   },
   methods: {
     jump() {
-      this.$router.push({ path: '/login' })
+      this.$router.push({ path: '/agentPage' })
     },
     login() {
       this.$router.push({ path: '/login' })
     },
     apply() {
-      this.$router.push({ path: '/agentPage' })
+      this.$router.push({ path: '/agentPage/application' })
     },
     loginOut() {
       this.postRequest('agent/loginout').then(res => {

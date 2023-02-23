@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     tabToggle(index) {
+      console.log(this.active)
       this.isActive = index
       this.getTransactionList()
     },
@@ -97,7 +98,6 @@ export default {
     },
     getTickers() {
       this.getRequest('agent/gettickers').then(res => {
-        // console.log(res)
         if (res.code && res.code == 2000) {
           res.data.forEach(item => {
             this.tickerOptions.unshift({

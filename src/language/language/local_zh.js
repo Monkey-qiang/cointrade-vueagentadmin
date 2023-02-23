@@ -3,8 +3,6 @@ module.exports = {
     enter: '请输入',
     sendVerifyCode: '发送验证码',
     sendAgain: '重新发送',
-    // sendSuccess: '验证码发送成功',
-    // sendFailed: '验证码发送失败',
     newPassword: '新密码',
     newPasswordConfirm: '新密码确认',
     confirmNewpassword: '请确认新密码',

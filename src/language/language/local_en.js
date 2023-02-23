@@ -5,7 +5,7 @@ module.exports = {
     sendAgain: 'Resend',
     sendSuccess: 'Success',
     sendFailed: 'Fail',
-    newPassword: 'New password',
+    newPassword: 'new password',
     newPasswordConfirm: 'Confirm new password',
     confirmNewpassword: 'Please confirm new password',
     passwordAtypism: 'Password is different',

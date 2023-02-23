@@ -17,6 +17,14 @@ export function agentEmail(data) {
     data
   })
 }
+//  邮箱验证
+export function agentUserid(data) {
+  return request({
+    url: '/agent/register/verification/userid',
+    method: 'post',
+    data
+  })
+}
 
 //  发送验证码
 export function agentRegisterSendcode(data) {
@@ -31,6 +39,14 @@ export function agentRegisterSendcode(data) {
 export function checkresetpasswd(data) {
   return request({
     url: '/agent/checkresetpasswd',
+    method: 'post',
+    data
+  })
+}
+// 找回密码邮箱验证码校验
+export function checkfindpasswd(data) {
+  return request({
+    url: '/agent/checkfindpasswd',
     method: 'post',
     data
   })

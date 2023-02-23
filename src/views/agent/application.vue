@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { agentEmail } from '@/api/agent.js'
+import { agentEmail, agentUserid } from '@/api/agent.js'
 import bus from '@/js/eventBus'
 import AreaCode from './component/index.vue'
 import { records } from '@/utils/country'
@@ -131,12 +131,15 @@ export default {
     },
     // 下一步，兄弟组件传参
     submitForm() {
-      this.$refs.ruleForm.validate((valid) => {
+      this.$refs.ruleForm.validate(async(valid) => {
         if (valid && this.emailCheck) {
-          this.$router.push({ path: '/agentPage/verification' })
-          setTimeout(() => {
-            bus.$emit('send', this.ruleForm)
-          }, 200)
+          const res = await agentUserid({ user_id: this.ruleForm.user_id })
+          if (res.data.code == 2000) {
+            this.$router.push({ path: '/agentPage/verification' })
+            setTimeout(() => {
+              bus.$emit('send', this.ruleForm)
+            }, 200)
+          }
         } else {
           return false
         }

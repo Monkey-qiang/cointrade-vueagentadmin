@@ -5,10 +5,10 @@
             <div class="text-c001529 font-52 m-b-32">{{ $t("login.forgetPassword") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
                 <el-form-item class="m-b-40" :label="$t('login.emailAddress')" prop="email">
-                    <el-input :placeholder="$t('common.enter')+$t('login.emailAddress')" v-model="loginForm.email"></el-input>
+                    <el-input :placeholder="$t('common.enter')+' '+$t('login.emailAddress')" v-model="loginForm.email"></el-input>
                 </el-form-item>
                 <el-form-item class="m-b-40 relative" :label="$t('login.verifyCode')" prop="verifyCode">
-                    <el-input :placeholder="$t('common.enter')+$t('login.verifyCode')" :maxlength="6" v-model="loginForm.verifyCode" @input="handleInput"></el-input>
+                    <el-input :placeholder="$t('common.enter')+' '+$t('login.verifyCode')" :maxlength="6" v-model="loginForm.verifyCode" @input="handleInput"></el-input>
                     <div class="text-c1890FF absolute top-8 right-16 cursor-point" @click="sendCode" v-if="!cutdownShow">{{ $t("common.sendVerifyCode") }}</div>
                     <div class="text-A9B3C9 absolute top-8 right-16" v-else>{{ cutdown }}s {{ $t("common.sendAgain") }}</div>
                 </el-form-item>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-// import { checkresetpasswd } from '@/api/agent.js'
+import { checkfindpasswd } from '@/api/agent.js'
 export default {
   data() {
     const that = this
@@ -37,11 +37,11 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: this.$t('common.enter') + this.$t('login.emailAddress'), trigger: 'blur' },
+          { required: true, message: this.$t('common.enter') + ' ' + this.$t('login.emailAddress'), trigger: 'blur' },
           { validator: validateEmail, trigger: 'blur' }
         ],
         verifyCode: [
-          { required: true, message: this.$t('common.enter') + this.$t('login.verifyCode'), trigger: 'blur' },
+          { required: true, message: this.$t('common.enter') + ' ' + this.$t('login.verifyCode'), trigger: 'blur' },
           { min: 6, max: 6, message: this.$t('common.code'), trigger: 'change' }
         ]
       },
@@ -86,10 +86,10 @@ export default {
     next() {
       this.$refs['loginForm'].validate(async(valid) => {
         if (valid) {
-          // const res = await checkresetpasswd(this.loginForm)
-          // if (res.code == 2000) {
-          this.$router.push({ path: '/login/newPassword', query: { email: this.loginForm.email, code: this.loginForm.verifyCode }})
-          // }
+          const res = await checkfindpasswd(this.loginForm)
+          if (res.code == 2000) {
+            this.$router.push({ path: '/login/newPassword', query: { email: this.loginForm.email, code: this.loginForm.verifyCode }})
+          }
         }
       })
     }
