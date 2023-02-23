@@ -1,5 +1,5 @@
 <template>
-  <div class="w-794 bg-white m-lr-auto ">
+  <div class="w-794 bg-white m-lr-auto">
     <div class="m-b-40 p-t-80">
       <div class="m-b-20 fw-600 font-44 l-h-44 ff-SCBold">Tokex Affiliate Program Application</div>
       <div class="fw-500 font-28 l-h-40 ff-Medium text-c070707">No fee is required, just register a Tokex trading
@@ -10,7 +10,7 @@
       <div class="m-b-40">
         <div class="m-b-20 fw-600 font-32 l-h-32 ff-SCBold text-c070707">Set Password</div>
         <div class="m-b-20 fw-500 font-22 l-h-24 text-c070707 ff-Medium">Email Address：{{ form.email }}</div>
-        <div class="fw-400 font-24 l-h-24 ff-Regular text-c636B75">After the application is appproved.you can use this
+        <div class="fw-400 font-24 l-h-30 ff-Regular text-c636B75">After the application is appproved.you can use this
           Email and Password to log in to the Affiliate system</div>
       </div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
@@ -106,6 +106,7 @@ export default {
   },
   created() {
     bus.$on('send', data => {
+      console.log(2)
       this.form = data
     })
     if (window.name == '') {

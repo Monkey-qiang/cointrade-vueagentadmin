@@ -52,7 +52,7 @@ export const tableColumns = [
     }
   },
   {
-    label: i18n.t('common.inviteDate'),
+    label: i18n.t('common.date'),
     prop: 'createtime'
     // align: 'right',
   }

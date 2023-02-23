@@ -53,12 +53,9 @@ export default {
     return {
       isActive: 1,
       ticker: '',
-      tickerOptions: [
-        {
-          value: '',
-          label: this.$t('common.all')
-        }
-      ],
+      tickerOptions: [],
+      spot: [],
+      concat: [],
       date: '',
       tableOptions: {
         columns: tableColumns,
@@ -81,8 +78,12 @@ export default {
   },
   methods: {
     tabToggle(index) {
-      console.log(this.active)
       this.isActive = index
+      if (index == 1) {
+        this.tickerOptions = this.spot
+      } else {
+        this.tickerOptions = this.concat
+      }
       this.getTransactionList()
     },
     search() {
@@ -90,7 +91,6 @@ export default {
       this.getTransactionList()
     },
     currentChange(page) {
-      // console.log(page)
       if (typeof (page) !== 'object') {
         this.tableOptions.paginationOp.currentPage = page
         this.getTransactionList()
@@ -100,7 +100,22 @@ export default {
       this.getRequest('agent/gettickers').then(res => {
         if (res.code && res.code == 2000) {
           res.data.forEach(item => {
-            this.tickerOptions.unshift({
+            this.spot.unshift({
+              value: item.coin + '/' + item.currency,
+              label: item.coin + '/' + item.currency
+            })
+          })
+        }
+      })
+      this.getRequest('agent/getfuttickers').then(res => {
+        if (res.code && res.code == 2000) {
+          res.data.forEach(item => {
+            if (item.coin_type == 1) {
+              item.currency = 'USDT'
+            } else {
+              item.currency = 'USD'
+            }
+            this.concat.unshift({
               value: item.coin + '/' + item.currency,
               label: item.coin + '/' + item.currency
             })

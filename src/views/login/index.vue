@@ -6,11 +6,11 @@
             <div class="text-c001529 font-52 m-b-32">{{ $t("login.welcomeLogin") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
                 <el-form-item class="m-b-40 relative" :label="$t('login.emailAddress')" prop="email">
-                    <el-input :placeholder="$t('common.enter')+' '+$t('login.emailAddress')" v-model="loginForm.email"></el-input>
+                    <el-input :placeholder="$t('common.enterEm')" v-model="loginForm.email"></el-input>
                     <img v-if="loginForm.email" class="absolute top-20 right-16" src="../../assets/login/close.png" alt="" @click="loginForm.email = ''">
                 </el-form-item>
                 <el-form-item class="m-b-40 relative" :label="$t('login.password')" prop="password">
-                    <el-input :placeholder="$t('common.enter')+' '+$t('login.password')" :type="passwordType" v-model="loginForm.password"></el-input>
+                    <el-input :placeholder="$t('common.enterPw')" :type="passwordType" v-model="loginForm.password"></el-input>
                     <img v-if="eyeIsOpen"  class="absolute top-20 right-16 cursor-point" src="../../assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-20 right-16 cursor-point" src="../../assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                     <img v-if="loginForm.password" class="absolute top-20 right-48 cursor-point" src="../../assets/login/close.png" alt="" @click="loginForm.password = ''">

@@ -23,7 +23,7 @@ export const tableColumns = [
     width: '260px'
   },
   {
-    label: i18n.t('common.inviteDate'),
+    label: i18n.t('common.date'),
     prop: 'createtime'
     // align: 'right',
   }

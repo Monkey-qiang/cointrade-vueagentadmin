@@ -5,7 +5,7 @@
             <div class="text-c001529 font-52 m-b-32">{{ $t("login.forgetPassword") }}</div>
             <el-form label-position="top" label-width="80px" :model="loginForm" :rules="rules" ref="loginForm">
                 <el-form-item class="m-b-40" :label="$t('common.newPassword')" prop="newPassword">
-                    <el-input :placeholder="$t('common.enter')+$t('common.newPassword')" :type="passwordType" v-model="loginForm.newPassword"></el-input>
+                    <el-input :placeholder="$t('common.enterNePw')" :type="passwordType" v-model="loginForm.newPassword"></el-input>
                     <img v-if="eyeIsOpen"  class="absolute top-20 right-16" src="../../assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-20 right-16" src="../../assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
@@ -44,7 +44,7 @@ export default {
       },
       rules: {
         newPassword: [
-          { required: true, message: this.$t('common.enter') + this.$t('common.newPassword'), trigger: 'blur' },
+          { required: true, message: this.$t('common.enterNePw'), trigger: 'blur' },
           { validator: validatePasswordFormat, trigger: 'blur' }
         ],
         confirmNewPassword: [

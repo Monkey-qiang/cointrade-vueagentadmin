@@ -1,6 +1,6 @@
 module.exports = {
   common: {
-    enter: 'Please enter',
+    enter: 'Please enter ',
     sendVerifyCode: 'Send verification code',
     sendAgain: 'Resend',
     sendSuccess: 'Success',
@@ -23,7 +23,10 @@ module.exports = {
     all: 'All',
     inviteDate: 'Invite Date',
     copySuccess: 'Copied',
-    passwordFormat: 'The password must be a combination of at least 8 numbers and letters'
+    passwordFormat: 'The password must be a combination of at least 8 numbers and letters',
+    enterEm: 'Please enter email',
+    enterPw: 'Please enter password',
+    enterNePw: 'Please enter new password'
   },
   login: {
     welcomeLogin: 'Welcome log in',
@@ -50,7 +53,7 @@ module.exports = {
     associatedUserID: 'Associated user ID',
     area: 'Area',
     password: 'Password',
-    modify: 'Modify',
+    modify: 'Modify ',
     emailCode: 'Email verification code',
     modifySuccess: 'Successfully modified',
     cancel: 'Cancle',

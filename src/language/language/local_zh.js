@@ -22,7 +22,10 @@ module.exports = {
     all: '全部',
     inviteDate: '邀请日期',
     copySuccess: '复制成功',
-    passwordFormat: '密码至少8位数字与大小写字母组合'
+    passwordFormat: '密码至少8位数字与大小写字母组合',
+    enterEm: '请输入邮箱',
+    enterPw: '请输入密码',
+    enterNePw: '请输入新密码'
   },
   login: {
     welcomeLogin: '欢迎登录',

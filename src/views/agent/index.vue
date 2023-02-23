@@ -4,8 +4,7 @@
             <div class="w-1024 m-lr-auto">
                 <div class="flex justify-between h-544 m-b-83">
                     <div class="m-t-91">
-                        <div class="title">Tokex</div>
-                        <div class="title m-b-21">Affiliate Program</div>
+                        <div class="w-557 h-188 m-b-41"><img class="img" src="@/assets/agent/Tokex.png" alt=""></div>
                         <div class="font-26 fw-400 ff-Regular l-h-30 m-b-48">{{ $t("agent.description") }}</div>
                         <el-button class="btn" type="primary" @click="application">{{
                             $t("agent.startEarning")
@@ -206,13 +205,6 @@ export default {
 .bg1 {
     background: linear-gradient(-176deg, #E8E8E8 0%, rgba(244, 244, 244, 0) 100%);
     opacity: 1
-}
-
-.title {
-    font-size: 58px;
-    font-family: FZYunDongHeiS-H-GB-Regular, FZYunDongHeiS-H-GB;
-    font-weight: 400;
-    line-height: 94px;
 }
 
 .btn2,

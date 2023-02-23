@@ -5,7 +5,7 @@
       <div class="fw-500 font-28 ff-Medium text-c070707">No fee is required, just register a Tokex trading account to
         join the Tokex Affiliate Program</div>
     </div>
-    <div>
+    <div class="m-b-200">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="name">
           <div class="input"><span class="text-red">*</span>Your Name</div>
@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item prop="user_id">
           <div class="input"><span class="text-red">*</span>Your Tokex User ID</div>
-          <el-input clearable maxlength="12" v-model.number="ruleForm.user_id"></el-input>
+          <el-input clearable maxlength="17" v-model.number="ruleForm.user_id"></el-input>
         </el-form-item>
         <el-form-item prop="telegram">
           <div class="input"><span class="text-red">*</span>Please provide your Telegram account and we will contact you
@@ -135,10 +135,10 @@ export default {
         if (valid && this.emailCheck) {
           const res = await agentUserid({ user_id: this.ruleForm.user_id })
           if (res.data.code == 2000) {
-            this.$router.push({ path: '/agentPage/verification' })
             setTimeout(() => {
               bus.$emit('send', this.ruleForm)
             }, 200)
+            this.$router.push({ path: '/agentPage/verification' })
           }
         } else {
           return false

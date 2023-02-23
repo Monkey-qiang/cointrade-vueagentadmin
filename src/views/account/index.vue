@@ -50,7 +50,7 @@
         <basic-dialog v-bind="bindDialogOptions" @confirm="handleComfirm" @cancel="cancel" @close="close">
             <el-form class="p-lr-40 p-t-24 b-t-1-solid-E4EBF1" label-position="top" label-width="96px" :model="passwordForm" :rules="rules" ref="passwordForm">
                 <el-form-item :label="$t('common.newPassword')" prop="password">
-                    <el-input :placeholder="$t('common.enter')+$t('common.newPassword')" :type="passwordType" v-model="passwordForm.password"></el-input>
+                    <el-input :placeholder="$t('common.enterNePw')" :type="passwordType" v-model="passwordForm.password"></el-input>
                     <img v-if="eyeIsOpen" class="absolute top-12 right-16" src="@/assets/login/eye_open.png" alt="" @click="eyeIsOpen = false" />
                     <img v-else class="absolute top-12 right-16" src="@/assets/login/eye_close.png" alt="" @click="eyeIsOpen = true" />
                 </el-form-item>
