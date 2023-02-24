@@ -22,7 +22,7 @@ module.exports = {
     all: '全部',
     inviteDate: '邀请日期',
     copySuccess: '复制成功',
-    passwordFormat: '密码至少8位数字与大小写字母组合',
+    passwordFormat: '密码长度8到32位，数字与大小写字母组合',
     enterEm: '请输入邮箱',
     enterPw: '请输入密码',
     enterNePw: '请输入新密码'
@@ -77,7 +77,7 @@ module.exports = {
     yesterdayAgent: '昨日代理佣金',
     monthAgent: '本月代理佣金',
     awardRecord: '奖励记录',
-    settlementTime: '结算时间',
+    settlementTime: '每日UTC+8时间10:00结算前一日奖励',
     coin: '币种',
     awardType: '奖励类型',
     straight: '直客佣金',

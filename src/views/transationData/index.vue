@@ -81,8 +81,10 @@ export default {
       this.isActive = index
       if (index == 1) {
         this.tickerOptions = this.spot
+        this.ticker = ''
       } else {
         this.tickerOptions = this.concat
+        this.ticker = ''
       }
       this.getTransactionList()
     },

@@ -5,7 +5,7 @@
                 <div class="flex justify-between h-544 m-b-83">
                     <div class="m-t-91">
                         <div class="w-557 h-188 m-b-41"><img class="img" src="@/assets/agent/Tokex.png" alt=""></div>
-                        <div class="font-26 fw-400 ff-Regular l-h-30 m-b-48">{{ $t("agent.description") }}</div>
+                        <div class="max-w-518 font-26 fw-400 ff-Regular l-h-30 m-b-48">{{ $t("agent.description") }}</div>
                         <el-button class="btn" type="primary" @click="application">{{
                             $t("agent.startEarning")
                         }}</el-button>
