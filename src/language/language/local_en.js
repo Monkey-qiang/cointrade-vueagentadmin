@@ -129,10 +129,10 @@ module.exports = {
     tokexPlan3: '3. What conditions are required to join the Tokex agent program?',
     tokexPlan4: '4. What are the benefits of joining the Tokex agent program?',
     tokexPlan5: '5. How do I view my compensation and referral list?',
-    tokexPlanContent1: 'Tokex currently provides transaction swaps of the top cryptocurrencies in the market, including mainstream digital assets Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC), etc.',
-    tokexPlanContent2: 'There is no service charge for purchasing digital assets in Tokex.',
-    tokexPlanContent3: 'We welcome any customers with promotion channels to apply',
-    tokexPlanContent4: 'First, you need to complete identity authentication (KYC) and mobile phone verification, and then you can place an order directly in the shortcut area, or browse all advertisements in the optional area, and select the appropriate advertisement. Click the "Purchase" button to place an order, enter the amount you want to purchase, and transfer according to the payment method provided by the seller. Finally, go back to the order page, click "Paid", and wait for the seller to release the currency to get your digital currency.',
-    tokexPlanContent5: 'Tokex will protect the assets of the digital currency order. After the seller publishes the advertisement, we will freeze the assets in the advertisement for custody. If the seller does not release the assets during the transaction, we will release the assets in the frozen custody to the buyer.'
+    tokexPlanContent1: 'Tokex Affiliate Program provides lifetime commissions to our partners.Commissions are calculated real-time and settled the next day, for users who sign up through our partner’s link and trade on Tokex.Our partners will gain access to a dedicated account manager who will help with marketing and technical support to help improve their conversions.',
+    tokexPlanContent2: 'Go to the affiliates.tokex.com and press the “Apply” button.Fill in a quick questionnaire about yourself and your plans to promote Tokex.Once our team evaluates your application and ensures you meet the criteria, your application will be approved!',
+    tokexPlanContent3: 'Bloggers, influencers, publishers, and content creators with a qualifying website, trading software or mobile app, as well as Tokex customers that have an extensive network of traders, can participate in the Tokex Affiliate Program.',
+    tokexPlanContent4: 'You can get generous commission rewards by participating in the Tokex Affiliate Program. We will provide you with professional marketing and technical support and data background to help you develop your business better.',
+    tokexPlanContent5: 'You can view each of your remuneration and the number of invitees in the "reward data" and "invitation data" of the data background.'
   }
 }

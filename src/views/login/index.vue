@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     jump() {
-      this.$router.push({ path: '/agentPage' })
+      this.$router.push({ path: '/agentPage/application' })
     },
     forgetPassword() {
       this.$router.push({ path: '/login/forgetPassword' })

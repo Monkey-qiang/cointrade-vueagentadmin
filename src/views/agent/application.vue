@@ -25,7 +25,7 @@
           <el-input clearable v-model.trim="ruleForm.telegram"></el-input>
         </el-form-item>
         <el-form-item prop="job">
-          <div class="input"><span class="text-red">*</span>Your are</div>
+          <div class="input"><span class="text-red">*</span>You are</div>
           <el-select clearable v-model.trim="ruleForm.job" placeholder="">
             <el-option label="Social Media Influencer" :value="1"></el-option>
             <el-option label="Content Creator" :value="3"></el-option>
