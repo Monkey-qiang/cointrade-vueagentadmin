@@ -1,16 +1,16 @@
 <template>
   <div class="layout">
-    <div class="flex justify-between align-center h-64 bg-c001529">
+    <div class="flex justify-between align-center h-64 bg-c141518">
       <div class="flex align-center">
         <img class="m-l-18 m-r-8" src="../../assets/common/logo.png" alt="">
-        <div class="login-text font-20 fw-600 text-white cursor-point" @click="jump">Tokex Affiliate</div>
+        <div class="login-text font-20 fw-600 text-FFC304 cursor-point" @click="jump">Tokex Affiliate</div>
       </div>
       <div class="flex align-center text-center">
-        <div class="m-r-14 l-h-24 b-r-4 w-48 h-24 cursor-point bg-FFC304 ff-Medium text-c070707 font-14 fw-500"
+        <div class="m-r-14 l-h-24 b-r-4 w-48 h-24 cursor-point bg-FFC304 ff-Medium text-c001529 font-14 fw-500"
           @click="login"
           v-if="isLogin || $route.path.indexOf('verification') > -1 || $route.path.indexOf('application') > -1 ? false : true">
           {{ $t('login.login') }}</div>
-        <div class="m-r-20 l-h-24 b-r-4 w-48 h-24 cursor-point bg-EDEDED ff-Medium text-c070707 font-14 fw-500"
+        <div class="m-r-20 l-h-24 b-r-4 w-48 h-24 cursor-point bg-c141518 ff-Medium text-FFC304 font-14 fw-500 brcolor"
           @click="apply"
           v-if="$route.path.indexOf('verification') > -1 || $route.path.indexOf('application') > -1 || isLogin ? false : true">
           {{ $t('login.apply') }}</div>
@@ -105,6 +105,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.brcolor{
+border: 1px solid #FFC304;
+}
 .el-dropdown-menu {
   width: 160px;
   top: 52px !important;

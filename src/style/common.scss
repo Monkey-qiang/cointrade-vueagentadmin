@@ -318,6 +318,8 @@ $D9D9D9: #d9d9d9;
 $C141515: #141515;
 $c02C078: #0ECB81;
 $F03851: #F03851;
+$c1F222C: #1F222C;
+$c34384C: #34384C;
 
 $c363C45: #363C45;
 $c47505A: #47505A;
@@ -343,6 +345,8 @@ $D4D9E4: #D4D9E4;
 $E4EBF1: #E4EBF1;
 $F0F2F5: #F0F2F5;
 $c01060C: #01060C;
+$c141518: #141518;
+$c001529: #001529;
 
 @mixin border {
   content: "";
@@ -368,6 +372,8 @@ $color in (red: $red,
   green: $green,
   black_o10: $black_o10,
 
+  c1F222C:$c1F222C,
+  c001529:$c001529,
   F8F8F8: #F8F8F8,
   c666: $c666,
   c999: $c999,
@@ -418,7 +424,6 @@ $color in (red: $red,
   c181a20:$c181a20,
   C141515:$C141515,
   c1E1E1E:$c1E1E1E,
-  c001529:$c001529,
   c7C869B:$c7C869B,
   c1890FF:$c1890FF,
   A9B3C9:$A9B3C9,
@@ -427,7 +432,11 @@ $color in (red: $red,
   D4D9E4: $D4D9E4,
   E4EBF1: $E4EBF1,
   F0F2F5: $F0F2F5,
-  c01060C: $c01060C, ) {
+  c01060C: $c01060C,
+  c141518: $c141518,
+  c34384C: $c34384C,
+  
+  ) {
   .text-#{$header} {
     color: $color;
   }

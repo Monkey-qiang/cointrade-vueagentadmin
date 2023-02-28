@@ -33,7 +33,7 @@ module.exports = {
     password: '密码',
     login: '登录',
     forgetPassword: '忘记密码',
-    applyAgent: '如果您还不是代理，请',
+    applyAgent: '如果您还不是代理，请 ',
     apply: '申请',
     verifyCode: '验证码',
     next: '下一步',
